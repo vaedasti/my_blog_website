@@ -8,92 +8,57 @@
     <div id="main" class="eight columns">
       <?php
         // Form GET var mı?
-        $ara = htmlspecialchars($_GET["ara"]);
-        if (! empty($ara)){
+        if (! empty($_GET['ara'])) {
+          $ara = htmlspecialchars($_GET['ara']);
           echo "Arama yapıldı. Değer: $ara";
         }
+        elseif (! empty($_GET['kategoriId'])) {
+          $kategori = htmlspecialchars($_GET['kategoriId']);
+          echo "Kategoriye tıklandı. Değer: $kategori";
+        }
+        elseif (! empty($_GET['etiket'])) {
+          $etiket = htmlspecialchars($_GET['etiket']);
+          echo "Etikete tıklandı. Değer: $etiket";
+        }
         else {
-          $oldPost = htmlspecialchars($_GET["old_post"]);
-          if (! empty($oldPost)){
-            // gönderilerden ilk "$oldPost" tanesini getirme.
-          }
-          for ($i=3; $i < 15; $i++) {
-            if ($i>5) {
-              echo "<div class='old-posts'><div class='tagcloud'>";
-              if (! empty($oldPost)) // To-Do
-                echo "<a href='?old_posts=".($i-3)."' title='Yeni Gönderiler'><i class='fa fa-arrow-left'></i> Yeni Gönderiler</a>";
-              echo "<a href='?old_posts=".($i-1)."' title='Eski Gönderiler' style='float: right;'>Eski Gönderiler <i class='fa fa-arrow-right'></i></a></div></div>";
-              break;
-            }
+          $limit = '0,3';
+          if (! empty($_GET['old_posts']))
+            $limit = htmlspecialchars($_GET['old_posts']).',3';
+          $gonderiler = sorgu_calistir("SELECT g.id, g.baslik, g.icerik, g.zaman, k.ad AS kategori, k.id AS kategoriId, kl.kAd AS yazar FROM gonderiler AS g INNER JOIN kategoriler AS k ON g.kategori=k.id INNER JOIN kullanicilar AS kl ON g.yazar=kl.id WHERE g.gosterim=1 ORDER BY zaman DESC LIMIT ".$limit);
+          foreach ($gonderiler as $gonderi) {
       ?>
       <article class="entry">
         <header class="entry-header">
           <h2 class="entry-title">
-            <?php echo "<a href='single.php?gonderiId=$i' title='Başlık $i'>Başlık $i</a>"; ?>
+            <?php echo '<a href=single.php?gonderiId='.$gonderi['id'].' title=\''.$gonderi['baslik'].'\'>'.$gonderi['baslik'].'</a>'; ?>
           </h2>
           <div class="entry-meta">
             <ul>
-              <li><?php echo "Tarih"; ?></li>
+              <li><?php echo $gonderi['zaman']; ?></li>
               <span class="meta-sep">&bull;</span>
-              <li><?php echo "<a href='single.php?kategoriId=1' title='Kategori' rel='category tag'>Kategori</a>"; ?></li>
+              <li><?php echo '<a href=index.php?kategoriId='.$gonderi['kategoriId'].' title='.$gonderi['kategori'].' rel=\'category tag\'>'.$gonderi['kategori'].'</a>'; ?></li>
               <span class="meta-sep">&bull;</span>
-              <li><?php echo "Yazar"; ?></li>
+              <li><?php echo $gonderi['yazar']; ?></li>
             </ul>
           </div>
         </header>
         <div class="entry-content">
-          <?php // Eğer yazı 250 karakterden fazlaysa "Devamını Gör" linki çıksın.
-            $a="İçerik: dhjskhajdhskahdkjshajkhdjkavbkdb vhj shfdjkshjkh kjdfhjk shdjkfahjkdsh fjalhdjskh fajkhd sjklafh dkjsahf kjdsha kfjldhs aldhjskhajdhskahdkjshajkhdjkavbkdb vhj shfdjkshjkh kjdfhjk shdjkfahjkdsh fjalhdjskh fajkhd sjklafh dkjsahf kjdsha kfjldhs aldhjskhajdhskahdkjshajkhdjkavbkdb vhj shfdjkshjkh kjdfhjk shdjkfahjkdsh fjalhdjskh fajkhd sjklafh dkjsahf kjdsha kfjldhs al";
-            echo "<p>$a</p>";
-          ?>
+          <p><?php
+                echo htmlspecialchars($gonderi['icerik']);
+                // Eğer yazı 250 karakterden fazlaysa "Devamını Gör" linki çıksın.
+                // echo '<a href=single.php?gonderiId='.$gonderi['id'].' title=\''.$gonderi['baslik'].'\'>Devaımı Gör</a>';
+              ?>
+          </p>
         </div>
       </article> <!-- end entry -->
-      <?php }} //End of for & else ?>
+      <?php
+        } //End of foreach
+        echo '<div class="pagenav"><p>';
+        if (! empty($_GET['old_posts'])) {
+          echo '<a rel=prev href=?old_posts='.(explode(',',$limit)[0]+3).'>Eski Gönderiler</a>';
+          echo '<a rel=next href=?old_posts='.(explode(',',$limit)[0]-3).'>Yeni Gönderiler</a></p></div>';
+        }
+        else
+          echo '<a rel=prev href=?old_posts=3>Eski Gönderiler</a></p></div>';
+      } // End of else ?>
     </div> <!-- end main -->
-    <div id="sidebar" class="four columns">
-      <div class="widget widget_search">
-        <h3>Ara</h3>
-        <form action="" method="get">
-          <input type="text" name="ara" value="Ara..." onblur="if(this.value == '') { this.value = 'Ara...'; }" onfocus="if (this.value == 'Ara...') { this.value = ''; }" class="text-search">
-          <input type="submit" value="" class="submit-search">
-        </form>
-      </div>
-      <div class="widget widget_categories group">
-          <h3>Kategoriler</h3>
-        <ul>
-          <?php
-            // Count; SELECT COUNT(k.ad) FROM gonderiler AS g INNER JOIN kategoriler AS k ON g.kategori=k.id GROUP BY k.ad WHERE k.ad=$kategoriler[$i]['ad'];
-            $kategoriler = sorgu_calistir("SELECT * FROM kategoriler");
-            //print_r($kategoriler);
-            for ($i=0; $i < 5; $i++) {
-              if ($i >= count($kategoriler)) break;
-              else { $count=sorgu_calistir("SELECT COUNT(k.ad) FROM gonderiler AS g INNER JOIN kategoriler AS k ON g.kategori=k.id WHERE k.ad='".$kategoriler[$i]['ad']."';", false);// Max 5 ?>
-            <li><?php echo "<a href='single.php?kategoriId=".$kategoriler[$i]['id']."' title='".$kategoriler[$i]['ad']."'> ".$kategoriler[$i]['ad']."</a> (".$count['COUNT(k.ad)'].")"; ?></li>
-          <?php }} ?>
-        </ul>
-      </div>
-      <!--<div class="widget widget_text group">
-        <h3>Widget Text.</h3>
-        <p>Lorem ipsum Ullamco commodo laboris sit dolore commodo aliquip incididunt fugiat esse dolor aute fugiat minim eiusmod do velit labore fugiat officia ad sit culpa labore in consectetur sint cillum sint consectetur voluptate adipisicing Duis irure magna ut sit amet reprehenderit.</p>
-      </div>-->
-      <div class="widget widget_tags">
-        <h3>Etiketler</h3>
-        <div class="tagcloud group">
-          <?php // Max 7
-            for ($i=1; $i <= 7; $i++) {
-              echo "<a href='single.php?etiket=$i'>Etiket $i</a>";
-            }
-          ?>
-        </div>
-      </div>
-      <!--<div class="widget widget_popular">
-        <h3>Popular Post.</h3>
-        <ul class="link-list">
-          <li><a href="#">Sint cillum consectetur voluptate.</a></li>
-          <li><a href="#">Lorem ipsum Ullamco commodo.</a></li>
-          <li><a href="#">Fugiat minim eiusmod do.</a></li>
-        </ul>
-      </div>-->
-    </div> <!-- end sidebar -->
-  </div> <!-- end row -->
-</div> <!-- end content-wrap -->

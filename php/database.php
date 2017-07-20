@@ -16,7 +16,7 @@
     try {
       global $db;
       $db = new PDO("mysql:host=$dbHost;port=$dbPort;dbname=$dbName;charset=utf8", $dbUser, $dbPass);
-      //$sorgu = $db -> query("SELECT * FROM kategoriler;", PDO::FETCH_ASSOC);
+      //$sorgu = $db -> query("", PDO::FETCH_ASSOC);
       //echo "<pre>";
       //print_r($sorgu);
       //if ($sorgu -> rowCount()) {
@@ -32,10 +32,13 @@
   }
   function sorgu_calistir($sorgu, $hepsi=true){
     global $db;
-    if ($hepsi)
-      return $db -> query("$sorgu", PDO::FETCH_ASSOC) -> fetchall();
-    else
-      return $db -> query("$sorgu", PDO::FETCH_ASSOC) -> fetch();
+    if (! empty($sorgu)) {
+      if ($hepsi)
+        return $db -> query($sorgu, PDO::FETCH_ASSOC) -> fetchall();
+      else
+        return $db -> query($sorgu, PDO::FETCH_ASSOC) -> fetch();
+    }
+    return Null;
   }
   db_connect($dbHost='172.17.0.1', $dbPort='8080', $dbName='blog', $dbUser="root", $dbPass='1234'); // blog_mysql,ogPMyPIImsHgpcR3
 ?>

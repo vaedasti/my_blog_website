@@ -352,7 +352,7 @@ ul#nav ul li a {
    margin: 0 0 12px 12px;
    padding: 6px 15px;
    position: relative;
-   text-transform: uppercase;
+   text-transform: capitalize;
    letter-spacing: 0.5px;
 
    background: #E9EBEE;

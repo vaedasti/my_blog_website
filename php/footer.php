@@ -5,33 +5,33 @@
         <div class="twelve columns">
           <ul class="social-links">
             <?php
-              if (! empty($website_bilgileri[0]["site_fb"])){
-                echo "<li><a href='https://www.facebook.com/".$website_bilgileri[0]["site_fb"]."'><i class='fa fa-facebook'></i></a></li>";
+              if (! empty($website_bilgileri["site_fb"])){
+                echo "<li><a href='https://www.facebook.com/".$website_bilgileri["site_fb"]."'><i class='fa fa-facebook'></i></a></li>";
               }
-              if (! empty($website_bilgileri[0]["site_tw"])){
-                echo "<li><a href='http://twittter.com/".$website_bilgileri[0]["site_tw"]."'><i class='fa fa-twitter'></i></a></li>";
+              if (! empty($website_bilgileri["site_tw"])){
+                echo "<li><a href='http://twittter.com/".$website_bilgileri["site_tw"]."'><i class='fa fa-twitter'></i></a></li>";
               }
-              if (! empty($website_bilgileri[0]["site_gp"])){
-                echo "<li><a href='https://plus.google.com/".$website_bilgileri[0]["site_gp"]."'><i class='fa fa-google-plus'></i></a></li>";
+              if (! empty($website_bilgileri["site_gp"])){
+                echo "<li><a href='https://plus.google.com/".$website_bilgileri["site_gp"]."'><i class='fa fa-google-plus'></i></a></li>";
               }
-              if (! empty($website_bilgileri[0]["site_git"])){
-                echo "<li><a href='https://github.com/".$website_bilgileri[0]["site_git"]."'><i class='fa fa-github-square'></i></a></li>";
+              if (! empty($website_bilgileri["site_git"])){
+                echo "<li><a href='https://github.com/".$website_bilgileri["site_git"]."'><i class='fa fa-github-square'></i></a></li>";
               }
-              if (! empty($website_bilgileri[0]["site_inst"])){
-                echo "<li><a href='https://www.instagram.com/".$website_bilgileri[0]["site_inst"]."'><i class='fa fa-instagram'></i></a></li>";
+              if (! empty($website_bilgileri["site_inst"])){
+                echo "<li><a href='https://www.instagram.com/".$website_bilgileri["site_inst"]."'><i class='fa fa-instagram'></i></a></li>";
               }
-              if (! empty($website_bilgileri[0]["site_flickr"])){
-                echo "<li><a href='https://www.flickr.com/people/".$website_bilgileri[0]["site_flickr"]."'><i class='fa fa-flickr'></i></a></li>";
+              if (! empty($website_bilgileri["site_flickr"])){
+                echo "<li><a href='https://www.flickr.com/people/".$website_bilgileri["site_flickr"]."'><i class='fa fa-flickr'></i></a></li>";
               }
-              if (! empty($website_bilgileri[0]["site_skype"])){
-                echo "<li><a href='" . $website_bilgileri[0]["site_skype"]. "'><i class='fa fa-skype'></i></a></li>";
+              if (! empty($website_bilgileri["site_skype"])){
+                echo "<li><a href='" . $website_bilgileri["site_skype"]. "'><i class='fa fa-skype'></i></a></li>";
               }
             ?>
           </ul>
         </div>
         <div class="six columns info">
-          <h3>About <?php echo $website_bilgileri[0]["site_basligi"]; ?></h3>
-          <p><?php echo $website_bilgileri[0]["site_bilgisi"]; ?></p>
+          <h3>About <?php echo $website_bilgileri["site_basligi"]; ?></h3>
+          <p><?php echo $website_bilgileri["site_bilgisi"]; ?></p>
         </div>
         <div class="four columns">
           <h3>Photostream</h3>
@@ -68,4 +68,4 @@
     <script src="js/main.js"></script>
   </body>
 </html>
-<?php unset($website_bilgileri); $db=null; ?>
+<?php unset($website_bilgileri); $db=null; unset($gonderiler); unset($kategoriler); unset($etiketler); ?>

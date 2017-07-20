@@ -7,9 +7,10 @@
     <!--- Basic Page Needs
     ================================================== -->
     <meta charset="utf-8">
-    <title>Keep It Simple.</title>
-    <meta name="description" content="">
-    <meta name="author" content="">
+		<?php $website_bilgileri = sorgu_calistir("SELECT * FROM website", false); ?>
+    <title><?php echo $website_bilgileri['site_basligi']; ?></title>
+    <meta name="description" content="<?php echo $website_bilgileri['site_bilgisi'] ?>">
+    <meta name="author" content="Velat Vurgun">
 
     <!-- mobile specific metas
     ================================================== -->
