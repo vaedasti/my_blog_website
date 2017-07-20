@@ -42,7 +42,7 @@
                                   `site_skype` VARCHAR(255) NULL DEFAULT NULL ,
                                 PRIMARY KEY (`id`)) ENGINE = InnoDB;
   */
-  //require_once "php/database.php";
+  require_once "php/database.php";
   include_once "php/header.php";
   include_once "php/content.php";
   include_once "php/footer.php";

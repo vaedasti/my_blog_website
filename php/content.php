@@ -61,9 +61,15 @@
       <div class="widget widget_categories group">
           <h3>Kategoriler</h3>
         <ul>
-          <?php for ($i=1; $i <= 5; $i++) { // Max 5 ?>
-              <li><?php echo "<a href='single.php?kategoriId=$i' title='Kategori $i'> Kategori $i" . "</a> (#count)"; ?></li>
-          <?php } ?>
+          <?php
+            // Count; SELECT COUNT(k.ad) FROM gonderiler AS g INNER JOIN kategoriler AS k ON g.kategori=k.id GROUP BY k.ad WHERE k.ad=$kategoriler[$i]['ad'];
+            $kategoriler = sorgu_calistir("SELECT * FROM kategoriler");
+            //print_r($kategoriler);
+            for ($i=0; $i < 5; $i++) {
+              if ($i >= count($kategoriler)) break;
+              else { $count=sorgu_calistir("SELECT COUNT(k.ad) FROM gonderiler AS g INNER JOIN kategoriler AS k ON g.kategori=k.id WHERE k.ad='".$kategoriler[$i]['ad']."';", false);// Max 5 ?>
+            <li><?php echo "<a href='single.php?kategoriId=".$kategoriler[$i]['id']."' title='".$kategoriler[$i]['ad']."'> ".$kategoriler[$i]['ad']."</a> (".$count['COUNT(k.ad)'].")"; ?></li>
+          <?php }} ?>
         </ul>
       </div>
       <!--<div class="widget widget_text group">

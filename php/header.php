@@ -2,11 +2,12 @@
 	<body>
 		<!-- Header
 		================================================== -->
+		<?php $website_bilgileri = sorgu_calistir("SELECT * FROM website"); ?>
 		<header id="top">
 			<div class="row">
 				<div class="header-content twelve columns">
-					<h1 id="logo-text"><a href="index.php" title="">Site Başlığı</a></h1>
-					<p id="intro">Site slaganı</p>
+					<h1 id="logo-text"><a href="index.php" title=""><?php echo $website_bilgileri[0]["site_basligi"]; ?></a></h1>
+					<p id="intro"><?php echo $website_bilgileri[0]["site_slogani"]; ?></p>
 				</div>
 			</div>
 			<nav id="nav-wrap">
@@ -17,9 +18,9 @@
 						<li class="current"><a href="index.php">Home</a></li>
 						<li class="has-children"><a href="#">Dropdown</a>
 							<ul>
-							<li><a href="#">Submenu 01</a></li>
-							<li><a href="#">Submenu 02</a></li>
-							<li><a href="#">Submenu 03</a></li>
+								<li><a href="#">Submenu 01</a></li>
+								<li><a href="#">Submenu 02</a></li>
+								<li><a href="#">Submenu 03</a></li>
 							</ul>
 						</li>
 						<li><a href="demo.php">Demo</a></li>

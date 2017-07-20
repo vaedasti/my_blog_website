@@ -10,17 +10,32 @@
             </div>
           </div>";
   }
+  $db;
   // Veritabanına bağlanma fonksiyonu. Parametreleri; $dbHost='sunucu', $dbPort='sunucu_portu', $dbName='veritabani_adi', $dbUser='veritabani_kullanici_adi', $dbPass='veritabani_parolasi'
   function db_connect($dbHost, $dbPort, $dbName, $dbUser, $dbPass){
     try {
-      $db = new PDO("mysql:host=$dbHost;port=$dbPort;dbname=$dbname;charset=utf-8", $dbuser, $dbPass);
-      foreach ($db->query('SELECT * FROM kategoriler') as $row) {
-        print_r($row);
-      }
+      global $db;
+      $db = new PDO("mysql:host=$dbHost;port=$dbPort;dbname=$dbName;charset=utf8", $dbUser, $dbPass);
+      //$sorgu = $db -> query("SELECT * FROM kategoriler;", PDO::FETCH_ASSOC);
+      //echo "<pre>";
+      //print_r($sorgu);
+      //if ($sorgu -> rowCount()) {
+      //  foreach ($sorgu as $row) {
+      //    print_r($row);
+      //  }
+      //}
+      //echo "</pre>";
     } catch (PDOException $e) {
       print hataMesaji("Veritabanına bağlanırken bir hata oluştu!", $e->getMessage());
       die();
     }
   }
-  db_connect($dbHost='172.17.0.2', $dbPort='80', $dbname='blog', $dbUser='blog_mysql', $dbPass='bf06R8SLp44rigvc');
+  function sorgu_calistir($sorgu, $hepsi=true){
+    global $db;
+    if ($hepsi)
+      return $db -> query("$sorgu", PDO::FETCH_ASSOC) -> fetchall();
+    else
+      return $db -> query("$sorgu", PDO::FETCH_ASSOC) -> fetch();
+  }
+  db_connect($dbHost='172.17.0.1', $dbPort='8080', $dbName='blog', $dbUser="root", $dbPass='1234'); // blog_mysql,ogPMyPIImsHgpcR3
 ?>
