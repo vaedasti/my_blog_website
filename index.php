@@ -43,6 +43,7 @@
                                 PRIMARY KEY (`id`)) ENGINE = InnoDB;
   */
   // prepare("INSERT INTO b_gonderiler(baslik, icerik, etiketler, yazar, kategori), VALUES(?,?,?,?,?)")
+  // execute(array($baslik, $icerik, $etiketler, $yazar, $kategori))
   require_once "php/database.php";
   include_once "php/header.php";
   include_once "php/content.php";
