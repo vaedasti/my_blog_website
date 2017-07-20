@@ -42,6 +42,7 @@
                                   `site_skype` VARCHAR(255) NULL DEFAULT NULL ,
                                 PRIMARY KEY (`id`)) ENGINE = InnoDB;
   */
+  // prepare("INSERT INTO b_gonderiler(baslik, icerik, etiketler, yazar, kategori), VALUES(?,?,?,?,?)")
   require_once "php/database.php";
   include_once "php/header.php";
   include_once "php/content.php";
