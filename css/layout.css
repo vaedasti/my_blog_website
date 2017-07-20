@@ -339,12 +339,13 @@ ul#nav ul li a {
 
 
 /* tag cloud */
-#sidebar .tagcloud {
+/* #sidebar */
+.tagcloud {
    margin: 18px 0 24px -12px;
    padding: 0;
    font-size: 17px;
 }
-#sidebar .tagcloud a {
+.tagcloud a {
    font: 12px/24px 'opensans-bold', sans-serif !important;
    display: inline-block;
    float: left;
@@ -367,7 +368,7 @@ ul#nav ul li a {
 
    border-radius: 3px;
 }
-#sidebar .tagcloud a:hover {
+.tagcloud a:hover {
    color: #fff;
    background: #93B876;
 }
@@ -395,6 +396,8 @@ ul#nav ul li a {
 }
 .entry .entry-meta ul .meta-sep {}
 .entry .entry-meta ul li a { color: #B7B9BD; }
+
+.entry .entry-content p { text-indent: 15px; }
 
 .entry .entry-content-media {	margin: 24px 0 18px;	}
 
