@@ -1,8 +1,7 @@
-<?php
-  require_once "php/database.php";
-  include_once "php/header.php";
-?>
-
+  <?php
+    require_once "php/database.php";
+    include_once "php/header.php";
+  ?>
    <!-- Content
    ================================================== -->
    <div id="content-wrap">
@@ -26,12 +25,16 @@
 						<div class="twelve columns">
 							<h4>Aylara göre.</h4>
 					      	<ul>
-				        		<li><a href="">July 2013</a></li>
-					      		<li><a href="">August 2013</a></li>
-					      		<li><a href="">September 2013</a></li>
-					      		<li><a href="">October 2013</a></li>
-					      		<li><a href="">November 2013</a></li>
-					      		<li><a href="">December 2013</a></li>
+                    <?php
+                      $a;
+                      $deger = sorgu_calistir("SELECT zaman FROM gonderiler ORDER BY zaman DESC");
+                      foreach ($deger as $key) {
+                        $tarih = tarih($key['zaman']);
+                        if (empty($a) OR ($a['ay'] != $tarih['ay'] AND $a['yil'] != $tarih['yil']))
+                          echo "<li><a href='index.php?zaman=".$key['zaman']."'>".$tarih['ay']." ".$tarih['yil']."</a></li>";
+                        $a = $tarih;
+                      }
+                    ?>
 					      	</ul>
 						</div>
 					</div> <!-- end row -->
@@ -63,7 +66,7 @@
 			      </div>
 				</section> <!-- End page -->
    		</div> <!-- End main -->
-<?php
-  include_once "php/sidebar.php";
-  include_once "php/footer.php";
-?>
+      <?php
+        include_once "php/sidebar.php";
+        include_once "php/footer.php";
+      ?>

@@ -1,40 +1,12 @@
 <!-- https://codepen.io/colorlib/pen/rxddKy -->
+<!--                                           ________________________________    TO-DO     ________________________________
+  SESSION EKLE
+-->
 <?php require_once "php/database.php"; ?>
-<?php
-  if (! empty($_SESSION['kAd'])) {
-    # code... Redirect
-  }
-  else {
-    $bilgi = array(
-      'kAdi' => $_POST['kAdi'],
-      'isim' => $_POST['isim'],
-      'sIsim' => $_POST['sIsim'],
-      'parola' => $_POST['parola'],
-      'tel' => $_POST['tel'],
-      'dTarih' => $_POST['dTarih'],
-      'email' => $_POST['email']
-    );
-    if (! empty($bilgi['isim'])) {
-      # Kayıt
-      //echo "<script></script>";
-      die();
-    }
-    else { # Giriş
-      if (! empty($bilgi['kAdi']) && ! empty($bilgi['parola'])) { // Here......................
-        echo '<script>
-                function yonlendir(){
-                  git("Hoşgeldiniz '.$bilgi['isim'].'", /my_blog_website");
-                }</script>';
-        //die();
-      }
-    }
-  }
-?>
 <html>
   <head>
     <meta charset="utf-8">
     <title>Login</title>
-    <meta name="description" content="<?php echo $website_bilgileri['site_bilgisi'] ?>">
     <meta name="author" content="Velat Vurgun">
     <!-- mobile specific metas
     ================================================== -->
@@ -43,6 +15,7 @@
     <!-- Favicons
     ================================================== -->
     <link rel="shortcut icon" href="favicon.png" >
+
     <script type="text/javascript">
       function git(mesaj, url){
         //Hoşgeldiniz Administrator.
@@ -53,13 +26,20 @@
           window.location.replace(url);
         }, 3000);
       }
+      function uyari(mesaj){
+        document.getElementsByClassName('uyari')[0].style='display: block';
+        document.getElementsByClassName("uyari")[0].innerHTML=mesaj;
+      }
     </script>
     <!-- Bootstrap
     ================================================== -->
     <!-- Latest compiled and minified CSS -->
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+    <link rel="stylesheet" href="css/bootstrap.min.css">
+    <!-- <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">-->
     <!-- Latest compiled and minified JavaScript -->
-    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
+    <script src="js/bootstrap.min.js" charset="utf-8"></script>
+    <script src="js/jquery-1.10.2.min.js" charset="utf-8"></script>
+    <!--<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>-->
     <style>
       @import url(https://fonts.googleapis.com/css?family=Roboto:300);
       .login-page {
@@ -114,6 +94,9 @@
         color: #4CAF50;
         text-decoration: none;
       }
+      .form .uyari {
+        display: none;
+      }
       .form .register-form {
         display: none;
       }
@@ -161,30 +144,32 @@
         -moz-osx-font-smoothing: grayscale;
       }
     </style>
-    <script src="//cdnjs.cloudflare.com/ajax/libs/jquery/2.1.3/jquery.min.js" charset="utf-8"></script>
   </head>
-  <body onload="yonlendir();">
+  <body>
     <div class="login-page">
       <div class="form">
         <form class="register-form" action="#" method="post">
-          <input type="text" placeholder="kullanıcı adı" name="kAdi"/>
-          <input type="text" placeholder="isim" name="isim"/>
+          <input type="hidden" name="kayit" value="true" required/>
+          <input type="text" placeholder="kullanıcı adı" name="kAd" required/>
+          <input type="text" placeholder="isim" name="isim" required/>
           <input type="text" placeholder="soyisim" name="sIsim"/>
-          <input type="password" placeholder="parola" name="parola"/>
-          <input type="number" placeholder="telefon" name="tel"/>
+          <input type="password" placeholder="parola" name="parola" required/>
+          <input type="email" placeholder="email adresi" name="email" required/>
           <input type="date" placeholder="doğum tarihi" name="dTarih"/>
-          <input type="email" placeholder="email adresi" name="email"/>
+          <input type="number" placeholder="telefon" name="tel"/>
           <button>kaydol</button>
           <p class="message">Zaten üye misin? <a href="#">Giriş Yap</a></p>
         </form>
         <form class="login-form" action="#" method="post">
-          <input type="text" placeholder="kullanıcı adı" name="kAdi"/>
-          <input type="password" placeholder="parola" name="parola"/>
+          <input type="hidden" name="giris" value="true"/>
+          <input type="text" placeholder="kullanıcı adı" name="kAd" required autofocus="true"/>
+          <input type="password" placeholder="parola" name="parola" required/>
           <button>giris yap</button>
           <p class="message">Üye değil misin? <a href="#">Kayıt Ol</a></p>
         </form>
         <div class="yonlendir"></div>
-        <p class="message"><a href="/my_blog_website/">Anasayfa</a></p>
+        <p class="message uyari"></p>
+        <p class="message"><a href="/my_blog_website">Anasayfa</a></p>
       </div>
     </div>
   </body>
@@ -193,4 +178,52 @@
       $('form').animate({height: "toggle", opacity: "toggle"}, "slow");
     });
   </script>
+  <?php
+    if (! empty($_SESSION['kAd'])) {
+      echo "Zaten Giriş Yapılmış.";
+      die();
+    }
+    else {
+      if ($_POST['kayit']) { // ! empty($_POST['kayit']) &&
+        $bilgi = array(
+          'kAd' => trim($_POST['kAd']),
+          'isim' => mb_convert_case(trim($_POST['isim']), MB_CASE_TITLE),
+          'sIsim' => mb_convert_case(trim($_POST['sIsim']), MB_CASE_TITLE),
+          'parola' => trim($_POST['parola']),
+          'email' => trim($_POST['email']),
+          'dTarih' => $_POST['dTarih'],
+          'tel' => $_POST['tel']
+        );
+        $sor = sorgu_calistir("SELECT kAd, email FROM kullanicilar WHERE kAd='".$bilgi['kAd']."' OR email='".$bilgi['email']."'", false);
+        if (count($sor) > 1)
+          echo "<script>$('.message a').click();uyari('Bu Kullanıcı Adına veya E-Mail\'e sahip zaten bir kullanıcı var!');</script>";
+        else {
+          if (empty($bilgi['dTarih'])) $bilgi['dTarih'] = "NULL";
+          else $bilgi['dTarih'] = "'".$bilgi['dTarih']."'";
+          $kayit = sorgu_calistir("INSERT INTO kullanicilar(kAd, parola, email, ad, soyad, tel, dTarih) VALUES('".$bilgi['kAd']."', '".$bilgi['parola']."', '".$bilgi['email']."', '".$bilgi['isim']."', '".$bilgi['sIsim']."', '".$bilgi['tel']."', ".$bilgi['dTarih'].")");
+          if (! empty($kayit)) {// Kayıt gerçekleştiyse
+            // SESSION EKLE
+            echo '<script>git("Hoşgeldiniz '.$bilgi['isim'].'", "/my_blog_website");</script>'; // Anasayfa
+          }
+        }
+      }
+      elseif ($_POST['giris']) {
+        if (! empty($_POST['kAd']) && ! empty($_POST['parola'])) {
+          // if its empty; Fatal error: Call to a member function fetch() on boolean in /var/www/html/my_blog_website/login.php on line 196
+          $sor = sorgu_calistir("SELECT id, kAd, ad, soyad, tip FROM kullanicilar WHERE kAd='".$_POST['kAd']."' AND parola=".$_POST['parola'], false);
+          if (count($sor) >= 4) {
+            // SESSION EKLE
+            if ($sor['tip'] == 1)
+              echo '<script>git("Hoşgeldiniz '.$sor['ad'].'", "/my_blog_website");</script>'; // Admin Panel
+            else
+              echo '<script>git("Hoşgeldiniz '.$sor['ad'].'", "/my_blog_website");</script>'; // Anasayfa
+          }
+          else
+            echo "<script>uyari('Böyle bir kullanıcı yok. Lütfen bilgileriniz kontrol edip tekrar giriniz.');</script>";
+        }
+        else
+          echo "<script>uyari('Lütfen alanları boş bırakmayın!');</script>";
+      }
+    }
+  ?>
 </html>

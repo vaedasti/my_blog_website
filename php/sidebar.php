@@ -6,15 +6,18 @@
           <input type="submit" value="" class="submit-search">
         </form>
       </div>
-      <div class="widget widget_text">
+      <div class="widget widget_text group">
         <h3>Kullanıcı</h3>
+        <?php
+          // Eğer SESSION var ise burada isim yazsın ve altında çıkış yap linki olsun.
+          // Eğer $_SESSION['tip']==1 ise admin paneline git linki olsun.
+        ?>
         <a href="login.php">Giriş Yap</a>
       </div>
       <div class="widget widget_categories group">
         <h3>Kategoriler</h3>
         <ul>
           <?php
-            global $db;
             $kategoriler = sorgu_calistir("SELECT COUNT(k.ad) AS adet, k.id, k.ad FROM gonderiler AS g INNER JOIN kategoriler AS k ON g.kategori=k.id WHERE g.gosterim=1 GROUP BY k.id ORDER BY adet DESC");
             $i = 0;
             foreach ($kategoriler as $kategori) { //for ($i=0; $i < 5; $i++) {

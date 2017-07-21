@@ -14,34 +14,30 @@
 				<a class="mobile-btn" href="#" title="Hide navigation">Hide Menu</a>
 				<div class="row">
 					<ul id="nav" class="nav">
-						<?php /*
-							switch ($_SERVER['PHP_SELF']) {
-								case '/my_blog_website/index.php':
-									# code...
-									break;
-								default:
-									# code...
-									break;
-							}*/
-						?>
-						<li class="current"><a href="<?php $_SERVER['PHP_SELF']; ?>">Ana Sayfa</a></li>
-						<li class="has-children"><a href="#">Kategoriler</a>
+						<li <?php if ($_SERVER['PHP_SELF'] == "/my_blog_website/index.php" AND empty(htmlspecialchars($_GET['kategoriId']))) echo "class='current'"; ?>><a href="index.php">Ana Sayfa</a></li>
+						<li class="has-children <?php if ($_SERVER['PHP_SELF'] == "/my_blog_website/index.php" AND ! empty(htmlspecialchars($_GET['kategoriId']))) echo "current"; ?>"><a href="#">Kategoriler</a>
 							<ul>
-								<li><a href="#">Submenu 01</a></li>
-								<li><a href="#">Submenu 02</a></li>
-								<li><a href="#">Submenu 03</a></li>
+								<?php
+			            global $db;
+			            $kategoriler = sorgu_calistir("SELECT k.id, k.ad FROM gonderiler AS g INNER JOIN kategoriler AS k ON g.kategori=k.id WHERE g.gosterim=1 GROUP BY k.id ORDER BY COUNT(k.ad) DESC");
+			            $i = 0;
+			            foreach ($kategoriler as $kategori) { //for ($i=0; $i < 5; $i++) {
+			              if ($i >= 10) break; // Max 5
+			              echo '<li><a href=index.php?kategoriId='.$kategori['id']. ' >'.$kategori['ad'].'</a></li>';
+			              $i++;
+			            }
+			          ?>
 							</ul>
 						</li>
-						<li><a href="demo.php">Demo</a></li>
-						<li><a href="archives.php">Arşiv</a></li>
-						<li class="has-children"><a href="single.php">Blog</a>
+						<!-- <li><a href="demo.php">Demo</a></li> -->
+						<li <?php if ($_SERVER['PHP_SELF'] == "/my_blog_website/archives.php") echo "class='current'"; ?>><a href="archives.php">Arşiv</a></li>
+						<!--<li class="has-children"><a href="single.php">Blog</a>
 							<ul>
 							<li><a href="<?php $_SERVER['PHP_SELF']; ?>">Blog Yazıları</a></li>
 							<li><a href="single.php">Single Blog</a></li>
 							</ul>
-						</li>
-						<li><a href="page.php">Page</a></li>
-						<!-- <li><a href="login.php">Login</a></li> -->
+						</li>-->
+						<li <?php if ($_SERVER['PHP_SELF'] == "/my_blog_website/page.php") echo "class='current'"; ?>><a href="page.php">Hakkımda</a></li>
 					</ul> <!-- end #nav -->
 				</div>
 			</nav> <!-- end #nav-wrap -->

@@ -30,7 +30,7 @@
           </ul>
         </div>
         <div class="six columns info">
-          <h3>About <?php echo $website_bilgileri["site_basligi"]; ?></h3>
+          <h3><?php echo $website_bilgileri["site_basligi"]; ?> hakkında</h3>
           <p><?php echo $website_bilgileri["site_bilgisi"]; ?></p>
         </div>
         <div class="four columns">
