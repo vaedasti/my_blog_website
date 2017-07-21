@@ -24,7 +24,7 @@
           $limit = '0,3';
           if (! empty($_GET['old_posts']))
             $limit = htmlspecialchars($_GET['old_posts']).',3';
-          $gonderiler = sorgu_calistir("SELECT g.id, g.baslik, g.icerik, g.zaman, k.ad AS kategori, k.id AS kategoriId, kl.kAd AS yazar FROM gonderiler AS g INNER JOIN kategoriler AS k ON g.kategori=k.id INNER JOIN kullanicilar AS kl ON g.yazar=kl.id WHERE g.gosterim=1 ORDER BY zaman DESC LIMIT ".$limit);
+          $gonderiler = sorgu_calistir("SELECT g.id, g.baslik, g.icerik, g.zaman, k.ad AS kategori, k.id AS kategoriId, kl.ad AS yazar FROM gonderiler AS g INNER JOIN kategoriler AS k ON g.kategori=k.id INNER JOIN kullanicilar AS kl ON g.yazar=kl.id WHERE g.gosterim=1 ORDER BY zaman DESC LIMIT ".$limit);
           foreach ($gonderiler as $gonderi) {
       ?>
       <article class="entry">
@@ -44,9 +44,13 @@
         </header>
         <div class="entry-content">
           <p><?php
-                echo htmlspecialchars($gonderi['icerik']);
-                // Eğer yazı 250 karakterden fazlaysa "Devamını Gör" linki çıksın.
-                // echo '<a href=single.php?gonderiId='.$gonderi['id'].' title=\''.$gonderi['baslik'].'\'>Devaımı Gör</a>';
+                if (strlen(htmlspecialchars($gonderi['icerik'])) >= 200) {
+                  echo substr(htmlspecialchars($gonderi['icerik']), 0, 200);
+                  // Eğer yazı 250 karakterden fazlaysa "Devamını Gör" linki çıksın.
+                  echo '<a href=single.php?gonderiId='.$gonderi['id'].' title=\''.$gonderi['baslik'].'\'> Devamını Gör</a>';
+                }
+                else
+                  echo htmlspecialchars($gonderi['icerik']);
               ?>
           </p>
         </div>

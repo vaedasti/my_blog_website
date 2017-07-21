@@ -25,13 +25,13 @@
 							}*/
 						?>
 						<li class="current"><a href="<?php $_SERVER['PHP_SELF']; ?>">Ana Sayfa</a></li>
-						<!--<li class="has-children"><a href="#">Dropdown</a>
+						<li class="has-children"><a href="#">Kategoriler</a>
 							<ul>
 								<li><a href="#">Submenu 01</a></li>
 								<li><a href="#">Submenu 02</a></li>
 								<li><a href="#">Submenu 03</a></li>
 							</ul>
-						</li>-->
+						</li>
 						<li><a href="demo.php">Demo</a></li>
 						<li><a href="archives.php">Arşiv</a></li>
 						<li class="has-children"><a href="single.php">Blog</a>
@@ -41,6 +41,7 @@
 							</ul>
 						</li>
 						<li><a href="page.php">Page</a></li>
+						<!-- <li><a href="login.php">Login</a></li> -->
 					</ul> <!-- end #nav -->
 				</div>
 			</nav> <!-- end #nav-wrap -->

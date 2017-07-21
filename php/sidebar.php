@@ -6,6 +6,10 @@
           <input type="submit" value="" class="submit-search">
         </form>
       </div>
+      <div class="widget widget_text">
+        <h3>Kullanıcı</h3>
+        <a href="login.php">Giriş Yap</a>
+      </div>
       <div class="widget widget_categories group">
         <h3>Kategoriler</h3>
         <ul>
