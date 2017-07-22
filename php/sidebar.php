@@ -8,11 +8,21 @@
       </div>
       <div class="widget widget_text group">
         <h3>Kullanıcı</h3>
-        <?php
-          // Eğer SESSION var ise burada isim yazsın ve altında çıkış yap linki olsun.
-          // Eğer $_SESSION['tip']==1 ise admin paneline git linki olsun.
-        ?>
-        <a href="login.php">Giriş Yap</a>
+        <ul>
+          <?php
+            // Eğer SESSION var ise burada isim yazsın ve altında çıkış yap linki olsun.
+            // Eğer $_SESSION['tip']==1 ise admin paneline git linki olsun.
+            if (! empty($_GET['cikis']) AND htmlspecialchars($_GET['cikis']) == 'true') {
+              echo "<li>Çıkış Yapıldı</li>";
+            }
+            if (true) {
+              echo '<li>Administrator</li>';
+              echo '<li><a href="admin_panel/light-bootstrap-dashboard-master/dashboard.html">Yönetim Paneli</a></li>';
+              echo '<li><a href="index.php?cikis=true">Çıkış Yap</a></li>';
+            }
+            else echo '<li><a href="login.php">Giriş Yap</a></li>';
+          ?>
+        </ul>
       </div>
       <div class="widget widget_categories group">
         <h3>Kategoriler</h3>

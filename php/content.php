@@ -59,15 +59,15 @@
           </div>
         </header>
         <div class="entry-content">
-          <p><?php
-                if (strlen(htmlspecialchars($gonderi['icerik'])) >= 200) {
-                  echo substr(htmlspecialchars($gonderi['icerik']), 0, 200);
-                  // Eğer yazı 250 karakterden fazlaysa "Devamını Gör" linki çıksın.
-                  echo '<a href=single.php?gonderiId='.$gonderi['id'].' title=\''.$gonderi['baslik'].'\'> Devamını Gör</a>';
-                }
-                else
-                  echo htmlspecialchars($gonderi['icerik']);
-              ?>
+          <p>
+            <?php
+              if (strlen(htmlspecialchars($gonderi['icerik'])) >= 200) {
+                echo substr(htmlspecialchars($gonderi['icerik']), 0, 200);
+                // Eğer yazı 250 karakterden fazlaysa "Devamını Gör" linki çıksın.
+                echo '<a href=single.php?gonderiId='.$gonderi['id'].' title=\''.$gonderi['baslik'].'\'> Devamını Gör</a>';
+              }
+              else echo htmlspecialchars($gonderi['icerik']);
+            ?>
           </p>
         </div>
       </article> <!-- end entry -->

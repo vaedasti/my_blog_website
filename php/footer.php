@@ -49,11 +49,9 @@
         <div class="two columns">
           <h3 class="social">Navigate</h3>
           <ul class="navigate group">
-            <li><a href="#">Home</a></li>
-            <li><a href="#">Blog</a></li>
-            <li><a href="#">Demo</a></li>
-            <li><a href="#">Archives</a></li>
-            <li><a href="#">About</a></li>
+            <li><a href="index.php">Ana Sayfa</a></li>
+            <li><a href="archives.php">Arşiv</a></li>
+            <li><a href"page.php">Hakkımda</a></li>
           </ul>
         </div>
         <p class="copyright">&copy; Copyright 2014 Keep It Simple. &nbsp; Design by <a title="Styleshout" href="http://www.styleshout.com/">Styleshout</a>.</p>

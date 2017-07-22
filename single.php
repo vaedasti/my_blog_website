@@ -1,5 +1,5 @@
   <?php
-    if (empty($_GET['gonderiId'])) {
+    if (empty(htmlspecialchars($_GET['gonderiId']))) {
       //http_redirect("my_blog_website");
       echo "Redirect to index.php";
       die();
@@ -7,6 +7,8 @@
 
     require_once "php/database.php";
     include_once "php/header.php";
+    $sorgu = "SELECT g.id, g.baslik, g.icerik, g.zaman, g.etiketler,k.ad AS kategori, k.id AS kategoriId, kl.ad AS yazar FROM gonderiler AS g INNER JOIN kategoriler AS k ON g.kategori=k.id INNER JOIN kullanicilar AS kl ON g.yazar=kl.id WHERE g.gosterim=1 AND g.id=".htmlspecialchars($_GET['gonderiId']);
+    $gonderi = sorgu_calistir($sorgu, false);
   ?>
    <!-- Content
    ================================================== -->
@@ -15,44 +17,47 @@
    		<div id="main" class="eight columns">
    			<article class="entry">
           <header class="entry-header">
-            <h2 class="entry-title">Baslik</h2>
+            <?php echo '<h2 class="entry-title">'.$gonderi['baslik'].'</h2>'; ?>
             <div class="entry-meta">
               <ul>
-                <li>July 11, 2014</li>
+                <li><?php echo $gonderi['zaman']; ?></li>
                 <span class="meta-sep">&bull;</span>
-                <li>
-                  <a href="#" title="" rel="category tag">Wordpress</a>,
-                  <a href="#" title="" rel="category tag">Ghost</a>
-                </li>
+                <li><?php echo '<a href=index.php?kategoriId='.$gonderi['kategoriId'].' title='.$gonderi['kategori'].' rel=\'category tag\'>'.$gonderi['kategori'].'</a>'; ?></li>
                 <span class="meta-sep">&bull;</span>
-                <li>Jane Doe</li>
+                <li><?php echo $gonderi['yazar']; ?></li>
               </ul>
             </div>
           </header>
+          <!--
 					<div class="entry-content-media">
 						<div class="post-thumb">
 							<img src="images/m-farmerboy.jpg">
 						</div>
-					</div>
+					</div>-->
 					<div class="entry-content">
-						<p class="lead">Lorem ipsum Nisi enim est proident est magna occaecat dolore proident eu ex sunt consectetur consectetur dolore enim nisi exercitation adipisicing magna culpa commodo deserunt ut do Ut occaecat. Lorem ipsum Veniam consequat quis aliquip dolore minim ex labore dolor Excepteur Duis velit in officia Excepteur officia officia officia cillum ut elit in fugiat incididunt ea ad Ut ut ea ea dolor ex dolor eu magna voluptate irure consectetur.</p>
-						<p>Duis ex ad cupidatat tempor Excepteur cillum cupidatat fugiat nostrud cupidatat dolor sunt sint sit nisi est eu exercitation incididunt adipisicing veniam velit id fugiat enim mollit amet anim veniam dolor dolor irure velit commodo cillum sit nulla ullamco magna amet magna cupidatat qui labore cillum sit in tempor veniam consequat non laborum adipisicing aliqua ea nisi sint ut quis proident ullamco ut dolore culpa occaecat ut laboris in sit minim cupidatat ut dolor voluptate enim veniam consequat occaecat fugiat in adipisicing in amet Ut nulla nisi non ut enim aliqua laborum mollit quis nostrud sed sed.</p>
-						<p>Lorem ipsum Nisi enim est proident est magna occaecat dolore proident eu ex sunt consectetur consectetur dolore enim nisi exercitation adipisicing magna culpa commodo deserunt ut do Ut occaecat. Lorem ipsum Veniam consequat quis aliquip dolore minim ex labore dolor Excepteur Duis velit in officia Excepteur officia officia officia cillum ut elit in fugiat incididunt ea ad Ut ut ea ea dolor ex dolor eu magna voluptate irure consectetur.</p>
+						<!-- <p class="lead">Lorem ipsum Nisi enim est proident est magna occaecat dolore proident eu</p> -->
+            <?php echo $gonderi['icerik']; ?>
 					</div>
 					<p class="tags">
-            <span>Tagged in </span>:
-            <a href="#">orci</a>, <a href="#">lectus</a>, <a href="#">varius</a>, <a href="#">turpis</a>
+            <span>Tagged in :</span>
+            <?php
+              foreach (explode(", " ,$gonderi['etiketler']) as $etiket) {
+                echo '<a href=index.php?etiket='.$etiket.">".$etiket.'</a>, ';
+              }
+              $gonderi=null;
+            ?>
+            <!-- <a href="#">orci</a>, <a href="#">lectus</a>, <a href="#">varius</a>, <a href="#">turpis</a> -->
           </p>
           <ul class="post-nav group">
             <li class="prev">
               <?php
-                // Eğer bir önceki yok ise ondan öncekine baksın; SQL ile yap 
-                //$onceki = sorgu_calistir("SELECT id, baslik FROM gonderiler WHERE gosterim=1 AND id=".htmlspecialchars($_GET['gonderiId'])-1, false);
-                //print_r($onceki);
+                // Eğer bir önceki yok ise ondan öncekine baksın; SQL ile yap
+                //$onceki = sorgu_calistir("SELECT id, baslik FROM gonderiler WHERE gosterim=1 AND id=".(htmlspecialchars($_GET['gonderiId'])-1), false);
+                // echo '<a rel="prev" href="single.php?gonderiId='.$onceki['id']."><strong>Önceki Gönderi</strong>baslik</a>";
                 // <a rel="prev" href="#"><strong>Önceki Gönderi</strong>baslik</a>
               ?>
             </li>
-            <li class="next"><a rel="next" href="#"><strong>Sonraki Gönderi</strong> Morbi Elit Consequat Ipsum</a></li>
+            <!-- <li class="next"><a rel="next" href="#"><strong>Sonraki Gönderi</strong> Morbi Elit Consequat Ipsum</a></li> -->
           </ul>
 				</article>
 				<!-- Comments
