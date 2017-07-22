@@ -57,4 +57,9 @@
                   );
     return array('ay' => $aylar[substr($zaman, 5,2)], 'yil' => substr($zaman, 0,4));
   }
+  function redirect($url, $statusCode = 303)
+  {
+    header('Location: ' . $url, true, $statusCode);
+    die();
+  }
 ?>

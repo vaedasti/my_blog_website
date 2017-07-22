@@ -1,12 +1,9 @@
-<!-- https://codepen.io/colorlib/pen/rxddKy -->
-<!--                                           ________________________________    TO-DO     ________________________________
-  SESSION EKLE
--->
 <?php require_once "php/database.php"; ?>
 <html>
+  <!-- https://codepen.io/colorlib/pen/rxddKy -->
   <head>
     <meta charset="utf-8">
-    <title>Login</title>
+    <title>Giriş</title>
     <meta name="author" content="Velat Vurgun">
     <!-- mobile specific metas
     ================================================== -->
@@ -21,7 +18,7 @@
         //Hoşgeldiniz Administrator.
         document.getElementsByClassName('login-form')[0].style="display: none;";
         document.getElementsByClassName('register-form')[0].style="display: none;";
-        document.getElementsByClassName('yonlendir')[0].innerHTML="<h3>"+mesaj+"</h3>Yönlendiriliyorsunuz.Eğer tarayıcınız yönlendirmeyi desteklemiyorsa lütfen aşağıdaki linke tıklayınız.";
+        document.getElementsByClassName('yonlendir')[0].innerHTML="<h3>"+mesaj+"</h3>Yönlendiriliyorsunuz. Eğer tarayıcınız yönlendirmeyi desteklemiyorsa lütfen aşağıdaki linke tıklayınız.";
         setTimeout(function(){
           window.location.replace(url);
         }, 3000);
@@ -179,64 +176,70 @@
     });
   </script>
   <?php
-    if (! empty($_SESSION['kAd'])) {
-      echo "Zaten Giriş Yapılmış.";
-      die();
+    $yPanel = "/my_blog_website/admin_panel/light-bootstrap-dashboard-master/dashboard.html";
+    setcookie("kAd", "admin", time() + (86400 * 30), "/"); // 86400 = 1 day
+    //$_SESSION['kAd'] = "admin";
+    //$_SESSION['tip'] = "0";
+    //if (isset($_SESSION['kAd'])) print_r($_SESSION);
+    //else echo "No Session";
+    if (isset($_SESSION['kAd']) AND ! empty($_SESSION['kAd'])){// { // Zaten giriş yapmış ise anasayfaya yönlendir.
+      if ($_SESSION['tip'] == "1") echo '<script>git("Hoşgeldiniz '.$_SESSION['kAd'].'", "'.$yPanel.'");</script>'; // Yönetim Panel
+      else echo '<script>git("Hoşgeldiniz '.$_SESSION['kAd'].'", "/my_blog_website");</script>'; // Anasayfa
     }
-    else {
-      if ($_SERVER["REQUEST_METHOD"] == "POST") {
-        if (htmlspecialchars($_POST['kayit']) == 'true') {
-          $bilgi = array(
-            'kAd' => trim($_POST['kAd']),
-            'isim' => mb_convert_case(trim($_POST['isim']), MB_CASE_TITLE),
-            'sIsim' => mb_convert_case(trim($_POST['sIsim']), MB_CASE_TITLE),
-            'parola' => trim($_POST['parola']),
-            'email' => trim($_POST['email']),
-            'dTarih' => $_POST['dTarih'],
-            'tel' => $_POST['tel']
-          );
-          $sor = sorgu_calistir("SELECT kAd, email FROM kullanicilar WHERE kAd='".$bilgi['kAd']."' OR email='".$bilgi['email']."'", false);
-          if (count($sor) > 1)
-            echo "<script>$('.message a').click();uyari('Bu Kullanıcı Adına veya E-Mail\'e sahip zaten bir kullanıcı var!');</script>";
-          else {
-            if (empty($bilgi['dTarih'])) $bilgi['dTarih'] = "NULL";
-            else $bilgi['dTarih'] = "'".$bilgi['dTarih']."'";
-            $kayit = sorgu_calistir("INSERT INTO kullanicilar(kAd, parola, email, ad, soyad, tel, dTarih) VALUES('".$bilgi['kAd']."', '".$bilgi['parola']."', '".$bilgi['email']."', '".$bilgi['isim']."', '".$bilgi['sIsim']."', '".$bilgi['tel']."', ".$bilgi['dTarih'].")");
-            if (! empty($kayit)) {// Kayıt gerçekleştiyse
-              // SESSION EKLE
-              echo '<script>git("Hoşgeldiniz '.$bilgi['isim'].'", "/my_blog_website");</script>'; // Anasayfa
-            }
+    if ($_SERVER["REQUEST_METHOD"] == "POST") {
+      if (htmlspecialchars($_POST['kayit']) == 'true') {
+        $bilgi = array(
+          'kAd' => trim($_POST['kAd']),
+          'isim' => mb_convert_case(trim($_POST['isim']), MB_CASE_TITLE),
+          'sIsim' => mb_convert_case(trim($_POST['sIsim']), MB_CASE_TITLE),
+          'parola' => trim($_POST['parola']),
+          'email' => trim($_POST['email']),
+          'dTarih' => $_POST['dTarih'],
+          'tel' => $_POST['tel']
+        );
+        $sor = sorgu_calistir("SELECT kAd, email FROM kullanicilar WHERE kAd='".$bilgi['kAd']."' OR email='".$bilgi['email']."'", false);
+        if (count($sor) > 1)
+          echo "<script>$('.message a').click();uyari('Bu Kullanıcı Adına veya E-Mail\'e sahip zaten bir kullanıcı var!');</script>";
+        else {
+          if (empty($bilgi['dTarih'])) $bilgi['dTarih'] = "NULL";
+          else $bilgi['dTarih'] = "'".$bilgi['dTarih']."'";
+          $kayit = sorgu_calistir("INSERT INTO kullanicilar(kAd, parola, email, ad, soyad, tel, dTarih) VALUES('".$bilgi['kAd']."', '".$bilgi['parola']."', '".$bilgi['email']."', '".$bilgi['isim']."', '".$bilgi['sIsim']."', '".$bilgi['tel']."', ".$bilgi['dTarih'].")");
+          if (! empty($kayit)) {// Kayıt gerçekleştiyse
+            // SESSION EKLE
+            $_SESSION['kAd'] = $bilgi['kAd'];
+            echo '<script>git("Hoşgeldiniz '.$bilgi['isim'].'", "/my_blog_website");</script>'; // Anasayfa
+            //redirect("index.php");
           }
         }
-        elseif (htmlspecialchars($_POST['giris']) == 'true') {
-          if (! empty($_POST['kAd']) && ! empty($_POST['parola'])) {
-            // if its empty; Fatal error: Call to a member function fetch() on boolean in /var/www/html/my_blog_website/login.php on line 196
-            $sor = sorgu_calistir("SELECT id, kAd, ad, soyad, tip FROM kullanicilar WHERE kAd='".$_POST['kAd']."' AND parola=".$_POST['parola'], false);
-            if (count($sor) >= 4) {
-              // SESSION EKLE
-              // Set a 200 (okay) response code.
-              http_response_code(200);
-              if ($sor['tip'] == 1) // session var ise scripti çalıştır. Burada session ekle.
-                echo '<script>git("Hoşgeldiniz '.$sor['ad'].'", "/my_blog_website");</script>'; // Admin Panel
-              else
-                echo '<script>git("Hoşgeldiniz '.$sor['ad'].'", "/my_blog_website");</script>'; // Anasayfa
-            }
-            else {
-              // Set a 500 (internal server error) response code.
-              http_response_code(500);
-              echo "<script>uyari('Böyle bir kullanıcı yok. Lütfen bilgileriniz kontrol edip tekrar giriniz.');</script>";
-            }
-          } else {
-              // Set a 500 (internal server error) response code.
-              http_response_code(500);
-              echo "<script>uyari('Lütfen alanları boş bırakmayın!');</script>";
-          }
-        }
-      } else {
-        // Not a POST request, set a 403 (forbidden) response code.
-        http_response_code(403);
-        echo "There was a problem with your submission, please try again.";
       }
-    }
+      elseif (htmlspecialchars($_POST['giris']) == 'true') {
+        if (! htmlspecialchars(empty($_POST['kAd'])) AND ! htmlspecialchars(empty($_POST['parola']))) {
+          // if its empty; Fatal error: Call to a member function fetch() on boolean in /var/www/html/my_blog_website/login.php on line 196
+          $sor = sorgu_calistir("SELECT id, kAd, ad, soyad, tip FROM kullanicilar WHERE kAd='".htmlspecialchars($_POST['kAd'])."' AND parola=".htmlspecialchars($_POST['parola']), false);
+          if (count($sor) >= 4) {
+            // SESSION EKLE
+            $_SESSION['kAd'] = $sor['kAd'];
+            $_SESSION['tip'] = $sor['tip'];
+            // Set a 200 (okay) response code.
+            http_response_code(200);
+            if ($_SESSION['tip'] == 1) // session var ise scripti çalıştır. Burada session ekle.
+              echo '<script>git("Hoşgeldiniz '.$sor['ad'].'", "'.$yPanel.'");</script>'; // Admin Panel
+            else echo '<script>git("Hoşgeldiniz '.$sor['ad'].'", "/my_blog_website");</script>'; // Anasayfa
+          }
+          else {
+            // Set a 500 (internal server error) response code.
+            http_response_code(500);
+            echo "<script>uyari('Böyle bir kullanıcı yok. Lütfen bilgileriniz kontrol edip tekrar giriniz.');</script>";
+          }
+        } else {
+            // Set a 500 (internal server error) response code.
+            http_response_code(500);
+            echo "<script>uyari('Lütfen alanları boş bırakmayın!');</script>";
+        }
+      }
+    } //else { // Not a POST request, set a 403 (forbidden) response code.
+      //http_response_code(403);
+      //echo "There was a problem with your submission, please try again.";
+    //}
   ?>
 </html>
