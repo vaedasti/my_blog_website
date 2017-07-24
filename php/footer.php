@@ -5,27 +5,20 @@
         <div class="twelve columns">
           <ul class="social-links">
             <?php
-              if (! empty($website_bilgileri["site_fb"])){
+              if (! empty($website_bilgileri["site_fb"])) // Eğer Facebook bilgisi var ise
                 echo "<li><a href='https://www.facebook.com/".$website_bilgileri["site_fb"]."'><i class='fa fa-facebook'></i></a></li>";
-              }
-              if (! empty($website_bilgileri["site_tw"])){
+              if (! empty($website_bilgileri["site_tw"])) // Eğer Twitter bilgisi var ise
                 echo "<li><a href='http://twittter.com/".$website_bilgileri["site_tw"]."'><i class='fa fa-twitter'></i></a></li>";
-              }
-              if (! empty($website_bilgileri["site_gp"])){
+              if (! empty($website_bilgileri["site_gp"])) // Eğer Google Plus bilgisi var ise
                 echo "<li><a href='https://plus.google.com/".$website_bilgileri["site_gp"]."'><i class='fa fa-google-plus'></i></a></li>";
-              }
-              if (! empty($website_bilgileri["site_git"])){
+              if (! empty($website_bilgileri["site_git"])) // Eğer GitHub bilgisi var ise
                 echo "<li><a href='https://github.com/".$website_bilgileri["site_git"]."'><i class='fa fa-github-square'></i></a></li>";
-              }
-              if (! empty($website_bilgileri["site_inst"])){
+              if (! empty($website_bilgileri["site_inst"])) // Eğer instagram bilgisi var ise
                 echo "<li><a href='https://www.instagram.com/".$website_bilgileri["site_inst"]."'><i class='fa fa-instagram'></i></a></li>";
-              }
-              if (! empty($website_bilgileri["site_flickr"])){
+              if (! empty($website_bilgileri["site_flickr"])) // Eğer Flickr bilgisi var ise
                 echo "<li><a href='https://www.flickr.com/people/".$website_bilgileri["site_flickr"]."'><i class='fa fa-flickr'></i></a></li>";
-              }
-              if (! empty($website_bilgileri["site_skype"])){
+              if (! empty($website_bilgileri["site_skype"])) // Eğer Skype bilgisi var ise
                 echo "<li><a href='" . $website_bilgileri["site_skype"]. "'><i class='fa fa-skype'></i></a></li>";
-              }
             ?>
           </ul>
         </div>
@@ -66,4 +59,4 @@
     <script src="js/main.js"></script>
   </body>
 </html>
-<?php unset($website_bilgileri); $db=null; unset($gonderiler); unset($kategoriler); unset($etiketler); ?>
+<?php unset($website_bilgileri); $db=null; unset($gonderiler); unset($kategoriler); unset($etiketler); // Değişkenleri sıfırla ?>

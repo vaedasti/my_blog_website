@@ -1,3 +1,4 @@
+    <!-- FIXME: aynı etiketler tekrarlamasın ve en çok olanlardan 7 tanesi gözüksün -->
     <div id="sidebar" class="four columns">
       <div class="widget widget_search">
         <h3>Ara</h3>
@@ -10,20 +11,11 @@
         <h3>Kullanıcı</h3>
         <ul>
           <?php
-            //print_r($_SESSION);
-            // Eğer SESSION var ise burada isim yazsın ve altında çıkış yap linki olsun.
-            // Eğer $_SESSION['tip']==1 ise admin paneline git linki olsun.
-            if (isset($_GET['cikis']) AND htmlspecialchars($_GET['cikis']) == 'true') {
-              // remove all session variables
-              session_unset();
-              // destroy the session
-              session_destroy();
-            }
             if (isset($_SESSION['kAd'])) {
-              echo '<li>'.$_SESSION['kAd'].'</li>';
+              echo '<li>'.$_SESSION['kAd'].' - '.$_SESSION['ad']." ".$_SESSION['soyad'].'</li>';
               if ($_SESSION['tip'] == '1')
-                echo '<li><a href="admin_panel/light-bootstrap-dashboard-master/dashboard.html">Yönetim Paneli</a></li>';
-              echo '<li><a href="index.php?cikis=true">Çıkış Yap</a></li>';
+                echo '<li><a href="'.$yPanel.'">Yönetim Paneli</a></li>';
+              echo '<li><a href="?cikis=true">Çıkış Yap</a></li>';
             }
             else echo '<li><a href="login.php">Giriş Yap</a></li>';
           ?>
@@ -35,7 +27,7 @@
           <?php
             $kategoriler = sorgu_calistir("SELECT COUNT(k.ad) AS adet, k.id, k.ad FROM gonderiler AS g INNER JOIN kategoriler AS k ON g.kategori=k.id WHERE g.gosterim=1 GROUP BY k.id ORDER BY adet DESC");
             $i = 0;
-            foreach ($kategoriler as $kategori) { //for ($i=0; $i < 5; $i++) {
+            foreach ($kategoriler as $kategori) {
               if ($i >= 5) break; // Max 5
               echo '<li><a href=index.php?kategoriId='.$kategori['id']. ' title=\''.$kategori['ad'].'\'>'.$kategori['ad'].'</a> ('.$kategori['adet'].')</li>'; //$kategoriler[$i]['adet']
               $i++;
@@ -50,13 +42,11 @@
       <div class="widget widget_tags">
         <h3>Etiketler</h3>
         <div class="tagcloud group">
-        <?php // Max 7
+        <?php
           $etiketler = sorgu_calistir("SELECT etiketler FROM gonderiler WHERE gosterim=1;");
-          $adet;
           foreach ($etiketler as $row) {
-            foreach (explode(', ', $row['etiketler']) as $etiket) {
+            foreach (explode(', ', $row['etiketler']) as $etiket)
               echo '<a href=index.php?etiket='.$etiket.'>'.$etiket.'</a>';
-            }
           }
         ?>
         </div>

@@ -1,11 +1,7 @@
   <?php
-    if (empty(htmlspecialchars($_GET['gonderiId']))) {
-      //http_redirect("my_blog_website");
-      echo "Redirect to index.php";
-      die();
-    }
-
     require_once "php/database.php";
+    // Eğer GET yok ise ansayfaya yönlendir
+    if (empty(htmlspecialchars($_GET['gonderiId']))) echo "<script>window.location.replace('index.php');</script>";
     include_once "php/header.php";
     $sorgu = "SELECT g.id, g.baslik, g.icerik, g.zaman, g.etiketler,k.ad AS kategori, k.id AS kategoriId, kl.ad AS yazar FROM gonderiler AS g INNER JOIN kategoriler AS k ON g.kategori=k.id INNER JOIN kullanicilar AS kl ON g.yazar=kl.id WHERE g.gosterim=1 AND g.id=".htmlspecialchars($_GET['gonderiId']);
     $gonderi = sorgu_calistir($sorgu, false);
@@ -17,7 +13,7 @@
    		<div id="main" class="eight columns">
    			<article class="entry">
           <header class="entry-header">
-            <?php echo '<h2 class="entry-title">'.$gonderi['baslik'].'</h2>'; ?>
+            <h2 class="entry-title"><?php echo $gonderi['baslik']; ?></h2>
             <div class="entry-meta">
               <ul>
                 <li><?php echo $gonderi['zaman']; ?></li>
@@ -41,9 +37,8 @@
 					<p class="tags">
             <span>Tagged in :</span>
             <?php
-              foreach (explode(", " ,$gonderi['etiketler']) as $etiket) {
+              foreach (explode(", " ,$gonderi['etiketler']) as $etiket)
                 echo '<a href=index.php?etiket='.$etiket.">".$etiket.'</a>, ';
-              }
               $gonderi=null;
             ?>
             <!-- <a href="#">orci</a>, <a href="#">lectus</a>, <a href="#">varius</a>, <a href="#">turpis</a> -->

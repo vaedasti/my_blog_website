@@ -7,9 +7,9 @@
     <!--- Basic Page Needs
     ================================================== -->
     <meta charset="utf-8">
-		<?php $website_bilgileri = sorgu_calistir("SELECT * FROM website", false); ?>
-    <title><?php echo $website_bilgileri['site_basligi']; ?></title>
-    <meta name="description" content="<?php echo $website_bilgileri['site_bilgisi'] ?>">
+		<?php $website_bilgileri = sorgu_calistir("SELECT * FROM website", false); // Websitenin bilgilerini veritabanında al ?>
+    <title><?php echo $website_bilgileri['site_basligi']; // Websitenin başlığı ?></title>
+    <meta name="description" content="<?php echo $website_bilgileri['site_bilgisi']; // Websitenin bilgisi ?>">
     <meta name="author" content="Velat Vurgun">
 
     <!-- mobile specific metas

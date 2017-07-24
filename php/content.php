@@ -1,6 +1,3 @@
-<?php
-  // SELECT g.id, g.baslik, g.icerik, g.zaman, g.etiketler, k.ad AS 'kategori', u.kAd as 'kullanici' FROM gonderiler AS g INNER JOIN kategoriler AS k ON g.kategori=k.id INNER JOIN kullanicilar AS u ON g.yazar=u.id WHERE g.gosterim=0;
-?>
 <!-- Content
 ================================================== -->
 <div id="content-wrap">
@@ -9,7 +6,7 @@
       <?php
         $limit = '0,3'; // kaç adet gönderi gözüksün
         $sorgu; $showOld=true; // $showOld: eski gönderiler gösterilsin mi?
-        // Form GET var mı?
+        // Form GET old_posts var mı?
         if (! empty($_GET['old_posts']))
           $limit = htmlspecialchars($_GET['old_posts']).',3';
         if (! empty($_GET['ara'])) {
