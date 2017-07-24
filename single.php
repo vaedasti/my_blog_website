@@ -35,7 +35,7 @@
             <?php echo $gonderi['icerik']; ?>
 					</div>
 					<p class="tags">
-            <span>Tagged in :</span>
+            <span>Etiketler :</span>
             <?php
               foreach (explode(", " ,$gonderi['etiketler']) as $etiket)
                 echo '<a href=index.php?etiket='.$etiket.">".$etiket.'</a>, ';
