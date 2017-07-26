@@ -1,17 +1,58 @@
 <?php
+  // Değişkenler
+  $db; // global; veritabanı değişkeni
+  $dbHost='172.17.0.1'; // database.php; veritabanı adresi
+  $dbPort='8080'; // database.php; veritabanı portu
+  $dbName='blog'; // database.php; veritabanı adı
+  $dbUser='root'; // database.php; veritabanı kullanıcı adı
+  $dbPass='1234'; // database.php; veritabanı kullanıcı şifresi
+  $limitAdet=4; // content.php; gonderi limiti adeti
+  $limit='0,'.$limitAdet; // content.php; gonderi limiti
+  $sorgu; // content.php; SQL sorgusunun bulunduğu değişken
+  $karakterLimiti=200; // content.php; gonderi içeriğinin kaç karakteri gözüksün
+  $sidebarKategoriAdet=5; // sidebar.php; sidebardaki kategori listesinde kaç adet öğe gözüksün  
   // Parametre olarak verilen mesaj ve hataya görsellik katar ve geri gönderir.
   function hata_mesaji($mesaj, $hata){
-    return "<div style='text-align: center; width: 50%; height: auto; box-shadow: 0 0 1px #424242; padding: 50px; margin: auto; border-radius: 3px; margin-top: 200px; color: #F44336;'>
-            <div style='margin: 10px 0;'>
-              <p style='font-size: 24px; font-weight: bold; margin: 0;'>$mesaj</p>
-            </div>
-            <div style='margin: 10px 0;'>
-              <span>Hata mesajı: </span><b>$hata</b>
-            </div>
-          </div>";
+    $style = "
+      .div {
+        width: 460px;
+        padding: 8% 0 0;
+        margin: auto;
+      }
+      .div > div {
+        position: relative;
+        z-index: 1;
+        background: #FFFFFF;
+        max-width: 360px;
+        margin: 0 auto 100px;
+        padding: 45px;
+        text-align: center;
+        box-shadow: 0 0 20px 0 rgba(0, 0, 0, 0.2), 0 5px 5px 0 rgba(0, 0, 0, 0.24);
+      }
+      body {
+        background: #76b852; /* fallback for old browsers */
+        background: -webkit-linear-gradient(right, #76b852, #8DC26F);
+        background: -moz-linear-gradient(right, #76b852, #8DC26F);
+        background: -o-linear-gradient(right, #76b852, #8DC26F);
+        background: linear-gradient(to left, #76b852, #8DC26F);
+        font-family: 'Roboto', sans-serif;
+        -webkit-font-smoothing: antialiased;
+        -moz-osx-font-smoothing: grayscale;
+      }
+    ";
+    return "<html><head><title>Hata</title><meta charset='utf-8'><style>".$style."</style></head><body>
+            <div class='div'>
+              <div>
+                <div style='text-transform: capitalize;'>
+                  <p style='font-size: 24px; font-weight: bold; margin: 0;'>$mesaj</p>
+                </div>
+                <div style='margin-top: 20px;'>
+                  <span>Hata Mesajı: <b>$hata</b></span>
+                </div>
+              </div>
+            </div></body></html>";
   }
   // Veritabanına bağlanma fonksiyonu. Parametreleri; $dbHost='sunucu', $dbPort='sunucu_portu', $dbName='veritabani_adi', $dbUser='veritabani_kullanici_adi', $dbPass='veritabani_parolasi'
-  $db; // veritabanı değişkeni
   function db_connect($dbHost, $dbPort, $dbName, $dbUser, $dbPass){
     try { global $db;
       $db = new PDO("mysql:host=$dbHost;port=$dbPort;dbname=$dbName;charset=utf8", $dbUser, $dbPass);
@@ -29,7 +70,7 @@
       elseif (!$hepsi)
         return $db -> query($sorgu, PDO::FETCH_ASSOC) -> fetch();
     }
-    return Null;
+    return null;
   }
   // 2017-07-22 formatında verilen tarih değerini Temmuz 2017'ye dönüştür ve geri ver
   function tarih($zaman){
@@ -46,7 +87,7 @@
                     '11' => "Kasım",
                     '12' => "Aralık"
                   );
-    return array('ay' => $aylar[substr($zaman, 5,2)], 'yil' => substr($zaman, 0,4));
+    return array('ay' => $aylar[substr($zaman, 5, 2)], 'yil' => substr($zaman, 0, 4));
   }
   // Verilen parametre değerlerini session olarak ekle
   function session_ekle($id, $kAd, $ad, $soyad, $tip){

@@ -13,8 +13,8 @@
         if (isset($_SESSION['kAd'])) {
           print '<li>'.$_SESSION['kAd'].' - '.$_SESSION['ad']." ".$_SESSION['soyad'].'</li>';
           if ($_SESSION['tip'] == '1')
-            print '<li><a href="'.$yPanel.'">Yönetim Paneli</a></li>';
-          print '<li><a href="?cikis=true">Çıkış Yap</a></li>';
+            print "<li><a href=$yPanel>Yönetim Paneli</a></li>";
+          print "<li><a href='?cikis=true'>Çıkış Yap</a></li>";
         }
         else print '<li><a href="login.php">Giriş Yap</a></li>';
       ?>
@@ -27,7 +27,7 @@
         $kategoriler = sorgu_calistir("SELECT COUNT(k.ad) AS adet, k.id, k.ad FROM gonderiler AS g INNER JOIN kategoriler AS k ON g.kategori=k.id WHERE g.gosterim=1 GROUP BY k.id ORDER BY adet DESC");
         $i = 0;
         foreach ($kategoriler as $kategori) {
-          if ($i >= 5) break; // Max 5
+          if ($i >= $sidebarKategoriAdet) break;
           print '<li><a href=index.php?kategoriId='.$kategori['id']. ' title=\''.$kategori['ad'].'\'>'.$kategori['ad'].'</a> ('.$kategori['adet'].')</li>'; //$kategoriler[$i]['adet']
           $i++;
         }
@@ -45,7 +45,7 @@
       $etiketler = sorgu_calistir("SELECT etiketler FROM gonderiler WHERE gosterim=1;");
       foreach ($etiketler as $row) {
         foreach (explode(', ', $row['etiketler']) as $etiket)
-          print '<a href=index.php?etiket='.$etiket.'>'.$etiket.'</a>';
+          print "<a href='index.php?etiket=$etiket'>$etiket</a>";
       }
     ?>
     </div>

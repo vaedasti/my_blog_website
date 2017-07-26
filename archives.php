@@ -17,7 +17,7 @@ include_once "php/header.php";
               <?php
                 $gonderiler = sorgu_calistir("SELECT id, baslik FROM gonderiler WHERE gosterim=1 ORDER BY zaman DESC LIMIT 0,10");
                 foreach ($gonderiler as $gonderi) {
-                  echo '<li><a href=single.php?gonderiId='.$gonderi['id'].'</a>'.$gonderi['baslik'].'</li>';
+                  print '<li><a href=single.php?gonderiId='.$gonderi['id'].'</a>'.$gonderi['baslik'].'</li>';
                 }
               ?>
 		      	</ul>
@@ -31,7 +31,7 @@ include_once "php/header.php";
                   foreach ($deger as $key) {
                     $tarih = tarih($key['zaman']);
                     if (empty($a) OR ($a['ay'] != $tarih['ay'] AND $a['yil'] != $tarih['yil']))
-                      echo "<li><a href='index.php?zaman=".$key['zaman']."'>".$tarih['ay']." ".$tarih['yil']."</a></li>";
+                      print "<li><a href='index.php?zaman=".$key['zaman']."'>".$tarih['ay']." ".$tarih['yil']."</a></li>";
                     $a = $tarih;
                   }
                 ?>
@@ -43,13 +43,9 @@ include_once "php/header.php";
 						<h4>Kategorilere göre.</h4>
 			      	<ul>
                 <?php
-                  global $db;
                   $kategoriler = sorgu_calistir("SELECT COUNT(k.ad) AS adet, k.id, k.ad FROM gonderiler AS g INNER JOIN kategoriler AS k ON g.kategori=k.id WHERE g.gosterim=1 GROUP BY k.id ORDER BY adet DESC");
-                  $i = 0;
-                  foreach ($kategoriler as $kategori) { //for ($i=0; $i < 5; $i++) {
-                    if ($i >= 5) break; // Max 5
-                    echo '<li><a href=index.php?kategoriId='.$kategori['id']. ' title=\''.$kategori['ad'].'\'>'.$kategori['ad'].'</a></li>'; //$kategoriler[$i]['adet']
-                    $i++;
+                  foreach ($kategoriler as $kategori) {
+                    print '<li><a href=index.php?kategoriId='.$kategori['id']. ' title=\''.$kategori['ad'].'\'>'.$kategori['ad'].'</a></li>'; //$kategoriler[$i]['adet']
                   }
                 ?>
 			      	</ul>
@@ -57,16 +53,15 @@ include_once "php/header.php";
 					<div class="twelve columns">
 						<h4>Site haritası.</h4>
 			      	<ul>
-			      		<li><a href="">Arşiv</a></li>
-			      		<li><a href="">Anasayfa</a></li>
-			      		<li><a href="">Hakkımda</a></li>
-			      		<li><a href="">Blog</a></li>
+			      		<li><a href="archives.php">Arşiv</a></li>
+			      		<li><a href="index.php">Anasayfa</a></li>
+			      		<li><a href="page.php">Hakkımda</a></li>
 			      	</ul>
 					</div>
 	      </div>
 	    </section> <!-- End page -->
 		</div> <!-- End main -->
-    <?php
-      include_once "php/sidebar.php";
-      include_once "php/footer.php";
-    ?>
+<?php
+	include_once "php/sidebar.php";
+	include_once "php/footer.php";
+?>

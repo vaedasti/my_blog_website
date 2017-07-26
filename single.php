@@ -1,6 +1,6 @@
 <?php
   require_once "php/database.php";
-  // Eğer GET yok ise ansayfaya yönlendir
+  // Eğer GET yok ise anasayfaya yönlendir
   if (empty(htmlspecialchars($_GET['gonderiId']))) echo "<script>window.location.replace('index.php');</script>";
   include_once "php/header.php";
   $sorgu = "SELECT g.id, g.baslik, g.icerik, g.zaman, g.etiketler,k.ad AS kategori, k.id AS kategoriId, kl.ad AS yazar FROM gonderiler AS g INNER JOIN kategoriler AS k ON g.kategori=k.id INNER JOIN kullanicilar AS kl ON g.yazar=kl.id WHERE g.gosterim=1 AND g.id=".htmlspecialchars($_GET['gonderiId']);
@@ -52,7 +52,7 @@
               $gonderi = $gonderi->fetch();
               print '<li class="prev"><a rel="prev" href="?gonderiId='.$gonderi['id'].'"><strong>Önceki Gönderi</strong>'.$gonderi['baslik'].'</a></li>';
             }
-            else print '<li class="prev"><strong>Hata</strong>Önceki Gönderi Bulunamadı.</li>';
+            //else print '<li class="prev"><strong>Hata</strong>Önceki Gönderi Bulunamadı.</li>';
             // Sonraki gönderi
             $gonderi = $db -> query("SELECT id, baslik FROM gonderiler WHERE gosterim=1 AND id=".(htmlspecialchars($_GET['gonderiId'])+1), PDO::FETCH_ASSOC);
             //print_r($gonderi);
@@ -60,7 +60,7 @@
               $gonderi = $gonderi->fetch();
               print '<li class="next"><a rel="next" href="?gonderiId='.$gonderi['id'].'"><strong>Sonraki Gönderi</strong>'.$gonderi['baslik'].'</a></li>';
             }
-            else print '<li class="next"><strong>Hata</strong>Önceki Gönderi Bulunamadı.</li>';
+            //else print '<li class="next"><strong>Hata</strong>Önceki Gönderi Bulunamadı.</li>';
           ?>
           <!--<li class="prev"><a rel="prev" href="#"><strong>Önceki Gönderi</strong>Başlık</a></li>-->
           <!--<li class="next"><a rel="next" href="#"><strong>Sonraki Gönderi</strong>Başlık</a></li>-->
@@ -69,7 +69,13 @@
       <!-- Comments
       ================================================== -->
       <div id="comments">
-        <h3>5 Yorum</h3>
+        <?php
+          $adet = sorgu_calistir("SELECT COUNT(y.id) AS adet FROM yorumlar as y INNER JOIN gonderiler AS g ON y.gonderi=g.id WHERE g.id=".htmlspecialchars($_GET['gonderiId']), false);
+          if ($adet['adet'] > 0) {
+            print "<h3>".$adet['adet']." Yorum</h3>"; $adet = null;
+            $yorumlar = sorgu_calistir("SELECT k.ad AS ad, k.soyad AS soyad, y.tarih AS zaman, y.icerik AS yorum FROM yorumlar as y INNER JOIN gonderiler AS g ON y.gonderi=g.id INNER JOIN kullanicilar AS k ON k.id=y.kullanici WHERE g.id=".htmlspecialchars($_GET['gonderiId'])." ORDER BY y.tarih DESC");
+            foreach ($yorumlar as $yorum) {
+        ?>
         <!-- commentlist -->
         <ol class="commentlist">
           <li class="depth-1">
@@ -78,18 +84,19 @@
             </div>
             <div class="comment-content">
               <div class="comment-info">
-                <cite>Itachi Uchiha</cite>
+                <cite><?php print $yorum['ad']." ".$yorum['soyad']; ?></cite>
                 <div class="comment-meta">
-                  <time class="comment-time" datetime="2014-07-12T23:05">Jul 12, 2014 @ 23:05</time>
-                  <span class="sep">/</span><a class="reply" href="#">Reply</a>
+                  <time class="comment-time" datetime="<?php print $yorum['zaman']; ?>"><?php print $yorum['zaman']; ?></time>
+                  <!--<span class="sep">/</span><a class="reply" href="#">Reply</a>-->
                 </div>
               </div>
               <div class="comment-text">
-                <p>Adhuc quaerendum est ne, vis ut harum tantas noluisse, id suas iisque mei. Nec te inani ponderum vulputate, facilisi expetenda has et. Iudico dictas scriptorem an vim, ei alia mentitum est, ne has voluptua praesent.</p>
+                <?php print $yorum['yorum']; ?>
+                <!--<p>Adhuc quaerendum est ne, vis ut harum tantas noluisse, id suas iisque mei. Nec te inani ponderum vulputate, facilisi expetenda has et. Iudico dictas scriptorem an vim, ei alia mentitum est, ne has voluptua praesent.</p>-->
               </div>
             </div>
           </li>
-          <li class="thread-alt depth-1">
+          <!--<li class="thread-alt depth-1">
             <div class="avatar">
               <img width="50" height="50" class="avatar" src="images/user-03.png" alt="">
             </div>
@@ -160,10 +167,11 @@
                 <p>Typi non habent claritatem insitam; est usus legentis in iis qui facit eorum claritatem.</p>
               </div>
             </div>
-          </li>
+          </li>-->
         </ol> <!-- Commentlist End -->
+        <?php }} ?>
         <!-- respond -->
-        <?php if (isset($_SESSION['kAd'])) { ?>
+        <?php if (isset($_SESSION['kAd']) AND !empty($_SESSION['kAd'])) { ?>
         <div class="respond">
           <h3>Yorum Yaz</h3>
           <!-- form -->
@@ -194,7 +202,7 @@
         <div class="respond">
           <h3>Yorum Yaz</h3>
           <div class="group">
-            <i>Zaten kayıtlı mısınız? <a href="login.php">Giriş</a> yapın. Henüz kayıt olmadınız mı? <a href="login.php">Kayıt</a> olun.</i>
+            <i>Zaten kayıtlı mısınız? <a href="login.php">Giriş</a> yapın.<br/>Henüz kayıt olmadınız mı? <a href="login.php">Kayıt</a> olun.</i>
           </div>
         </div>
         <?php } ?>

@@ -11,8 +11,8 @@
 	<header id="top">
 		<div class="row">
 			<div class="header-content twelve columns">
-				<h1 id="logo-text"><a href="index.php" title=""><?php print $website_bilgileri["site_basligi"]; // Websitenin başlığı ?></a></h1>
-				<p id="intro"><?php print $website_bilgileri["site_slogani"]; // Websitenin sloganı ?></p>
+				<h1 id="logo-text"><a href="index.php" title=""><?php print $website_bilgileri['site_basligi']; // Websitenin başlığı ?></a></h1>
+				<p id="intro"><?php print $website_bilgileri['site_slogani']; // Websitenin sloganı ?></p>
 			</div>
 		</div>
 		<nav id="nav-wrap">
@@ -42,7 +42,7 @@
 						<li><a href="single.php">Single Blog</a></li>
 						</ul>
 					</li>-->
-					<li class="<?php if ($_SERVER['PHP_SELF'] == "/my_blog_website/page.php") echo "current"; ?>"><a href="page.php">Hakkımda</a></li>
+					<li <?php if ($_SERVER['PHP_SELF'] == "/my_blog_website/page.php") echo "class='current'"; ?>><a href="page.php">Hakkımda</a></li>
 				</ul> <!-- end #nav -->
 			</div>
 		</nav> <!-- end #nav-wrap -->
