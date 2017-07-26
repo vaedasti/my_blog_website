@@ -24,8 +24,10 @@
   function sorgu_calistir($sorgu, $hepsi=true){
     global $db;
     if (!empty($sorgu)) {
-      if ($hepsi) return $db -> query($sorgu, PDO::FETCH_ASSOC) -> fetchall();
-      else return $db -> query($sorgu, PDO::FETCH_ASSOC) -> fetch();
+      if ($hepsi)
+        return $db -> query($sorgu, PDO::FETCH_ASSOC) -> fetchall();
+      elseif (!$hepsi)
+        return $db -> query($sorgu, PDO::FETCH_ASSOC) -> fetch();
     }
     return Null;
   }
@@ -60,5 +62,5 @@
     die(); // Öl
   }
   // Yönetim panelinin URL'si
-  $yPanel = "/my_blog_website/admin_panel/light-bootstrap-dashboard-master/dashboard.html";
+  $yPanel = "/my_blog_website/admin_panel/material-dashboard/examples/template.html";
 ?>

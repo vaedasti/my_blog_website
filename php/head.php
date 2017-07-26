@@ -2,14 +2,13 @@
 <!--[if IE 8 ]><html class="no-js ie ie8" lang="en"> <![endif]-->
 <!--[if IE 9 ]><html class="no-js ie ie9" lang="en"> <![endif]-->
 <!--[if (gte IE 8)|!(IE)]><!--><html class="no-js" lang="en"> <!--<![endif]-->
-
   <head>
-    <!--- Basic Page Needs
-    ================================================== -->
+  <!--- Basic Page Needs
+  ================================================== -->
     <meta charset="utf-8">
-		<?php $website_bilgileri = sorgu_calistir("SELECT * FROM website", false); // Websitenin bilgilerini veritabanında al ?>
-    <title><?php echo $website_bilgileri['site_basligi']; // Websitenin başlığı ?></title>
-    <meta name="description" content="<?php echo $website_bilgileri['site_bilgisi']; // Websitenin bilgisi ?>">
+    <?php $website_bilgileri = sorgu_calistir("SELECT * FROM website", false); // Websitenin bilgilerini veritabanında al ?>
+    <title><?php print $website_bilgileri['site_basligi']; // Websitenin başlığı ?></title>
+    <meta name="description" content="<?php print $website_bilgileri['site_bilgisi']; // Websitenin bilgisi ?>">
     <meta name="author" content="Velat Vurgun">
 
     <!-- mobile specific metas

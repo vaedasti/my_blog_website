@@ -1,5 +1,4 @@
 <?php require_once "php/database.php"; ?>
-<!-- FIXME: When username or pass wrong - Fatal error: Call to a member function fetch() on boolean in /var/www/html/my_blog_website/php/functions.php on line 40 -->
 <html>
   <!-- https://codepen.io/colorlib/pen/rxddKy -->
   <head>

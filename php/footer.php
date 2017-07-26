@@ -6,37 +6,51 @@
           <ul class="social-links">
             <?php
               if (! empty($website_bilgileri["site_fb"])) // Eğer Facebook bilgisi var ise
-                echo "<li><a href='https://www.facebook.com/".$website_bilgileri["site_fb"]."'><i class='fa fa-facebook'></i></a></li>";
+                print "<li><a href='https://www.facebook.com/".$website_bilgileri["site_fb"]."'><i class='fa fa-facebook'></i></a></li>";
               if (! empty($website_bilgileri["site_tw"])) // Eğer Twitter bilgisi var ise
-                echo "<li><a href='http://twittter.com/".$website_bilgileri["site_tw"]."'><i class='fa fa-twitter'></i></a></li>";
+                print "<li><a href='http://twittter.com/".$website_bilgileri["site_tw"]."'><i class='fa fa-twitter'></i></a></li>";
               if (! empty($website_bilgileri["site_gp"])) // Eğer Google Plus bilgisi var ise
-                echo "<li><a href='https://plus.google.com/".$website_bilgileri["site_gp"]."'><i class='fa fa-google-plus'></i></a></li>";
+                print "<li><a href='https://plus.google.com/".$website_bilgileri["site_gp"]."'><i class='fa fa-google-plus'></i></a></li>";
               if (! empty($website_bilgileri["site_git"])) // Eğer GitHub bilgisi var ise
-                echo "<li><a href='https://github.com/".$website_bilgileri["site_git"]."'><i class='fa fa-github-square'></i></a></li>";
+                print "<li><a href='https://github.com/".$website_bilgileri["site_git"]."'><i class='fa fa-github-square'></i></a></li>";
               if (! empty($website_bilgileri["site_inst"])) // Eğer instagram bilgisi var ise
-                echo "<li><a href='https://www.instagram.com/".$website_bilgileri["site_inst"]."'><i class='fa fa-instagram'></i></a></li>";
+                print "<li><a href='https://www.instagram.com/".$website_bilgileri["site_inst"]."'><i class='fa fa-instagram'></i></a></li>";
               if (! empty($website_bilgileri["site_flickr"])) // Eğer Flickr bilgisi var ise
-                echo "<li><a href='https://www.flickr.com/people/".$website_bilgileri["site_flickr"]."'><i class='fa fa-flickr'></i></a></li>";
+                print "<li><a href='https://www.flickr.com/people/".$website_bilgileri["site_flickr"]."'><i class='fa fa-flickr'></i></a></li>";
               if (! empty($website_bilgileri["site_skype"])) // Eğer Skype bilgisi var ise
-                echo "<li><a href='" . $website_bilgileri["site_skype"]. "'><i class='fa fa-skype'></i></a></li>";
+                print "<li><a href='" . $website_bilgileri["site_skype"]. "'><i class='fa fa-skype'></i></a></li>";
             ?>
           </ul>
         </div>
         <div class="six columns info">
-          <h3><?php echo $website_bilgileri["site_basligi"]; ?> hakkında</h3>
-          <p><?php echo $website_bilgileri["site_bilgisi"]; ?></p>
+          <h3><?php print $website_bilgileri["site_basligi"]; ?> hakkında</h3>
+          <p><?php print $website_bilgileri["site_bilgisi"]; ?></p>
         </div>
         <div class="four columns">
-          <h3>Photostream</h3>
+          <h3>Fotoğraf Akışı</h3>
           <ul class="photostream group">
+            <?php
+              $username = "natgeo";
+              $json = file_get_contents('https://www.instagram.com/'.$username.'/media/');
+              $instagram_feed_data = json_decode($json, true);
+              $post = $instagram_feed_data['items'];
+              if (isset($post)) {
+                for ($i=0; $i < 8; $i++) {
+                  $link = $post[$i]['link'];
+                  $img_url = $post[$i]['images']['low_resolution']['url'];
+                  //$caption = isset($post[$i]['caption']) ? $post[$i]['caption']['text'] : '';
+                  print "<li><a href=".$link."><img alt='thumbnail' src=".$img_url."></a></li>";
+                }
+              }
+            ?>
+            <!--<li><a href="#"><img alt="thumbnail" src="images/thumb.jpg"></a></li>
             <li><a href="#"><img alt="thumbnail" src="images/thumb.jpg"></a></li>
             <li><a href="#"><img alt="thumbnail" src="images/thumb.jpg"></a></li>
             <li><a href="#"><img alt="thumbnail" src="images/thumb.jpg"></a></li>
             <li><a href="#"><img alt="thumbnail" src="images/thumb.jpg"></a></li>
             <li><a href="#"><img alt="thumbnail" src="images/thumb.jpg"></a></li>
             <li><a href="#"><img alt="thumbnail" src="images/thumb.jpg"></a></li>
-            <li><a href="#"><img alt="thumbnail" src="images/thumb.jpg"></a></li>
-            <li><a href="#"><img alt="thumbnail" src="images/thumb.jpg"></a></li>
+            <li><a href="#"><img alt="thumbnail" src="images/thumb.jpg"></a></li>-->
           </ul>
         </div>
         <div class="two columns">
