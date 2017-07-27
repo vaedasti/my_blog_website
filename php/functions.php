@@ -10,7 +10,7 @@
   $limit='0,'.$limitAdet; // content.php; gonderi limiti
   $sorgu; // content.php; SQL sorgusunun bulunduğu değişken
   $karakterLimiti=200; // content.php; gonderi içeriğinin kaç karakteri gözüksün
-  $sidebarKategoriAdet=5; // sidebar.php; sidebardaki kategori listesinde kaç adet öğe gözüksün  
+  $sidebarKategoriAdet=5; // sidebar.php; sidebardaki kategori listesinde kaç adet öğe gözüksün
   // Parametre olarak verilen mesaj ve hataya görsellik katar ve geri gönderir.
   function hata_mesaji($mesaj, $hata){
     $style = "
@@ -62,15 +62,21 @@
     }
   }
   // Parametre olarak verilen sorguyu çalıştırıp değerleri geri ver
-  function sorgu_calistir($sorgu, $hepsi=true){
+  function sorgu_calistir($sorgu, $hepsi=1){
     global $db;
     if (!empty($sorgu)) {
-      if ($hepsi)
-        return $db -> query($sorgu, PDO::FETCH_ASSOC) -> fetchall();
-      elseif (!$hepsi)
-        return $db -> query($sorgu, PDO::FETCH_ASSOC) -> fetch();
+      switch ($hepsi) {
+        case 2:
+          return $db -> query($sorgu, PDO::FETCH_ASSOC);
+          break;
+        case 0:
+          return $db -> query($sorgu, PDO::FETCH_ASSOC) -> fetch();
+          break;
+        default:
+          return $db -> query($sorgu, PDO::FETCH_ASSOC) -> fetchall();
+          break;
+      }
     }
-    return null;
   }
   // 2017-07-22 formatında verilen tarih değerini Temmuz 2017'ye dönüştür ve geri ver
   function tarih($zaman){
@@ -99,7 +105,7 @@
   }
   // PHP ile sayfa yönlendirme
   function yonlendir($url, $statusCode = 303){
-    header('Location: ' . $url, true, $statusCode); // Yönlendir
+    header('Location: ' . $url, True, $statusCode); // Yönlendir
     die(); // Öl
   }
   // Yönetim panelinin URL'si

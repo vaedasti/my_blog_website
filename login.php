@@ -224,9 +224,12 @@
       elseif (htmlspecialchars($_POST['giris']) == 'true') { // Giriş mi?
         // Eğer kullanıcı adı veya parola boş değil ise
         if (! htmlspecialchars(empty($_POST['kAd'])) AND ! htmlspecialchars(empty($_POST['parola']))) {
+          $_POST['kAd']=str_replace("'", "", $_POST['kAd']);
+          $_POST['parola']=str_replace("'", "", $_POST['parola']);
           // Kullanıcı adı ve parola veritabanında var mı?
-          $sor = sorgu_calistir("SELECT id, kAd, ad, soyad, tip FROM kullanicilar WHERE kAd='".htmlspecialchars($_POST['kAd'])."' AND parola=".htmlspecialchars($_POST['parola']), false);
-          if (count($sor) >= 4) { // Kullanıcı adı ve parola veritabanında var ise
+          $sor = sorgu_calistir("SELECT id, kAd, ad, soyad, tip FROM kullanicilar WHERE kAd='".htmlspecialchars($_POST['kAd'])."' AND parola=".htmlspecialchars($_POST['parola']), 2);
+          if ($sor){//count($sor) >= 4) { // Kullanıcı adı ve parola veritabanında var ise
+            $sor=$sor->fetch();
             // Session'a bilgileri ekle
             session_ekle($sor['id'], $sor['kAd'], $sor['ad'], $sor['soyad'], $sor['tip']);
             http_response_code(200); // Set a 200 (okay) response code.
@@ -237,7 +240,7 @@
           } else { // Kullanıcı adı ve parola veritabanında yok ise
             http_response_code(500); // Set a 500 (internal server error) response code.
             // Uyarı ver
-            echo "<script>uyari('Böyle bir kullanıcı yok. Lütfen bilgileriniz kontrol edip tekrar giriniz.');</script>";
+            echo "<script>uyari('Böyle bir kullanıcı yok. Lütfen bilgilerinizi kontrol edip tekrar giriniz.');</script>";
           }
         } else { // Eğer kullanıcı adı veya parola boş ise
             http_response_code(500); // Set a 500 (internal server error) response code.

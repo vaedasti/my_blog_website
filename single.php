@@ -4,7 +4,7 @@
   if (empty(htmlspecialchars($_GET['gonderiId']))) echo "<script>window.location.replace('index.php');</script>";
   include_once "php/header.php";
   $sorgu = "SELECT g.id, g.baslik, g.icerik, g.zaman, g.etiketler,k.ad AS kategori, k.id AS kategoriId, kl.ad AS yazar FROM gonderiler AS g INNER JOIN kategoriler AS k ON g.kategori=k.id INNER JOIN kullanicilar AS kl ON g.yazar=kl.id WHERE g.gosterim=1 AND g.id=".htmlspecialchars($_GET['gonderiId']);
-  $gonderi = sorgu_calistir($sorgu, false);
+  $gonderi = sorgu_calistir($sorgu, 0);
 ?>
 <!-- Content
 ================================================== -->
@@ -70,7 +70,7 @@
       ================================================== -->
       <div id="comments">
         <?php
-          $adet = sorgu_calistir("SELECT COUNT(y.id) AS adet FROM yorumlar as y INNER JOIN gonderiler AS g ON y.gonderi=g.id WHERE g.id=".htmlspecialchars($_GET['gonderiId']), false);
+          $adet = sorgu_calistir("SELECT COUNT(y.id) AS adet FROM yorumlar as y INNER JOIN gonderiler AS g ON y.gonderi=g.id WHERE g.id=".htmlspecialchars($_GET['gonderiId']), 0);
           if ($adet['adet'] > 0) {
             print "<h3>".$adet['adet']." Yorum</h3>"; $adet = null;
             $yorumlar = sorgu_calistir("SELECT k.ad AS ad, k.soyad AS soyad, y.tarih AS zaman, y.icerik AS yorum FROM yorumlar as y INNER JOIN gonderiler AS g ON y.gonderi=g.id INNER JOIN kullanicilar AS k ON k.id=y.kullanici WHERE g.id=".htmlspecialchars($_GET['gonderiId'])." ORDER BY y.tarih DESC");
@@ -91,7 +91,7 @@
                 </div>
               </div>
               <div class="comment-text">
-                <?php print $yorum['yorum']; ?>
+                <?php print htmlspecialchars($yorum['yorum']); ?>
                 <!--<p>Adhuc quaerendum est ne, vis ut harum tantas noluisse, id suas iisque mei. Nec te inani ponderum vulputate, facilisi expetenda has et. Iudico dictas scriptorem an vim, ei alia mentitum est, ne has voluptua praesent.</p>-->
               </div>
             </div>

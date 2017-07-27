@@ -2,8 +2,9 @@
 ATA-BAUM Intern Project
 
 ### To-Do
++ ~~FIXME: login.php. ' or 'a'='a'~~
 + FIXME: sidebar.php. Aynı etiketler tekrarlamasın ve en çok olanlardan 7 tanesi gözüksün. Array içerisine nasıl sonradan veri atılır araştır.
-+ FIXME: login.php. Giriş yaparken kullanıcı adı veya şifre veritabanında yok ise bu hatayı veriyor. Fatal error: Call to a member function fetch() on boolean in /var/www/html/my_blog_website/php/functions.php on line 40
++ ~~FIXME: login.php. Giriş yaparken kullanıcı adı veya şifre veritabanında yok ise bu hatayı veriyor. Fatal error: Call to a member function fetch() on boolean in /var/www/html/my_blog_website/php/functions.php on line 40~~
 + ~~Tüm değişkenleri tek bir dosyada topla.~~
 + site_basligi, site_bilgisi gibi veritabanından alınan bilgileri cookie olarak tanımla.
 + ~~Single.php dosyasında 'Önceki Gönderi', 'Sonraki Gönderi' olayını hallet.~~
@@ -18,3 +19,8 @@ ATA-BAUM Intern Project
 + 08/11/17 tarihinde staj defterini imzalat.
 + Staj bitiminden sonraki hafta(08/14/17) Tortum Meslek Yüksek Okulu'na staj defterini teslim et.
 + Bir aksilik çıkmaz ise iki hafta sonra(08/28/17) aynı haftaya Mardin'e otobüs bileti al.
+
+### Araştır
++ SQLinjection
++ xss
++ csrf

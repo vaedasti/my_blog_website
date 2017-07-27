@@ -17,7 +17,7 @@ include_once "php/header.php";
               <?php
                 $gonderiler = sorgu_calistir("SELECT id, baslik FROM gonderiler WHERE gosterim=1 ORDER BY zaman DESC LIMIT 0,10");
                 foreach ($gonderiler as $gonderi) {
-                  print '<li><a href=single.php?gonderiId='.$gonderi['id'].'</a>'.$gonderi['baslik'].'</li>';
+                  print "<li><a href='single.php?gonderiId=".$gonderi['id']."'</a>".$gonderi['baslik']."</li>";
                 }
               ?>
 		      	</ul>
