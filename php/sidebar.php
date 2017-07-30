@@ -1,7 +1,7 @@
 <div id="sidebar" class="four columns">
   <div class="widget widget_search">
     <h3>Ara</h3>
-    <form action="#" method="GET">
+    <form action="index.php" method="GET">
       <input type="text" name="ara" value="Ara..." onblur="if(this.value == '') { this.value = 'Ara...'; }" onfocus="if (this.value == 'Ara...') { this.value = ''; }" class="text-search">
       <input type="submit" value="" class="submit-search">
     </form>
@@ -24,7 +24,7 @@
     <h3>Kategoriler</h3>
     <ul>
       <?php
-        $kategoriler = sorgu_calistir("SELECT COUNT(k.ad) AS adet, k.id, k.ad FROM gonderiler AS g INNER JOIN kategoriler AS k ON g.kategori=k.id WHERE g.gosterim=1 GROUP BY k.id ORDER BY adet DESC");
+        $kategoriler = sorgu_calistir("SELECT COUNT(k.ad) AS adet, k.id, k.ad FROM gonderiler AS g INNER JOIN kategoriler AS k ON g.kategori=k.id WHERE g.gosterim=1 GROUP BY k.id ORDER BY adet DESC", 2);
         $i = 0;
         foreach ($kategoriler as $kategori) {
           if ($i >= $sidebarKategoriAdet) break;
@@ -42,11 +42,19 @@
     <h3>Etiketler</h3>
     <div class="tagcloud group">
     <?php
-      $etiketler = sorgu_calistir("SELECT etiketler FROM gonderiler WHERE gosterim=1;");
+      $dizi = array();
+      $etiketler = sorgu_calistir("SELECT etiketler FROM gonderiler WHERE gosterim=1;", 2);
       foreach ($etiketler as $row) {
-        foreach (explode(', ', $row['etiketler']) as $etiket)
-          print "<a href='index.php?etiket=$etiket'>$etiket</a>";
+        foreach (explode(', ', $row['etiketler']) as $etiket) {
+          if (!in_array($etiket, $dizi))
+            $dizi[]=$etiket;
+        }
       }
+      for ($i=0; $i < count($dizi); $i++) {
+        if ($i>=15) break;
+        print "<a href='index.php?etiket=$dizi[$i]'>$dizi[$i]</a>";
+      }
+      $dizi=NULL;
     ?>
     </div>
   </div>

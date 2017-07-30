@@ -152,8 +152,8 @@
           <input type="text" placeholder="soyisim" name="sIsim"/>
           <input type="password" placeholder="parola" name="parola" required/>
           <input type="email" placeholder="email adresi" name="email" required/>
-          <input type="date" placeholder="doğum tarihi" name="dTarih"/>
-          <input type="number" placeholder="telefon" name="tel"/>
+          <!-- <input type="date" placeholder="doğum tarihi" name="dTarih"/> -->
+          <!-- <input type="number" placeholder="telefon" name="tel"/> -->
           <button>kaydol</button>
           <p class="message">Zaten üye misin? <a href="#">Giriş Yap</a></p>
         </form>
@@ -194,42 +194,44 @@
       if (htmlspecialchars($_POST['kayit']) == 'true') { // Kayıt mı?
         // Değerleri bir diziye at // Ulaşması daha kolay olur
         $bilgi = array(
-          'kAd' => trim(htmlspecialchars($_POST['kAd'])),
-          'isim' => mb_convert_case(trim(htmlspecialchars($_POST['isim'])), MB_CASE_TITLE),
-          'sIsim' => mb_convert_case(trim(htmlspecialchars($_POST['sIsim'])), MB_CASE_TITLE),
+          'kAd' => strip_tags(trim($_POST['kAd'])),
+          'isim' => mb_convert_case(strip_tags(trim($_POST['isim'])), MB_CASE_TITLE),
+          'sIsim' => mb_convert_case(strip_tags(trim($_POST['sIsim'])), MB_CASE_TITLE),
           'parola' => trim(htmlspecialchars($_POST['parola'])),
-          'email' => trim(htmlspecialchars($_POST['email'])),
-          'dTarih' => trim(htmlspecialchars($_POST['dTarih'])),
-          'tel' => trim(htmlspecialchars($_POST['tel']))
+          'email' => trim(htmlspecialchars($_POST['email']))
+          //'dTarih' => trim(htmlspecialchars($_POST['dTarih'])),
+          //'tel' => trim(strip_tags($_POST['tel']))
         );
+        //print_r($bilgi); die();
         // Bu kullanıcı adına sahip kullanıcı var mı?
-        $sor = sorgu_calistir("SELECT kAd, email FROM kullanicilar WHERE kAd='".$bilgi['kAd']."' OR email='".$bilgi['email']."'", false);
-        if (count($sor) > 1) // Bu kullanıcı adına sahip kullanıcı var ise uyarı ver ve kaydetme.
-          echo "<script>$('.message a').click();uyari('Bu Kullanıcı Adına veya E-Mail\'e sahip zaten bir kullanıcı var!');</script>";
+        $sor = sorgu_calistir("SELECT kAd, email FROM kullanicilar WHERE kAd='".$bilgi['kAd']."' OR email='".$bilgi['email']."'", 1);
+        //print_r($sor);die();
+        if (!empty($sor)) // Bu kullanıcı adına sahip kullanıcı var ise uyarı ver ve kaydetme.
+          echo "<script>document.getElementsByClassName('message')[0].childNodes[1].click();uyari('Bu Kullanıcı Adına veya E-Mail\'e sahip zaten bir kullanıcı var!');</script>";
         else { // Bu kullanıcı adına sahip kullanıcı yok ise
           // Doğum tarihi kısmını boş bırakmış ise NULL değer ekle
-          if (empty($bilgi['dTarih'])) $bilgi['dTarih'] = "NULL";
+          //if (empty($bilgi['dTarih'])) $bilgi['dTarih'] = "NULL";
           // Doğum tarihi kısmını boş bırakmamış ise değeri tırnaklar('') içerisinde ekle
-          else $bilgi['dTarih'] = "'".$bilgi['dTarih']."'";
+          //else $bilgi['dTarih'] = "'".$bilgi['dTarih']."'";
           // Kayıt eklemek için SQL sorgusunu çalıştır
-          $kayit = sorgu_calistir("INSERT INTO kullanicilar(kAd, parola, email, ad, soyad, tel, dTarih) VALUES('".$bilgi['kAd']."', '".$bilgi['parola']."', '".$bilgi['email']."', '".$bilgi['isim']."', '".$bilgi['sIsim']."', '".$bilgi['tel']."', ".$bilgi['dTarih'].")");
-          if (! empty($kayit)) { // Kayıt gerçekleştiyse
+          $kayit = sorgu_calistir("INSERT INTO kullanicilar(kAd, parola, email, ad, soyad) VALUES(?,?,?,?,?)", 3, array($bilgi['kAd'], $bilgi['parola'], $bilgi['email'], $bilgi['isim'], $bilgi['sIsim']));
+          //if ($kayit->rowCount()) { // Kayıt gerçekleştiyse
             // Session'a bilgileri ekle
-            session_ekle(sorgu_calistir("SELECT id FROM kullanicilar WHERE kAd='".$bilgi['kAd']."'", false)['id'], $bilgi['kAd'], $bilgi['isim'], $bilgi['sIsim'], "0");
+            session_ekle(sorgu_calistir("SELECT id FROM kullanicilar WHERE kAd='".$bilgi['kAd']."'", 1)['id'], $bilgi['kAd'], $bilgi['isim'], $bilgi['sIsim'], "0");
             // Anasayfaya yönlendir
             echo '<script>git("Hoşgeldiniz '.$bilgi['isim'].'", "/my_blog_website");</script>';
-          } // Kayıt gerçekleştiyse
+          //} // Kayıt gerçekleştiyse
         } // Bu kullanıcı adına sahip kullanıcı yok ise
       } // Kayıt ise
-      elseif (htmlspecialchars($_POST['giris']) == 'true') { // Giriş mi?
+      elseif (strip_tags($_POST['giris']) == 'true') { // Giriş mi?
         // Eğer kullanıcı adı veya parola boş değil ise
-        if (! htmlspecialchars(empty($_POST['kAd'])) AND ! htmlspecialchars(empty($_POST['parola']))) {
-          $_POST['kAd']=str_replace("'", "", $_POST['kAd']);
-          $_POST['parola']=str_replace("'", "", $_POST['parola']);
+        $bilgi = array('kAd' => strip_tags(trim($_POST['kAd'])), 'parola' => strip_tags(trim($_POST['parola'])));
+        //print_r($bilgi);die();
+        if (!empty($bilgi['kAd']) AND !empty($bilgi['parola'])) {
           // Kullanıcı adı ve parola veritabanında var mı?
-          $sor = sorgu_calistir("SELECT id, kAd, ad, soyad, tip FROM kullanicilar WHERE kAd='".htmlspecialchars($_POST['kAd'])."' AND parola=".htmlspecialchars($_POST['parola']), 2);
-          if ($sor){//count($sor) >= 4) { // Kullanıcı adı ve parola veritabanında var ise
-            $sor=$sor->fetch();
+          $sor = sorgu_calistir("SELECT id, kAd, ad, soyad, tip FROM kullanicilar WHERE kAd='".$bilgi['kAd']."' AND parola='".$bilgi['parola']."'", 1);
+          //print_r(count($sor));die();
+          if (count($sor) == 5) { // Kullanıcı adı ve parola veritabanında var ise
             // Session'a bilgileri ekle
             session_ekle($sor['id'], $sor['kAd'], $sor['ad'], $sor['soyad'], $sor['tip']);
             http_response_code(200); // Set a 200 (okay) response code.

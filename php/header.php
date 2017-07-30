@@ -24,7 +24,7 @@
 					<li class="has-children <?php if ($_SERVER['PHP_SELF'] == "/my_blog_website/index.php" AND !empty(htmlspecialchars($_GET['kategoriId']))) print "current";  // Eğer sayfa index.php ise ve GET var ise ?>"><a href="#">Kategoriler</a>
 						<ul>
 							<?php
-		            $kategoriler = sorgu_calistir("SELECT k.id, k.ad FROM gonderiler AS g INNER JOIN kategoriler AS k ON g.kategori=k.id WHERE g.gosterim=1 GROUP BY k.id ORDER BY COUNT(k.ad) DESC");
+		            $kategoriler = sorgu_calistir("SELECT k.id, k.ad FROM gonderiler AS g INNER JOIN kategoriler AS k ON g.kategori=k.id WHERE g.gosterim=1 GROUP BY k.id ORDER BY COUNT(k.ad) DESC", 2);
 		            $i = 0;
 		            foreach ($kategoriler as $kategori) { //for ($i=0; $i < 5; $i++) {
 		              if ($i >= 10) break; // Max 5

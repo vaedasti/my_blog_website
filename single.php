@@ -4,7 +4,7 @@
   if (empty(htmlspecialchars($_GET['gonderiId']))) echo "<script>window.location.replace('index.php');</script>";
   include_once "php/header.php";
   $sorgu = "SELECT g.id, g.baslik, g.icerik, g.zaman, g.etiketler,k.ad AS kategori, k.id AS kategoriId, kl.ad AS yazar FROM gonderiler AS g INNER JOIN kategoriler AS k ON g.kategori=k.id INNER JOIN kullanicilar AS kl ON g.yazar=kl.id WHERE g.gosterim=1 AND g.id=".htmlspecialchars($_GET['gonderiId']);
-  $gonderi = sorgu_calistir($sorgu, 0);
+  $gonderi = sorgu_calistir($sorgu, 1);
 ?>
 <!-- Content
 ================================================== -->
@@ -32,7 +32,7 @@
         </div>-->
         <div class="entry-content">
           <!-- <p class="lead">Lorem ipsum Nisi enim est proident est magna occaecat dolore proident eu</p> -->
-          <?php print $gonderi['icerik']; ?>
+          <?php print htmlspecialchars($gonderi['icerik']); ?>
         </div>
         <p class="tags">
           <span>Etiketler :</span>
@@ -70,10 +70,10 @@
       ================================================== -->
       <div id="comments">
         <?php
-          $adet = sorgu_calistir("SELECT COUNT(y.id) AS adet FROM yorumlar as y INNER JOIN gonderiler AS g ON y.gonderi=g.id WHERE g.id=".htmlspecialchars($_GET['gonderiId']), 0);
+          $adet = sorgu_calistir("SELECT COUNT(y.id) AS adet FROM yorumlar as y INNER JOIN gonderiler AS g ON y.gonderi=g.id WHERE g.id=".htmlspecialchars($_GET['gonderiId'])." AND y.onay=1", 1);
           if ($adet['adet'] > 0) {
             print "<h3>".$adet['adet']." Yorum</h3>"; $adet = null;
-            $yorumlar = sorgu_calistir("SELECT k.ad AS ad, k.soyad AS soyad, y.tarih AS zaman, y.icerik AS yorum FROM yorumlar as y INNER JOIN gonderiler AS g ON y.gonderi=g.id INNER JOIN kullanicilar AS k ON k.id=y.kullanici WHERE g.id=".htmlspecialchars($_GET['gonderiId'])." ORDER BY y.tarih DESC");
+            $yorumlar = sorgu_calistir("SELECT k.ad AS ad, k.soyad AS soyad, y.tarih AS zaman, y.icerik AS yorum FROM yorumlar as y INNER JOIN gonderiler AS g ON y.gonderi=g.id INNER JOIN kullanicilar AS k ON k.id=y.kullanici WHERE g.id=".htmlspecialchars($_GET['gonderiId'])." AND y.onay=1 ORDER BY y.tarih DESC", 2);
             foreach ($yorumlar as $yorum) {
         ?>
         <!-- commentlist -->

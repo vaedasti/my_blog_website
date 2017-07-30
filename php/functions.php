@@ -6,11 +6,13 @@
   $dbName='blog'; // database.php; veritabanı adı
   $dbUser='root'; // database.php; veritabanı kullanıcı adı
   $dbPass='1234'; // database.php; veritabanı kullanıcı şifresi
+  $yPanel = "/my_blog_website/admin_panel/material-dashboard/main"; // Yönetim panelinin URL'si
   $limitAdet=4; // content.php; gonderi limiti adeti
   $limit='0,'.$limitAdet; // content.php; gonderi limiti
   $sorgu; // content.php; SQL sorgusunun bulunduğu değişken
   $karakterLimiti=200; // content.php; gonderi içeriğinin kaç karakteri gözüksün
   $sidebarKategoriAdet=5; // sidebar.php; sidebardaki kategori listesinde kaç adet öğe gözüksün
+  $instUser = "natgeo";
   // Parametre olarak verilen mesaj ve hataya görsellik katar ve geri gönderir.
   function hata_mesaji($mesaj, $hata){
     $style = "
@@ -62,18 +64,27 @@
     }
   }
   // Parametre olarak verilen sorguyu çalıştırıp değerleri geri ver
-  function sorgu_calistir($sorgu, $hepsi=1){
+  function sorgu_calistir($sorgu, $tur, $dizi=""){
     global $db;
     if (!empty($sorgu)) {
-      switch ($hepsi) {
-        case 2:
-          return $db -> query($sorgu, PDO::FETCH_ASSOC);
-          break;
+      switch ($tur) {
         case 0:
+          return $db -> query($sorgu);
+          break;
+        case 1:
           return $db -> query($sorgu, PDO::FETCH_ASSOC) -> fetch();
           break;
+        case 2:
+          return $db -> query($sorgu, PDO::FETCH_ASSOC) -> fetchAll();
+          break;
+        case 3:
+          return $db -> prepare($sorgu) -> execute($dizi);
+          break;
+        case 4:
+          return $db -> exec($sorgu);
+          break;
         default:
-          return $db -> query($sorgu, PDO::FETCH_ASSOC) -> fetchall();
+          return Null;//sorgu_calistir($sorgu, 0, $dizi);
           break;
       }
     }
@@ -108,6 +119,22 @@
     header('Location: ' . $url, True, $statusCode); // Yönlendir
     die(); // Öl
   }
-  // Yönetim panelinin URL'si
-  $yPanel = "/my_blog_website/admin_panel/material-dashboard/examples/template.html";
+  // Instagram resimlerini getir
+  function inst_resim($adet=8){
+    global $instUser;
+    $resimler = array();
+    $json = file_get_contents('https://www.instagram.com/'.$instUser.'/media/');
+    //$instagram_feed_data = json_decode($json, true);
+    $post = json_decode($json, true)['items'];//$instagram_feed_data['items'];
+    if (isset($post)) {
+      for ($i=0; $i < $adet; $i++) {
+        //$link = $post[$i]['link'];
+        //$img_url = $post[$i]['images']['low_resolution']['url'];
+        //$caption = isset($post[$i]['caption']) ? $post[$i]['caption']['text'] : '';
+        //print "<li><a href=".$link."><img alt='thumbnail' src=".$img_url."></a></li>";
+        $resimler['resim'.$i] = array('link' => $post[$i]['link'], 'resim' => $post[$i]['images']['low_resolution']['url']);
+      }
+    }
+    return $resimler;
+  }
 ?>

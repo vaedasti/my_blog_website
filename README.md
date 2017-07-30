@@ -3,7 +3,7 @@ ATA-BAUM Intern Project
 
 ### To-Do
 + ~~FIXME: login.php. ' or 'a'='a'~~
-+ FIXME: sidebar.php. Aynı etiketler tekrarlamasın ve en çok olanlardan 7 tanesi gözüksün. Array içerisine nasıl sonradan veri atılır araştır.
++ ~~FIXME: sidebar.php. Aynı etiketler tekrarlamasın ve en çok olanlardan 7 tanesi gözüksün. Array içerisine nasıl sonradan veri atılır araştır.~~
 + ~~FIXME: login.php. Giriş yaparken kullanıcı adı veya şifre veritabanında yok ise bu hatayı veriyor. Fatal error: Call to a member function fetch() on boolean in /var/www/html/my_blog_website/php/functions.php on line 40~~
 + ~~Tüm değişkenleri tek bir dosyada topla.~~
 + site_basligi, site_bilgisi gibi veritabanından alınan bilgileri cookie olarak tanımla.

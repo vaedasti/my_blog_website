@@ -14,7 +14,7 @@
         }
         elseif (!empty($_GET['kategoriId'])) { // kategori
           $kategori = htmlspecialchars($_GET['kategoriId']);
-          print "<h4>".sorgu_calistir("SELECT ad FROM kategoriler WHERE id=".$kategori, 0)['ad']." kategorisine ait gönderiler listeleniyor; </h4><hr />";
+          print "<h4>".sorgu_calistir("SELECT ad FROM kategoriler WHERE id=$kategori", 1)['ad']." kategorisine ait gönderiler listeleniyor; </h4><hr />";
           $sorgu = "SELECT g.id, g.baslik, g.icerik, g.zaman, k.ad AS kategori, k.id AS kategoriId, kl.ad AS yazar FROM gonderiler AS g INNER JOIN kategoriler AS k ON g.kategori=k.id INNER JOIN kullanicilar AS kl ON g.yazar=kl.id WHERE g.gosterim=1 AND k.id=$kategori ORDER BY zaman DESC";
         }
         elseif (!empty($_GET['etiket'])) { // etiket
@@ -29,7 +29,7 @@
         }
         else
           $sorgu = "SELECT g.id, g.baslik, g.icerik, g.zaman, k.ad AS kategori, k.id AS kategoriId, kl.ad AS yazar FROM gonderiler AS g INNER JOIN kategoriler AS k ON g.kategori=k.id INNER JOIN kullanicilar AS kl ON g.yazar=kl.id WHERE g.gosterim=1 ORDER BY zaman DESC LIMIT $limit";
-        foreach (sorgu_calistir($sorgu) as $gonderi) {
+        foreach (sorgu_calistir($sorgu, 2) as $gonderi) {
       ?>
       <article class="entry">
         <header class="entry-header">
@@ -50,7 +50,7 @@
           <p>
             <?php
               if (strlen(htmlspecialchars($gonderi['icerik'])) >= $karakterLimiti) { // Eğer yazı $karakterLimiti karakterden fazlaysa "Devamını Gör" linki çıksın.
-                print substr(htmlspecialchars($gonderi['icerik']), 0, $karakterLimiti);
+                print substr(htmlspecialchars($gonderi['icerik']), 0, $karakterLimiti)."...";
                 print '<a href="single.php?gonderiId='.$gonderi['id'].'" title="'.$gonderi['baslik'].'"> Devamını Gör</a>';
               }
               else print htmlspecialchars($gonderi['icerik']);

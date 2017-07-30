@@ -30,18 +30,9 @@
           <h3>Fotoğraf Akışı</h3>
           <ul class="photostream group">
             <?php
-              $username = "natgeo";
-              $json = file_get_contents('https://www.instagram.com/'.$username.'/media/');
-              $instagram_feed_data = json_decode($json, true);
-              $post = $instagram_feed_data['items'];
-              if (isset($post)) {
-                for ($i=0; $i < 8; $i++) {
-                  $link = $post[$i]['link'];
-                  $img_url = $post[$i]['images']['low_resolution']['url'];
-                  //$caption = isset($post[$i]['caption']) ? $post[$i]['caption']['text'] : '';
-                  print "<li><a href=".$link."><img alt='thumbnail' src=".$img_url."></a></li>";
-                }
-              }
+              //foreach (inst_resim() as $resimler) {
+              //  print "<li><a href=".$resimler['link']."><img alt='thumbnail' src=".$resimler['resim']."></a></li>";
+              //}
             ?>
             <!--<li><a href="#"><img alt="thumbnail" src="images/thumb.jpg"></a></li>
             <li><a href="#"><img alt="thumbnail" src="images/thumb.jpg"></a></li>
