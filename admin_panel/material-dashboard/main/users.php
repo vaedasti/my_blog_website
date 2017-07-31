@@ -84,16 +84,20 @@
 																<input type="checkbox" <?php //if ($kullanici['tip']=="1") print "checked"; ?> name="admin" value="<?php //print $kullanici['id']; ?>">
 															</label>
 														</div>-->
+														<!--<button type="button" rel="tooltip" class="btn btn-primary btn-icon edit" data-original-title="Düzenle" title="" onclick="demo.showSwal('basic')">
+															<i class="material-icons">edit</i>
+															<div class="ripple-container"></div>
+														</button>-->
 														<?php if ($kullanici['tip']=="0") { ?>
-														<button type="button" rel="tooltip" class="btn btn-success btn-icon edit" data-original-title="Admin Yap" title="" onclick="demo.showSwal('basic')">
+														<button type="button" rel="tooltip" class="btn btn-success btn-icon edit" data-original-title="Yönetici Yap" title="" onclick="demo.showSwal2('Emin Misiniz!', 'Bu kullanıcıyı yönetici yapmak istediğinize emin misiniz?', 'warning', 'Evet', 'Hayır', 'Tamam!', 'Kullanıcı başarılı bir şekilde yönetici yapıldı!')">
 															<i class="material-icons">person</i>
 															<div class="ripple-container"></div>
 														</button>
-														<?php } ?>
-														<button type="button" rel="tooltip" class="btn btn-danger btn-icon remove" data-original-title="Sil" title="" onclick="demo.showSwal('basic')">
+														<button type="button" rel="tooltip" class="btn btn-danger btn-icon remove" data-original-title="Sil" title="" onclick="demo.showSwal2('Emin Misiniz!', 'Bu kullanıcıyı silmek istediğinize emin misiniz?', 'warning', 'Evet', 'Hayır', 'Silindi!', 'Kullanıcı başarılı bir şekilde silindi!')">
 															<i class="material-icons">close</i>
 															<div class="ripple-container"></div>
 														</button>
+														<?php } ?>
 														<!--<a href="#" class="btn btn-simple btn-success btn-icon edit" onclick="demo.showSwal('yorum-onayla')" rel="tooltip" data-original-title="Onayla"><i class="material-icons">done</i></a>
 														<a href="#" class="btn btn-simple btn-danger btn-icon remove" onclick="demo.showSwal('yorum-sil')" rel="tooltip" data-original-title="Sil"><i class="material-icons">close</i></a>-->
 													</td>
@@ -153,6 +157,114 @@
 			<!--  end card  -->
 			</div>
 		</div>
+		<div class="row" style="display:none;">
+                        <div class="col-md-8">
+                            <div class="card">
+                                <div class="card-header card-header-icon" data-background-color="rose">
+                                    <i class="material-icons">perm_identity</i>
+                                </div>
+                                <div class="card-content">
+                                    <h4 class="card-title">Edit Profile -
+                                        <small class="category">Complete your profile</small>
+                                    </h4>
+                                    <form lpformnum="1">
+                                        <div class="row">
+                                            <div class="col-md-5">
+                                                <div class="form-group label-floating is-empty">
+                                                    <label class="control-label">Company (disabled)</label>
+                                                    <input type="text" class="form-control" disabled="" style="background-image: url(&quot;data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAQAAAC1HAwCAAAAC0lEQVR4nGP6zwAAAgcBApocMXEAAAAASUVORK5CYII=&quot;);">
+                                                <span class="material-input"></span></div>
+                                            </div>
+                                            <div class="col-md-3">
+                                                <div class="form-group label-floating is-empty">
+                                                    <label class="control-label">Username</label>
+                                                    <input type="text" class="form-control">
+                                                <span class="material-input"></span></div>
+                                            </div>
+                                            <div class="col-md-4">
+                                                <div class="form-group label-floating is-empty">
+                                                    <label class="control-label">Email address</label>
+                                                    <input type="email" class="form-control">
+                                                <span class="material-input"></span></div>
+                                            </div>
+                                        </div>
+                                        <div class="row">
+                                            <div class="col-md-6">
+                                                <div class="form-group label-floating is-empty">
+                                                    <label class="control-label">Fist Name</label>
+                                                    <input type="text" class="form-control">
+                                                <span class="material-input"></span></div>
+                                            </div>
+                                            <div class="col-md-6">
+                                                <div class="form-group label-floating is-empty">
+                                                    <label class="control-label">Last Name</label>
+                                                    <input type="text" class="form-control">
+                                                <span class="material-input"></span></div>
+                                            </div>
+                                        </div>
+                                        <div class="row">
+                                            <div class="col-md-12">
+                                                <div class="form-group label-floating is-empty">
+                                                    <label class="control-label">Adress</label>
+                                                    <input type="text" class="form-control">
+                                                <span class="material-input"></span></div>
+                                            </div>
+                                        </div>
+                                        <div class="row">
+                                            <div class="col-md-4">
+                                                <div class="form-group label-floating is-empty">
+                                                    <label class="control-label">City</label>
+                                                    <input type="text" class="form-control">
+                                                <span class="material-input"></span></div>
+                                            </div>
+                                            <div class="col-md-4">
+                                                <div class="form-group label-floating is-empty">
+                                                    <label class="control-label">Country</label>
+                                                    <input type="text" class="form-control">
+                                                <span class="material-input"></span></div>
+                                            </div>
+                                            <div class="col-md-4">
+                                                <div class="form-group label-floating is-empty">
+                                                    <label class="control-label">Postal Code</label>
+                                                    <input type="text" class="form-control">
+                                                <span class="material-input"></span></div>
+                                            </div>
+                                        </div>
+                                        <div class="row">
+                                            <div class="col-md-12">
+                                                <div class="form-group">
+                                                    <label>About Me</label>
+                                                    <div class="form-group label-floating is-empty">
+                                                        <label class="control-label"> Lamborghini Mercy, Your chick she so thirsty, I'm in that two seat Lambo.</label>
+                                                        <textarea class="form-control" rows="5"></textarea>
+                                                    <span class="material-input"></span></div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <button type="submit" class="btn btn-rose pull-right">Update Profile</button>
+                                        <div class="clearfix"></div>
+                                    </form>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-4">
+                            <div class="card card-profile">
+                                <div class="card-avatar">
+                                    <a href="#pablo">
+                                        <img class="img" src="../../assets/img/faces/marc.jpg">
+                                    </a>
+                                </div>
+                                <div class="card-content">
+                                    <h6 class="category text-gray">CEO / Co-Founder</h6>
+                                    <h4 class="card-title">Alec Thompson</h4>
+                                    <p class="description">
+                                        Don't be scared of the truth because we need to restart the human foundation in truth And I love you like Kanye loves Kanye I love Rick Owens’ bed design but the back is...
+                                    </p>
+                                    <a href="#pablo" class="btn btn-rose btn-round">Follow</a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
 	</div>
 </div>
 <?php

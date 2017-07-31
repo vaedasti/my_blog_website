@@ -78,7 +78,7 @@
           return $db -> query($sorgu, PDO::FETCH_ASSOC) -> fetchAll();
           break;
         case 3:
-          return $db -> prepare($sorgu) -> execute($dizi);
+          $db -> prepare($sorgu) -> execute($dizi);
           break;
         case 4:
           return $db -> exec($sorgu);

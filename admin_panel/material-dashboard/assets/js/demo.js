@@ -888,31 +888,10 @@ demo = {
 
                     })
                 }).catch(swal.noop)
-            } else if(type == 'yorum-onayla'){
-                    swal({
-                            title: 'Emin misiniz?',
-                            text: "Bu yorumu onaylamak istediğinize emin misiniz!",
-                            type: 'warning',
-                            showCancelButton: true,
-                            confirmButtonClass: 'btn btn-success',
-                            cancelButtonClass: 'btn btn-danger',
-                            confirmButtonText: 'Onayla',
-                            cancelButtonText: 'İptal',
-                            buttonsStyling: false
-                        }).then(function() {
-                          swal({
-                            title: 'Onaylandı!',
-                            text: 'Yorum başarılı bir şekilde onaylandı.',
-                            type: 'success',
-                            confirmButtonClass: "btn btn-success",
-                            confirmButtonText: 'Tamam',
-                            buttonsStyling: false
-                            })
-                        });
             } else if(type == 'yorum-sil'){
                     swal({
                             title: 'Emin misiniz?',
-                            text: "Bu yorumu silmek istediğinize emin misiniz!",
+                            text: "Bu yorumu  istediğinize emin misiniz!",
                             type: 'warning',
                             showCancelButton: true,
                             confirmButtonClass: 'btn btn-success',
@@ -951,8 +930,52 @@ demo = {
                             buttonsStyling: false
                             })
                         });
+            } else if(type == 'gonderi-yayinla'){
+                    swal({
+                            title: 'Emin misiniz?',
+                            text: "Bu gönderiyi yayınlamak istediğinize emin misiniz!",
+                            type: 'warning',
+                            showCancelButton: true,
+                            confirmButtonClass: 'btn btn-success',
+                            cancelButtonClass: 'btn btn-danger',
+                            confirmButtonText: 'Evet',
+                            cancelButtonText: 'İptal',
+                            buttonsStyling: false
+                        }).then(function() {
+                          swal({
+                            title: 'Silindi!',
+                            text: 'Gönderi başarılı bir şekilde silindi.',
+                            type: 'success',
+                            confirmButtonClass: "btn btn-success",
+                            confirmButtonText: 'Tamam',
+                            buttonsStyling: false
+                            })
+                        });
             }
         },
+
+    showSwal2: function(baslik, mesaj, tip, confirmButtonText, cancelButtonText, confirmTitle, confirmText){
+      swal({
+              title: baslik,
+              text: mesaj,
+              type: tip,
+              showCancelButton: true,
+              confirmButtonClass: 'btn btn-success',
+              cancelButtonClass: 'btn btn-danger',
+              confirmButtonText: confirmButtonText,
+              cancelButtonText: cancelButtonText,
+              buttonsStyling: false
+          }).then(function() {
+            swal({
+              title: confirmTitle,
+              text: confirmText,
+              type: 'success',
+              confirmButtonClass: "btn btn-success",
+              confirmButtonText: 'Tamam',
+              buttonsStyling: false
+              })
+          });
+    },
 
     initVectorMap: function(){
          var mapData = {

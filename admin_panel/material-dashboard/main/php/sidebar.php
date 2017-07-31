@@ -5,8 +5,11 @@
   Tip 2: you can also add an image using data-image tag
   -->
   <div class="logo">
-    <a href="../../../" class="simple-text">Anasayfa</a>
+    <a href="../../../" class="simple-text">Ana Sayfa</a>
     <!--<a href="http://www.creative-tim.com" class="simple-text">Creative Tim</a>-->
+  </div>
+  <div class="logo logo-mini">
+    <a href="../../../" class="simple-text">Blog</a>
   </div>
   <div class="sidebar-wrapper">
     <ul class="nav">

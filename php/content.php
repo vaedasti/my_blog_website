@@ -50,10 +50,10 @@
           <p>
             <?php
               if (strlen(htmlspecialchars($gonderi['icerik'])) >= $karakterLimiti) { // Eğer yazı $karakterLimiti karakterden fazlaysa "Devamını Gör" linki çıksın.
-                print substr(htmlspecialchars($gonderi['icerik']), 0, $karakterLimiti)."...";
+                print substr($gonderi['icerik'], 0, $karakterLimiti)."...";
                 print '<a href="single.php?gonderiId='.$gonderi['id'].'" title="'.$gonderi['baslik'].'"> Devamını Gör</a>';
               }
-              else print htmlspecialchars($gonderi['icerik']);
+              else print $gonderi['icerik'];
             ?>
           </p>
         </div>

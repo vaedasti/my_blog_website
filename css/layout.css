@@ -496,8 +496,9 @@ ol.commentlist {
 .commentlist li .comment-text {
 	clear: both;
 	margin: 18px 0 0 0;
-   padding: 0;
-   line-height: 30px;
+	padding: 0;
+	line-height: 30px;
+	word-break: break-all;
 }
 
 /* children */

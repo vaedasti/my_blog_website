@@ -18,6 +18,12 @@
 <script src="../assets/js/material.min.js" type="text/javascript"></script>
 <!--<script src="../assets/js/perfect-scrollbar.jquery.min.js" type="text/javascript"></script>-->
 
+<!--  Plugin for Date Time Picker and Full Calendar Plugin-->
+<!-- <script src="../assets/js/moment.min.js"></script> -->
+
+<!--  Full Calendar Plugin    -->
+<!-- <script src="../assets/js/fullcalendar.min.js"></script> -->
+
 <!--  Charts Plugin -->
 <!--  <script src="../assets/js/chartist.min.js"></script> -->
 
@@ -57,6 +63,11 @@
     $(item+'>ul>li')[sira].className="active";
     $( document ).ready(function() {
       $(item).parent()[0].children[0].click();//document.getElementById(item).parentNode.childNodes[1].click();
+    });
+  }
+  function clickSomeWhere(item, sira) {
+    $( document ).ready(function() {
+      $(item)[sira].click();//document.getElementById(item).parentNode.childNodes[1].click();
     });
   }
 </script>

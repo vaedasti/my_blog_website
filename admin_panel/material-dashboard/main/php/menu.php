@@ -7,15 +7,15 @@
           <div class="ripple-container"></div>
         </button>
       </div>
-      <div class="navbar-header">
-        <!--<button type="button" class="navbar-toggle" data-toggle="collapse">
+      <!--<div class="navbar-header">
+        <button type="button" class="navbar-toggle" data-toggle="collapse">
           <span class="sr-only">Toggle navigation</span>
           <span class="icon-bar"></span>
           <span class="icon-bar"></span>
           <span class="icon-bar"></span>
-        </button>-->
+        </button>
         <a class="navbar-brand" href="#">Dashboard</a>
-      </div>
+      </div>-->
       <div class="collapse navbar-collapse">
         <ul class="nav navbar-nav navbar-right">
           <!--<li>
@@ -42,13 +42,14 @@
             <a href="#" class="dropdown-toggle" data-toggle="dropdown">
               <i class="material-icons">person</i>
               <p class="hidden-lg hidden-md">Profile</p>
+              <?php print "<span>".$_SESSION['ad']." ".$_SESSION['soyad']."</span>"; ?>
             </a>
             <ul class="dropdown-menu">
               <!--<li><a href="#">Mike John responded to your email</a></li>
               <li><a href="#">You have 5 new tasks</a></li>
               <li><a href="#">You're now friend with Andrew</a></li>
               <li><a href="#">Another Notification</a></li>-->
-              <li><a href="#">Çıkış</a></li>
+              <li><a href="../../../index.php?cikis=true">Çıkış</a></li>
             </ul>
           </li>
         </ul>

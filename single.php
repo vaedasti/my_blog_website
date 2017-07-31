@@ -6,6 +6,11 @@
   $sorgu = "SELECT g.id, g.baslik, g.icerik, g.zaman, g.etiketler,k.ad AS kategori, k.id AS kategoriId, kl.ad AS yazar FROM gonderiler AS g INNER JOIN kategoriler AS k ON g.kategori=k.id INNER JOIN kullanicilar AS kl ON g.yazar=kl.id WHERE g.gosterim=1 AND g.id=".htmlspecialchars($_GET['gonderiId']);
   $gonderi = sorgu_calistir($sorgu, 1);
 ?>
+<?php
+  if (isset($_SESSION['id']) AND isset($_POST['cMessage'])) {
+    sorgu_calistir("INSERT INTO yorumlar(kullanici, icerik, gonderi) VALUES(?,?,?)", 3, array($_SESSION['id'], htmlspecialchars($_POST['cMessage']), $_GET['gonderiId']));
+  }
+?>
 <!-- Content
 ================================================== -->
 <div id="content-wrap">
@@ -32,7 +37,7 @@
         </div>-->
         <div class="entry-content">
           <!-- <p class="lead">Lorem ipsum Nisi enim est proident est magna occaecat dolore proident eu</p> -->
-          <?php print htmlspecialchars($gonderi['icerik']); ?>
+          <?php print $gonderi['icerik']; ?>
         </div>
         <p class="tags">
           <span>Etiketler :</span>
@@ -175,7 +180,7 @@
         <div class="respond">
           <h3>Yorum Yaz</h3>
           <!-- form -->
-          <form name="contactForm" id="contactForm" method="post" action="">
+          <form name="contactForm" id="contactForm" method="post" action="#">
             <fieldset>
               <input type="hidden" name="gonderiId" value="<?php print $_GET['gonderiId']; ?>" />
               <!--<div class="group">

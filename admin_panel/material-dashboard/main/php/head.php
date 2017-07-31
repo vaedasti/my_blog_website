@@ -1,3 +1,23 @@
+<?php
+	require_once "../../../php/database.php";
+	if (!isset($_SESSION['kAd']) OR $_SESSION['tip'] != 1)
+		yonlendir("../../../");
+	if ($_SERVER['PHP_SELF'] == "/my_blog_website/admin_panel/material-dashboard/main/postAdd.php") {
+		if ($_SERVER["REQUEST_METHOD"] == "POST") {
+			$bilgi = array('baslik' => htmlspecialchars(trim($_POST['baslik'])),
+										'kategori' => $_POST['kategori'],
+										'etiket' => htmlspecialchars(trim($_POST['etiket'])),
+										'icerik' => $_POST['icerik'],
+										);
+			if (isset($_POST['gonderi']))
+				sorgu_calistir("UPDATE gonderiler SET baslik=?, icerik=?, etiketler=?, kategori=?) WHERE id=?", 3, array($bilgi['baslik'], $bilgi['icerik'], $bilgi['etiket'], $bilgi['kategori'], $_POST['gonderi']));
+			else
+				sorgu_calistir("INSERT INTO gonderiler(baslik, icerik, etiketler, yazar, kategori) VALUES(?,?,?,?,?)", 3, array($bilgi['baslik'],$bilgi['icerik'],$bilgi['etiket'],$_SESSION['id'],$bilgi['kategori']));
+			yonlendir("posts.php");
+			//$("")[].click()
+		}
+	}
+?>
 <html lang="en"> <!-- class="perfect-scrollbar-on" -->
 	<head>
 		<meta charset="utf-8" />
@@ -24,5 +44,5 @@
 	</head>
 	<body>
 		<div class="wrapper">
-			<?php include "sidebar.php"; require_once "../../../php/database.php"; ?>
+			<?php include "sidebar.php"; ?>
 			<div class="main-panel">

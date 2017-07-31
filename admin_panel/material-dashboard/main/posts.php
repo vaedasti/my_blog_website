@@ -59,7 +59,7 @@
 								<div class="bootstrap-tagsinput">
 									<?php
 										foreach (explode(", ", $gonderi['etiketler']) as $etiket) {
-											print '<span class="tag label label-info">'.$etiket.'<span data-role="remove"></span></span>';
+											print '<span class="tag label label-info">'.$etiket.'<span data-role="remove"></span></span> ';
 										}
 									?>
 									<!--<span class="tag label label-info">Amsterdam<span data-role="remove"></span></span>
@@ -70,8 +70,18 @@
 								</div>
 								<hr>
 								<div class="col-md-12" align="center">
-									<button type="button" class="btn btn-primary"><i class="material-icons">edit</i> Düzenle<div class="ripple-container"></div></button>
-									<button type="button" class="btn btn-success"><i class="material-icons">chat</i> Yayınla<div class="ripple-container"></div></button>
+									<form action="postAdd.php" class="form-horizontal" method="get">
+										<a href="postAdd.php?duzenle=<?php print $gonderi['id']; ?>" target="_self">
+											<button type="button" class="btn btn-primary">
+												<i class="material-icons">edit</i> Düzenle
+												<div class="ripple-container"></div>
+											</button>
+										</a>
+										<button type="button" name="yayinla" value="<?php print $gonderi['id']; ?>" class="btn btn-success" onclick="demo.showSwal2('Emin Misiniz!', 'Bu gönderiyi yayınlamak istediğinize emin misiniz?', 'warning', 'Evet', 'Hayır', 'Yayınlandı!', 'Gönderi başarılı bir şekilde yayınlandı!')">
+											<i class="material-icons">chat</i> Yayınla
+											<div class="ripple-container"></div>
+										</button>
+									</form>
 									<!--<button type="button" class="btn"><i class="material-icons">open_in_new</i> Sayfada Aç<div class="ripple-container"></div></button>-->
 								</div>
 							</div>
@@ -89,12 +99,12 @@
 								<p class="category"><?php print $gonderi['kAd']." ".$gonderi['kSoyad']; ?> - <?php print $gonderi['kategori']; ?> - <?php print $gonderi['tarih']; ?></p>
 							</div>
 							<div class="card-content">
-								<?php print strip_tags(htmlspecialchars($gonderi['icerik'])); ?>
+								<?php print htmlspecialchars($gonderi['icerik']); ?>
 								<br>
 								<div class="bootstrap-tagsinput">
 									<?php
 										foreach (explode(", ", $gonderi['etiketler']) as $etiket) {
-											print '<span class="tag label label-info">'.$etiket.'<span data-role="remove"></span></span>';
+											print '<span class="tag label label-info">'.$etiket.'<span data-role="remove"></span></span> ';
 										}
 									?>
 									<!--<span class="tag label label-info">Amsterdam<span data-role="remove"></span></span>
@@ -105,9 +115,13 @@
 								</div>
 								<hr>
 								<div class="col-md-12" align="center">
-									<button type="button" class="btn btn-primary"><i class="material-icons">edit</i> Düzenle<div class="ripple-container"></div></button>
-									<button type="button" class="btn btn-danger"><i class="material-icons">chat</i> Yayından Kaldır<div class="ripple-container"></div></button>
-									<button type="button" class="btn"><i class="material-icons">open_in_new</i> Sayfada Aç<div class="ripple-container"></div></button>
+									<form action="postAdd.php" class="form-horizontal" method="get">
+										<button type="submit" name="duzenle" value="<?php print $gonderi['id']; ?>" class="btn btn-primary"><i class="material-icons">edit</i> Düzenle<div class="ripple-container"></div></button>
+										<button type="button" name="yayındanKaldir" value="<?php print $gonderi['id']; ?>" class="btn btn-danger" onclick="demo.showSwal2('Emin Misiniz!', 'Bu gönderiyi yayından kaldırmak istediğinize emin misiniz?', 'warning', 'Evet', 'Hayır', 'Yayından Kaldırıldı!', 'Gönderi başarılı bir şekilde yayından kaldırıldı!')"><i class="material-icons">chat_bubble</i> Yayından Kaldır<div class="ripple-container"></div></button>
+										<a href="../../../single.php?gonderiId=<?php print $gonderi['id']; ?>" target="_blank">
+											<button type="button" class="btn"><i class="material-icons">open_in_new</i> Sayfada Aç<div class="ripple-container"></div></button>
+											</a>
+									</form>
 								</div>
 							</div>
 						</div>
