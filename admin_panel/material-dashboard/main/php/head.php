@@ -23,7 +23,7 @@
 	}
 	require_once "../../../php/database.php";
 	if (!isset($_SESSION['kAd']) OR $_SESSION['tip'] != 1)
-		yonlendir("../../../");
+		yonlendir("../../../login.php");
 	if ($_SERVER['PHP_SELF'] == "/my_blog_website/admin_panel/material-dashboard/main/postAdd.php") {
 		if ($_SERVER["REQUEST_METHOD"] == "POST") {
 			if (isset($_POST['baslik'])) {
