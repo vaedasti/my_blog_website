@@ -14,7 +14,6 @@ $().ready(function(){
         if($('.fixed-plugin .dropdown').hasClass('show-dropdown')){
             $('.fixed-plugin .dropdown').addClass('open');
         }
-
     }
 
     $('.fixed-plugin a').click(function(event){
@@ -891,62 +890,94 @@ demo = {
             }
         },
 
-    showSwal2: function(baslik, mesaj, tip, confirmButtonText, cancelButtonText, confirmTitle, confirmText, yayinlaID, yayinKaldirID, yorumSilID, yorumOnaylaID, yorumOnayKaldirID, kullaniciSilID, kullaniciYoneticiID){
-      swal({
-              title: baslik,
-              text: mesaj,
-              type: tip,
-              showCancelButton: true,
-              confirmButtonClass: 'btn btn-success',
-              cancelButtonClass: 'btn btn-danger',
-              confirmButtonText: confirmButtonText,
-              cancelButtonText: cancelButtonText,
-              buttonsStyling: false
-          }).then(function() {
-            if(typeof(yayinlaID) != "undefined" && yayinlaID !== null) {
-              //$("#post-btn").click(function(){
-              $.post("php/head.php", { yayinla:yayinlaID } ,function(data){
-                console.log(data);//"yayinla="+yayinlaID);
+        showSwal2: function(baslik, mesaj, tip, confirmButtonText, cancelButtonText, confirmTitle, confirmText, yayinlaID, yayinKaldirID, yorumSilID, yorumOnaylaID, yorumOnayKaldirID, kullaniciSilID, kullaniciYoneticiID){
+          swal({
+                  title: baslik,
+                  text: mesaj,
+                  type: tip,
+                  showCancelButton: true,
+                  confirmButtonClass: 'btn btn-success',
+                  cancelButtonClass: 'btn btn-danger',
+                  confirmButtonText: confirmButtonText,
+                  cancelButtonText: cancelButtonText,
+                  buttonsStyling: false
+              }).then(function() {
+                if(typeof(yayinlaID) != "undefined" && yayinlaID !== null) {
+                  //$("#post-btn").click(function(){
+                  $.post("php/head.php", { yayinla:yayinlaID } ,function(data){
+                    console.log(data);//"yayinla="+yayinlaID);
+                  });
+                  //});
+                }else if(typeof(yayinKaldirID) != "undefined" && yayinKaldirID !== null) {
+                  $.post("php/head.php", { yayinKaldir:yayinKaldirID } ,function(data){
+                    console.log("yayinKaldir="+yayinKaldirID);
+                  });
+                }else if(typeof(yorumSilID) != "undefined" && yorumSilID !== null) {
+                  $.post("php/head.php", { yorumSil:yorumSilID } ,function(data){
+                    console.log("yorumSil="+yorumSilID);
+                  });
+                }else if(typeof(yorumOnaylaID) != "undefined" && yorumOnaylaID !== null) {
+                  $.post("php/head.php", { yorumOnayla:yorumOnaylaID } ,function(data){
+                    console.log("yorumOnayla="+yorumOnaylaID);
+                  });
+                }else if(typeof(yorumOnayKaldirID) != "undefined" && yorumOnayKaldirID !== null) {
+                  $.post("php/head.php", { yorumOnayKaldir:yorumOnayKaldirID } ,function(data){
+                    console.log("yorumOnayKaldir="+yorumOnayKaldirID);
+                  });
+                }else if(typeof(kullaniciYoneticiID) != "undefined" && kullaniciYoneticiID !== null) {
+                  $.post("php/head.php", { kullaniciYonetici:kullaniciYoneticiID } ,function(data){
+                    console.log("kullaniciYonetici="+kullaniciYoneticiID);
+                  });
+                }else if(typeof(kullaniciSilID) != "undefined" && kullaniciSilID !== null) {
+                  $.post("php/head.php", { kullaniciSil:kullaniciSilID } ,function(data){
+                    console.log("kullaniciSil="+kullaniciSilID);
+                  });
+                }
+                setTimeout(function(){
+                  location.reload();
+                }, 300);
+                /*swal({
+                  title: confirmTitle,
+                  text: confirmText,
+                  type: 'success',
+                  confirmButtonClass: "btn btn-success",
+                  confirmButtonText: 'Tamam',
+                  buttonsStyling: false
+                })*/
               });
-              //});
-            }else if(typeof(yayinKaldirID) != "undefined" && yayinKaldirID !== null) {
-              $.post("php/head.php", { yayinKaldir:yayinKaldirID } ,function(data){
-                console.log("yayinKaldir="+yayinKaldirID);
+        },
+        kategoriEkle: function(){
+          swal({
+            title: 'Kategori Ekle',
+            html: '<div class="form-group">' +
+            '<input id="input-field" type="text" class="form-control" />' +
+            '</div>',
+            showCancelButton: true,
+            confirmButtonClass: 'btn btn-success',
+            cancelButtonClass: 'btn btn-danger',
+            confirmButtonText: 'Tamam',
+            cancelButtonText: 'İptal',
+            buttonsStyling: false
+            }).then(function(result) {
+              $.post("php/head.php", { kategori:$('#input-field').val() } ,function(data){
+                console.log("You Entered: " + $('#input-field').val());
+                console.log(data);
+                //var a = $(".dropdown-menu .inner")[0];
+                //var b = a.children[a.childElementCount-1];
+                //var c = parseInt(b.attributes[0].value)+1;
+
+                var option = document.createElement("option");
+                option.setAttribute("value", data);
+                option.innerHTML = $('#input-field').val();
+                $(".selectpicker")[0].append(option);
+
+                var li = document.createElement("li");
+                li.setAttribute("data-original-index", data);
+                li.innerHTML = "<a tabindex='0' class='' data-tokens='null' role='option' aria-disabled='false' aria-selected='false'><span class='text'>"+$('#input-field').val()+"</span><span class='material-icons check-mark'> done </span></a>";
+                $(".dropdown-menu .inner")[0].append(li);
               });
-            }else if(typeof(yorumSilID) != "undefined" && yorumSilID !== null) {
-              $.post("php/head.php", { yorumSil:yorumSilID } ,function(data){
-                console.log("yorumSil="+yorumSilID);
-              });
-            }else if(typeof(yorumOnaylaID) != "undefined" && yorumOnaylaID !== null) {
-              $.post("php/head.php", { yorumOnayla:yorumOnaylaID } ,function(data){
-                console.log("yorumOnayla="+yorumOnaylaID);
-              });
-            }else if(typeof(yorumOnayKaldirID) != "undefined" && yorumOnayKaldirID !== null) {
-              $.post("php/head.php", { yorumOnayKaldir:yorumOnayKaldirID } ,function(data){
-                console.log("yorumOnayKaldir="+yorumOnayKaldirID);
-              });
-            }else if(typeof(kullaniciYoneticiID) != "undefined" && kullaniciYoneticiID !== null) {
-              $.post("php/head.php", { kullaniciYonetici:kullaniciYoneticiID } ,function(data){
-                console.log("kullaniciYonetici="+kullaniciYoneticiID);
-              });
-            }else if(typeof(kullaniciSilID) != "undefined" && kullaniciSilID !== null) {
-              $.post("php/head.php", { kullaniciSil:kullaniciSilID } ,function(data){
-                console.log("kullaniciSil="+kullaniciSilID);
-              });
-            }
-            setTimeout(function(){
-              location.reload();
-            }, 300);
-            /*swal({
-              title: confirmTitle,
-              text: confirmText,
-              type: 'success',
-              confirmButtonClass: "btn btn-success",
-              confirmButtonText: 'Tamam',
-              buttonsStyling: false
-            })*/
-          });
-    },
+            }).catch(swal.noop)
+        },
 
     initVectorMap: function(){
          var mapData = {

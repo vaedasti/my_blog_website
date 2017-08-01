@@ -34,22 +34,27 @@
 									</div>
 								</div>
 								<div class="col-sm-6 col-lg-3 col-xs-4">
-									<div class="col-md-12">
-										<select class="selectpicker dropdown-toggle" name="kategori" aria-expanded="false" data-style="btn btn-primary" role="button" title="Kategori Seç">
-											<?php
-												foreach (sorgu_calistir("SELECT * FROM kategoriler",2) as $kategori) {
-													if (isset($gonderi)) {
-														if ($gonderi['kategori'] == $kategori['ad'])
-															print "<option value='".$kategori['id']."' selected>".$kategori['ad']."</option>";
+									<!--<div class="col-md-12">-->
+										<div class="col-md-8 col-lg-8 col-xs-8">
+											<select class="selectpicker dropdown-toggle" name="kategori" aria-expanded="false" data-style="btn btn-primary" role="button" title="Kategori Seç">
+												<?php
+													foreach (sorgu_calistir("SELECT * FROM kategoriler",2) as $kategori) {
+														if (isset($gonderi)) {
+															if ($gonderi['kategori'] == $kategori['ad'])
+																print "<option value='".$kategori['id']."' selected>".$kategori['ad']."</option>";
+															else
+																print "<option value='".$kategori['id']."'>".$kategori['ad']."</option>";
+														}
 														else
 															print "<option value='".$kategori['id']."'>".$kategori['ad']."</option>";
-													}
-													else
-														print "<option value='".$kategori['id']."'>".$kategori['ad']."</option>";
-											} ?>
-										</select>
-										<!--<button type="button" class="btn btn-warning" rel="tooltip" data-original-title="Kategori Ekle"><i class="material-icons">edit</i><div class="ripple-container"></div></button>-->
-									</div>
+												} ?>
+											</select>
+										</div>
+										<div class="col-md-4 col-lg-4 col-xs-4" align="center">
+											<button type="button" class="btn btn-warning" rel="tooltip" data-original-title="Kategori Ekle" onclick="demo.kategoriEkle()"><i class="material-icons dp48">add_box</i><div class="ripple-container"></div></button>
+
+										</div>
+									<!--</div>-->
 								</div>
 								<div class="col-sm-6 col-lg-3 col-xs-4">
 									<div class="form-group label-floating <?php if (!isset($gonderi)) print "is-empty"; ?>">

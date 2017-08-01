@@ -15,6 +15,9 @@
 			sorgu_calistir("DELETE FROM kullanicilar WHERE id=".$_POST['kullaniciSil'], 4);
 		} else if (isset($_POST['kullaniciYonetici'])) {
 			sorgu_calistir("UPDATE kullanicilar SET tip=1 WHERE id=".$_POST['kullaniciYonetici'], 4);
+		} else if (isset($_POST['kategori'])) {
+			sorgu_calistir("INSERT INTO kategoriler(ad) VALUES(?)", 3, array($_POST['kategori']));
+			print sorgu_calistir("SELECT id FROM kategoriler WHERE ad='".$_POST['kategori']."'",1)['id'];
 		}
 		die();
 	}

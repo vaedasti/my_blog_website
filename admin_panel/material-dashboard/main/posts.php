@@ -54,7 +54,7 @@
 								<p class="category"><?php print $gonderi['kAd']." ".$gonderi['kSoyad']; ?> - <?php print $gonderi['kategori']; ?> - <?php print $gonderi['tarih']; ?></p>
 							</div>
 							<div class="card-content">
-								<?php print strip_tags(htmlspecialchars($gonderi['icerik'])); ?>
+								<?php print strip_tags($gonderi['icerik']); ?>
 								<br>
 								<div class="bootstrap-tagsinput">
 									<?php
@@ -99,7 +99,7 @@
 								<p class="category"><?php print $gonderi['kAd']." ".$gonderi['kSoyad']; ?> - <?php print $gonderi['kategori']; ?> - <?php print $gonderi['tarih']; ?></p>
 							</div>
 							<div class="card-content">
-								<?php print htmlspecialchars($gonderi['icerik']); ?>
+								<?php print strip_tags($gonderi['icerik']); ?>
 								<br>
 								<div class="bootstrap-tagsinput">
 									<?php
