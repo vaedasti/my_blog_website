@@ -89,11 +89,11 @@
 															<div class="ripple-container"></div>
 														</button>-->
 														<?php if ($kullanici['tip']=="0") { ?>
-														<button type="button" rel="tooltip" class="btn btn-success btn-icon edit" data-original-title="Yönetici Yap" title="" onclick="demo.showSwal2('Emin Misiniz!', 'Bu kullanıcıyı yönetici yapmak istediğinize emin misiniz?', 'warning', 'Evet', 'Hayır', 'Tamam!', 'Kullanıcı başarılı bir şekilde yönetici yapıldı!')">
+														<button type="button" rel="tooltip" class="btn btn-success btn-icon edit" data-original-title="Yönetici Yap" title="" onclick="demo.showSwal2('Emin Misiniz!', 'Bu kullanıcıyı yönetici yapmak istediğinize emin misiniz?', 'warning', 'Evet', 'Hayır', 'Tamam!', 'Kullanıcı başarılı bir şekilde yönetici yapıldı!', null, null, null, null, null, null, '<?php print $kullanici['id']; ?>')">
 															<i class="material-icons">person</i>
 															<div class="ripple-container"></div>
 														</button>
-														<button type="button" rel="tooltip" class="btn btn-danger btn-icon remove" data-original-title="Sil" title="" onclick="demo.showSwal2('Emin Misiniz!', 'Bu kullanıcıyı silmek istediğinize emin misiniz?', 'warning', 'Evet', 'Hayır', 'Silindi!', 'Kullanıcı başarılı bir şekilde silindi!')">
+														<button type="button" rel="tooltip" class="btn btn-danger btn-icon remove" data-original-title="Sil" title="" onclick="demo.showSwal2('Emin Misiniz!', 'Bu kullanıcıyı silmek istediğinize emin misiniz?', 'warning', 'Evet', 'Hayır', 'Silindi!', 'Kullanıcı başarılı bir şekilde silindi!!', null, null, null, null, null, '<?php print $kullanici['id']; ?>', null)">
 															<i class="material-icons">close</i>
 															<div class="ripple-container"></div>
 														</button>

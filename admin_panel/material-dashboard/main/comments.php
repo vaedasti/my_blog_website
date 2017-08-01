@@ -109,11 +109,11 @@
 															<td><?php print substr($yorum['gonderi'], 0, 20); ?></td>
 															<td><?php print $yorum['tarih']; ?></td>
 															<td class="td-actions text-right">
-																<button type="button" name="onayla" value="<?php print $yorum['id']; ?>" onclick="demo.showSwal2('Emin Misiniz!', 'Bu yorumu onaylamak istediğinize emin misiniz?', 'warning', 'Evet', 'Hayır', 'Onaylandı!', 'Yorum başarılı bir şekilde onaylandı!')" rel="tooltip" class="btn btn-success btn-icon edit" data-original-title="Onayla" title="">
+																<button type="button" name="onayla" value="<?php print $yorum['id']; ?>" onclick="demo.showSwal2('Emin Misiniz!', 'Bu yorumu onaylamak istediğinize emin misiniz?', 'warning', 'Evet', 'Hayır', 'Onaylandı!', 'Yorum başarılı bir şekilde onaylandı!', null, null, null, '<?php print $yorum['id']; ?>', null, null, null)" rel="tooltip" class="btn btn-success btn-icon edit" data-original-title="Onayla" title="">
 																	<i class="material-icons">done</i>
 																	<div class="ripple-container"></div>
 																</button>
-																<button type="button" name="sil" value="<?php print $yorum['id']; ?>" onclick="demo.showSwal2('Emin Misiniz!', 'Bu yorumu silmek istediğinize emin misiniz?', 'warning', 'Evet', 'Hayır', 'Silindi!', 'Yorum başarılı bir şekilde silindi!')" rel="tooltip" class="btn btn-danger btn-icon remove" data-original-title="Sil" title="" onclick="demo.showSwal('yorum-sil')">
+																<button type="button" name="sil" value="<?php print $yorum['id']; ?>" onclick="demo.showSwal2('Emin Misiniz!', 'Bu yorumu silmek istediğinize emin misiniz?', 'warning', 'Evet', 'Hayır', 'Silindi!', 'Yorum başarılı bir şekilde silindi!', null, null, '<?php print $yorum['id']; ?>', null, null, null, null)" rel="tooltip" class="btn btn-danger btn-icon remove" data-original-title="Sil" title="">
 																	<i class="material-icons">close</i>
 																	<div class="ripple-container"></div>
 																</button>
@@ -242,11 +242,11 @@
 															<td><?php print substr($yorum['gonderi'], 0, 20); ?></td>
 															<td><?php print $yorum['tarih']; ?></td>
 															<td class="td-actions text-right">
-																<button type="button" name="onayiKaldir" value="<?php print $yorum['id']; ?>" onclick="demo.showSwal2('Emin Misiniz!', 'Bu yorumun onayını kaldırmak istediğinize emin misiniz?', 'warning', 'Evet', 'Hayır', 'Onay Kaldırıldı!', 'Yorumun onayı başarılı bir şekilde kaldırıldı!')" rel="tooltip" class="btn btn-warning btn-icon edit" data-original-title="Onayı Kaldır" title="">
+																<button type="button" name="onayiKaldir" value="<?php print $yorum['id']; ?>"  onclick="demo.showSwal2('Emin Misiniz!', 'Bu yorumun onayını kaldırmak istediğinize emin misiniz?', 'warning', 'Evet', 'Hayır', 'Tamam!', 'Yorumun onayı başarılı bir şekilde kaldırıldı!', null, null, null, null, '<?php print $yorum['id']; ?>', null, null)"  rel="tooltip" class="btn btn-warning btn-icon edit" data-original-title="Onayı Kaldır" title="">
 																	<i class="material-icons">restore</i>
 																	<div class="ripple-container"></div>
 																</button>
-																<button type="button" name="sil" value="<?php print $yorum['id']; ?>" onclick="demo.showSwal2('Emin Misiniz!', 'Bu yorumu silmek istediğinize emin misiniz?', 'warning', 'Evet', 'Hayır', 'Silindi!', 'Yorum başarılı bir şekilde silindi!')" rel="tooltip" class="btn btn-danger btn-icon remove" data-original-title="Sil" title="">
+																<button type="button" name="sil" value="<?php print $yorum['id']; ?>" onclick="demo.showSwal2('Emin Misiniz!', 'Bu yorumu silmek istediğinize emin misiniz?', 'warning', 'Evet', 'Hayır', 'Silindi!', 'Yorum başarılı bir şekilde silindi!', null, null, '<?php print $yorum['id']; ?>', null, null, null, null)" rel="tooltip" class="btn btn-danger btn-icon remove" data-original-title="Sil" title="">
 																	<i class="material-icons">close</i>
 																	<div class="ripple-container"></div>
 																</button>

@@ -818,7 +818,7 @@ demo = {
                     buttonsStyling: false
                     })
                 });
-    	}else if(type == 'warning-message-and-cancel'){
+        }else if(type == 'warning-message-and-cancel'){
             swal({
                     title: 'Are you sure?',
                     text: 'You will not be able to recover this imaginary file!',
@@ -888,73 +888,10 @@ demo = {
 
                     })
                 }).catch(swal.noop)
-            } else if(type == 'yorum-sil'){
-                    swal({
-                            title: 'Emin misiniz?',
-                            text: "Bu yorumu  istediğinize emin misiniz!",
-                            type: 'warning',
-                            showCancelButton: true,
-                            confirmButtonClass: 'btn btn-success',
-                            cancelButtonClass: 'btn btn-danger',
-                            confirmButtonText: 'Sil',
-                            cancelButtonText: 'İptal',
-                            buttonsStyling: false
-                        }).then(function() {
-                          swal({
-                            title: 'Silindi!',
-                            text: 'Yorum başarılı bir şekilde silindi.',
-                            type: 'success',
-                            confirmButtonClass: "btn btn-success",
-                            confirmButtonText: 'Tamam',
-                            buttonsStyling: false
-                            })
-                        });
-            } else if(type == 'gonderi-sil'){
-                    swal({
-                            title: 'Emin misiniz?',
-                            text: "Bu gönderiyi silmek istediğinize emin misiniz!",
-                            type: 'warning',
-                            showCancelButton: true,
-                            confirmButtonClass: 'btn btn-success',
-                            cancelButtonClass: 'btn btn-danger',
-                            confirmButtonText: 'Sil',
-                            cancelButtonText: 'İptal',
-                            buttonsStyling: false
-                        }).then(function() {
-                          swal({
-                            title: 'Silindi!',
-                            text: 'Gönderi başarılı bir şekilde silindi.',
-                            type: 'success',
-                            confirmButtonClass: "btn btn-success",
-                            confirmButtonText: 'Tamam',
-                            buttonsStyling: false
-                            })
-                        });
-            } else if(type == 'gonderi-yayinla'){
-                    swal({
-                            title: 'Emin misiniz?',
-                            text: "Bu gönderiyi yayınlamak istediğinize emin misiniz!",
-                            type: 'warning',
-                            showCancelButton: true,
-                            confirmButtonClass: 'btn btn-success',
-                            cancelButtonClass: 'btn btn-danger',
-                            confirmButtonText: 'Evet',
-                            cancelButtonText: 'İptal',
-                            buttonsStyling: false
-                        }).then(function() {
-                          swal({
-                            title: 'Silindi!',
-                            text: 'Gönderi başarılı bir şekilde silindi.',
-                            type: 'success',
-                            confirmButtonClass: "btn btn-success",
-                            confirmButtonText: 'Tamam',
-                            buttonsStyling: false
-                            })
-                        });
             }
         },
 
-    showSwal2: function(baslik, mesaj, tip, confirmButtonText, cancelButtonText, confirmTitle, confirmText){
+    showSwal2: function(baslik, mesaj, tip, confirmButtonText, cancelButtonText, confirmTitle, confirmText, yayinlaID, yayinKaldirID, yorumSilID, yorumOnaylaID, yorumOnayKaldirID, kullaniciSilID, kullaniciYoneticiID){
       swal({
               title: baslik,
               text: mesaj,
@@ -966,14 +903,48 @@ demo = {
               cancelButtonText: cancelButtonText,
               buttonsStyling: false
           }).then(function() {
-            swal({
+            if(typeof(yayinlaID) != "undefined" && yayinlaID !== null) {
+              //$("#post-btn").click(function(){
+              $.post("php/head.php", { yayinla:yayinlaID } ,function(data){
+                console.log(data);//"yayinla="+yayinlaID);
+              });
+              //});
+            }else if(typeof(yayinKaldirID) != "undefined" && yayinKaldirID !== null) {
+              $.post("php/head.php", { yayinKaldir:yayinKaldirID } ,function(data){
+                console.log("yayinKaldir="+yayinKaldirID);
+              });
+            }else if(typeof(yorumSilID) != "undefined" && yorumSilID !== null) {
+              $.post("php/head.php", { yorumSil:yorumSilID } ,function(data){
+                console.log("yorumSil="+yorumSilID);
+              });
+            }else if(typeof(yorumOnaylaID) != "undefined" && yorumOnaylaID !== null) {
+              $.post("php/head.php", { yorumOnayla:yorumOnaylaID } ,function(data){
+                console.log("yorumOnayla="+yorumOnaylaID);
+              });
+            }else if(typeof(yorumOnayKaldirID) != "undefined" && yorumOnayKaldirID !== null) {
+              $.post("php/head.php", { yorumOnayKaldir:yorumOnayKaldirID } ,function(data){
+                console.log("yorumOnayKaldir="+yorumOnayKaldirID);
+              });
+            }else if(typeof(kullaniciYoneticiID) != "undefined" && kullaniciYoneticiID !== null) {
+              $.post("php/head.php", { kullaniciYonetici:kullaniciYoneticiID } ,function(data){
+                console.log("kullaniciYonetici="+kullaniciYoneticiID);
+              });
+            }else if(typeof(kullaniciSilID) != "undefined" && kullaniciSilID !== null) {
+              $.post("php/head.php", { kullaniciSil:kullaniciSilID } ,function(data){
+                console.log("kullaniciSil="+kullaniciSilID);
+              });
+            }
+            setTimeout(function(){
+              location.reload();
+            }, 300);
+            /*swal({
               title: confirmTitle,
               text: confirmText,
               type: 'success',
               confirmButtonClass: "btn btn-success",
               confirmButtonText: 'Tamam',
               buttonsStyling: false
-              })
+            })*/
           });
     },
 

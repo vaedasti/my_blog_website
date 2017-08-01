@@ -39,7 +39,9 @@
                             <div class="ripple-container"></div>
                           </button>
                         </a>
-                        <button type="button" rel="tooltip" class="btn btn-danger btn-icon remove" data-original-title="Yayından Kaldır" title="" onclick="demo.showSwal('yorum-sil')"><i class="material-icons">chat_bubble</i><div class="ripple-container"></div>
+                        <button type="button" rel="tooltip" class="btn btn-danger btn-icon remove" data-original-title="Yayından Kaldır" title="" onclick="demo.showSwal2('Emin Misiniz!', 'Bu gönderiyi yayından kaldırmak istediğinize emin misiniz?', 'warning', 'Evet', 'Hayır', 'Tamam!', 'Gönderi başarılı bir şekilde yayından kaldırıldı!', null, '<?php print $gonderi['id']; ?>', null, null, null, null, null)">
+                          <i class="material-icons">chat_bubble</i>
+                          <div class="ripple-container"></div>
                         </button>
                       <!--</form>-->
                     </td>
@@ -329,11 +331,11 @@
                   <td><?php print substr($yorum['gonderi'], 0, 15); ?></td>
                   <td><?php print substr($yorum['tarih'], 0,10); ?></td>
                   <td class="td-actions text-right">
-                    <button type="button" rel="tooltip" class="btn btn-success btn-icon edit" data-original-title="Onayla" title="" onclick="demo.showSwal('yorum-onayla')">
+                    <button type="button" rel="tooltip" class="btn btn-success btn-icon edit" data-original-title="Onayla" title="" onclick="demo.showSwal2('Emin Misiniz!', 'Bu yorumu onaylamak istediğinize emin misiniz?', 'warning', 'Evet', 'Hayır', 'Onaylandı!', 'Yorum başarılı bir şekilde onaylandı!', null, null, null, '<?php print $yorum['id']; ?>', null, null, null)">
                       <i class="material-icons">done</i>
                       <div class="ripple-container"></div>
                     </button>
-                    <button type="button" rel="tooltip" class="btn btn-danger btn-icon remove" data-original-title="Sil" title="" onclick="demo.showSwal('yorum-sil')">
+                    <button type="button" rel="tooltip" class="btn btn-danger btn-icon remove" data-original-title="Sil" title="" onclick="demo.showSwal2('Emin Misiniz!', 'Bu yorumu silmek istediğinize emin misiniz?', 'warning', 'Evet', 'Hayır', 'Silindi!', 'Yorum başarılı bir şekilde silindi!', null, null, '<?php print $yorum['id']; ?>', null, null, null, null)">
                       <i class="material-icons">close</i>
                       <div class="ripple-container"></div>
                     </button>

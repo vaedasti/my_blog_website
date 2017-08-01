@@ -77,7 +77,7 @@
 												<div class="ripple-container"></div>
 											</button>
 										</a>
-										<button type="button" name="yayinla" value="<?php print $gonderi['id']; ?>" class="btn btn-success" onclick="demo.showSwal2('Emin Misiniz!', 'Bu gönderiyi yayınlamak istediğinize emin misiniz?', 'warning', 'Evet', 'Hayır', 'Yayınlandı!', 'Gönderi başarılı bir şekilde yayınlandı!')">
+										<button type="button" name="yayinla" class="btn btn-success" onclick="demo.showSwal2('Emin Misiniz!', 'Bu gönderiyi yayınlamak istediğinize emin misiniz?', 'warning', 'Evet', 'Hayır', 'Tamam!', 'Gönderi başarılı bir şekilde yayınlandı!', '<?php print $gonderi['id']; ?>', null, null, null, null, null, null)">
 											<i class="material-icons">chat</i> Yayınla
 											<div class="ripple-container"></div>
 										</button>
@@ -117,10 +117,10 @@
 								<div class="col-md-12" align="center">
 									<form action="postAdd.php" class="form-horizontal" method="get">
 										<button type="submit" name="duzenle" value="<?php print $gonderi['id']; ?>" class="btn btn-primary"><i class="material-icons">edit</i> Düzenle<div class="ripple-container"></div></button>
-										<button type="button" name="yayındanKaldir" value="<?php print $gonderi['id']; ?>" class="btn btn-danger" onclick="demo.showSwal2('Emin Misiniz!', 'Bu gönderiyi yayından kaldırmak istediğinize emin misiniz?', 'warning', 'Evet', 'Hayır', 'Yayından Kaldırıldı!', 'Gönderi başarılı bir şekilde yayından kaldırıldı!')"><i class="material-icons">chat_bubble</i> Yayından Kaldır<div class="ripple-container"></div></button>
+										<button type="button" name="yayındanKaldir" class="btn btn-danger" onclick="demo.showSwal2('Emin Misiniz!', 'Bu gönderiyi yayından kaldırmak istediğinize emin misiniz?', 'warning', 'Evet', 'Hayır', 'Tamam!', 'Gönderi başarılı bir şekilde yayından kaldırıldı!', null, '<?php print $gonderi['id']; ?>', null, null, null, null, null)"><i class="material-icons">chat_bubble</i> Yayından Kaldır<div class="ripple-container"></div></button>
 										<a href="../../../single.php?gonderiId=<?php print $gonderi['id']; ?>" target="_blank">
 											<button type="button" class="btn"><i class="material-icons">open_in_new</i> Sayfada Aç<div class="ripple-container"></div></button>
-											</a>
+										</a>
 									</form>
 								</div>
 							</div>

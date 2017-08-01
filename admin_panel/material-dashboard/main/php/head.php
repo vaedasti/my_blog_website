@@ -1,20 +1,45 @@
 <?php
+	if ($_SERVER['PHP_SELF'] == "/my_blog_website/admin_panel/material-dashboard/main/php/head.php") {
+		include "../../../../php/database.php";
+		if (isset($_POST['yayinla'])) {
+			sorgu_calistir("UPDATE gonderiler SET gosterim=1 WHERE id=".$_POST['yayinla'], 4);
+		} else if (isset($_POST['yayinKaldir'])) {
+			sorgu_calistir("UPDATE gonderiler SET gosterim=0 WHERE id=".$_POST['yayinKaldir'], 4);
+		} else if (isset($_POST['yorumSil'])) {
+			sorgu_calistir("DELETE FROM yorumlar WHERE id=".$_POST['yorumSil'], 4);
+		} else if (isset($_POST['yorumOnayla'])) {
+			sorgu_calistir("UPDATE yorumlar SET onay=1 WHERE id=".$_POST['yorumOnayla'], 4);
+		} else if (isset($_POST['yorumOnayKaldir'])) {
+			sorgu_calistir("UPDATE yorumlar SET onay=0 WHERE id=".$_POST['yorumOnayKaldir'], 4);
+		} else if (isset($_POST['kullaniciSil'])) {
+			sorgu_calistir("DELETE FROM kullanicilar WHERE id=".$_POST['kullaniciSil'], 4);
+		} else if (isset($_POST['kullaniciYonetici'])) {
+			sorgu_calistir("UPDATE kullanicilar SET tip=1 WHERE id=".$_POST['kullaniciYonetici'], 4);
+		}
+		die();
+	}
 	require_once "../../../php/database.php";
 	if (!isset($_SESSION['kAd']) OR $_SESSION['tip'] != 1)
 		yonlendir("../../../");
 	if ($_SERVER['PHP_SELF'] == "/my_blog_website/admin_panel/material-dashboard/main/postAdd.php") {
 		if ($_SERVER["REQUEST_METHOD"] == "POST") {
-			$bilgi = array('baslik' => htmlspecialchars(trim($_POST['baslik'])),
-										'kategori' => $_POST['kategori'],
-										'etiket' => htmlspecialchars(trim($_POST['etiket'])),
-										'icerik' => $_POST['icerik'],
-										);
-			if (isset($_POST['gonderi']))
-				sorgu_calistir("UPDATE gonderiler SET baslik=?, icerik=?, etiketler=?, kategori=?) WHERE id=?", 3, array($bilgi['baslik'], $bilgi['icerik'], $bilgi['etiket'], $bilgi['kategori'], $_POST['gonderi']));
-			else
-				sorgu_calistir("INSERT INTO gonderiler(baslik, icerik, etiketler, yazar, kategori) VALUES(?,?,?,?,?)", 3, array($bilgi['baslik'],$bilgi['icerik'],$bilgi['etiket'],$_SESSION['id'],$bilgi['kategori']));
-			yonlendir("posts.php");
-			//$("")[].click()
+			if (isset($_POST['baslik'])) {
+				$bilgi = array(':baslik' => htmlspecialchars(trim($_POST['baslik'])),
+											':kategori' => $_POST['kategori'],
+											':etiket' => htmlspecialchars(trim($_POST['etiket'])),
+											':icerik' => $_POST['icerik'],
+											);
+				if (isset($_POST['gonderi'])) {
+					$bilgi[':id'] = $_POST['gonderi'];
+					sorgu_calistir("UPDATE gonderiler SET baslik=:baslik, icerik=:icerik, etiketler=:etiket, kategori=:kategori WHERE id=:id", 3, $bilgi);
+				}
+				else {
+					$bilgi[':yazar'] = $_SESSION['id'];
+					sorgu_calistir("INSERT INTO gonderiler(baslik, icerik, etiketler, yazar, kategori) VALUES(:baslik,:icerik,:etiket,:yazar,:kategori)", 3, $bilgi);
+				}
+				yonlendir("posts.php");
+				//$("")[].click()
+			}
 		}
 	}
 ?>
