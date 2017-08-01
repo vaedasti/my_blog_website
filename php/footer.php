@@ -30,9 +30,8 @@
           <h3>Fotoğraf Akışı</h3>
           <ul class="photostream group">
             <?php
-              //foreach (inst_resim() as $resimler) {
-              //  print "<li><a href=".$resimler['link']."><img alt='thumbnail' src=".$resimler['resim']."></a></li>";
-              //}
+              foreach (inst_resim() as $resimler)
+                print "<li><a href=".$resimler['link']."><img alt='thumbnail' src=".$resimler['resim']."></a></li>";
             ?>
             <!--<li><a href="#"><img alt="thumbnail" src="images/thumb.jpg"></a></li>
             <li><a href="#"><img alt="thumbnail" src="images/thumb.jpg"></a></li>
