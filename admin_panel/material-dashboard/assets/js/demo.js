@@ -946,7 +946,8 @@ demo = {
                 })*/
               });
         },
-        kategoriEkle: function(){
+
+        kategoriEkle: function(comboBox=true){
           swal({
             title: 'Kategori Ekle',
             html: '<div class="form-group">' +
@@ -965,16 +966,77 @@ demo = {
                 //var a = $(".dropdown-menu .inner")[0];
                 //var b = a.children[a.childElementCount-1];
                 //var c = parseInt(b.attributes[0].value)+1;
+                if (comboBox) {
+                  var option = document.createElement("option");
+                  option.setAttribute("value", data);
+                  option.innerHTML = $('#input-field').val();
+                  $(".selectpicker")[0].append(option);
 
-                var option = document.createElement("option");
-                option.setAttribute("value", data);
-                option.innerHTML = $('#input-field').val();
-                $(".selectpicker")[0].append(option);
+                  var li = document.createElement("li");
+                  li.setAttribute("data-original-index", data);
+                  li.setAttribute("class", "selected");
+                  li.innerHTML = "<a tabindex='0' data-tokens='null' role='option' aria-disabled='false' aria-selected='false'><span class='text'>"+$('#input-field').val()+"</span><span class='material-icons check-mark'> done </span></a>";
+                  $(".dropdown-menu .inner")[0].append(li);
+                } else {
+                  setTimeout(function(){
+                    location.reload();
+                  }, 300);
+                }
+              });
+            }).catch(swal.noop)
+        },
 
-                var li = document.createElement("li");
-                li.setAttribute("data-original-index", data);
-                li.innerHTML = "<a tabindex='0' class='' data-tokens='null' role='option' aria-disabled='false' aria-selected='false'><span class='text'>"+$('#input-field').val()+"</span><span class='material-icons check-mark'> done </span></a>";
-                $(".dropdown-menu .inner")[0].append(li);
+        kategoriSil: function(id){
+          swal({
+                  title: 'Emin Misiniz?',
+                  text: "Kategoriyi silmek istediğinize emin misiniz!",
+                  type: 'warning',
+                  showCancelButton: true,
+                  confirmButtonClass: 'btn btn-success',
+                  cancelButtonClass: 'btn btn-danger',
+                  confirmButtonText: 'Evet, Sil!',
+                  cancelButtonText: 'Hayır, Silme!',
+                  buttonsStyling: false
+              }).then(function() {
+                /*swal({
+                  title: 'Silindi!',
+                  text: 'Kategori başarılı bir şekilde silindi.',
+                  type: 'success',
+                  confirmButtonClass: "btn btn-success",
+                  confirmButtonText: 'Tamam',
+                  buttonsStyling: false
+                })*/
+                $.post("category.php", { kategoriSil:id } ,function(data){
+                  //  console.log("You Entered: " + $('#input-field').val());
+                  console.log("id:"+id);
+
+                  setTimeout(function(){
+                    location.reload();
+                  }, 300);
+                });
+              });
+        },
+
+        kategoriDuzenle: function(id, ad){
+          swal({
+            title: 'Kategori Düzenle',
+            html: '<div class="form-group">' +
+            '<input id="input-field" type="text" class="form-control" value="'+ad+'" />' +
+            '</div>',
+            showCancelButton: true,
+            confirmButtonClass: 'btn btn-success',
+            cancelButtonClass: 'btn btn-danger',
+            confirmButtonText: 'Tamam',
+            cancelButtonText: 'İptal',
+            buttonsStyling: false
+            }).then(function(result) {
+              $.post("category.php", { kategoriDuzenle:id, icerik:$('#input-field').val() } ,function(data){
+                console.log("You Entered: " + $('#input-field').val());
+                console.log("id:"+id);
+
+                setTimeout(function(){
+                  location.reload();
+                }, 300);
               });
             }).catch(swal.noop)
         },

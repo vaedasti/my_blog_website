@@ -51,8 +51,10 @@
 											</select>
 										</div>
 										<div class="col-md-4 col-lg-4 col-xs-4" align="center">
-											<button type="button" class="btn btn-warning" rel="tooltip" data-original-title="Kategori Ekle" onclick="demo.kategoriEkle()"><i class="material-icons dp48">add_box</i><div class="ripple-container"></div></button>
-
+											<button type="button" class="btn btn-warning" rel="tooltip" data-original-title="Kategori Ekle" onclick="demo.kategoriEkle()">
+												<i class="material-icons">add_box</i>
+												<div class="ripple-container"></div>
+											</button>
 										</div>
 									<!--</div>-->
 								</div>

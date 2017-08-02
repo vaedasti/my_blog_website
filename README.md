@@ -12,7 +12,7 @@ ATA-BAUM Intern Project
 + Üst menü ve alt "Navigate" bölümünü veritabanından çeksin.
 + ~~Yönetim Panelini erişilebilir yap.~~
 + ~~Yönetim Panelinin Front-End kısmını tamamla.~~
-+ Yönetim Panelinin Back-End kısmını tamamla.
++ ~~Yönetim Panelinin Back-End kısmını tamamla.~~
 + Yapmış olduğun websitesini en az iki saat test et.
 + Staj bitiminden en geç iki gün önce(08/09/17) bitirmiş ol ve bitirdiğini ilan et.
 + Websitesi üzerinde şunları geliştir, ekle, çıkar vb. cümleler söylerlerse bunları olabilitesine göre yap.

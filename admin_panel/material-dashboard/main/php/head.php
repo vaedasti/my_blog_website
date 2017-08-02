@@ -46,7 +46,7 @@
 		}
 	}
 ?>
-<html lang="en"> <!-- class="perfect-scrollbar-on" -->
+<html lang="en" class="perfect-scrollbar-off">
 	<head>
 		<meta charset="utf-8" />
 		<link rel="apple-touch-icon" sizes="76x76" href="../assets/img/apple-icon.png" />
@@ -59,18 +59,18 @@
 		<!-- Bootstrap core CSS     -->
 		<link href="../assets/css/bootstrap.min.css" rel="stylesheet" />
 
-		<!--  Material Dashboard CSS    -->
+		<!--  Material Dashboard CSS-->
 		<link href="../assets/css/material-dashboard.css" rel="stylesheet"/>
 
 		<!--  CSS for Demo Purpose, don't include it in your project     -->
 		<link href="../assets/css/demo.css" rel="stylesheet" />
 
 		<!--     Fonts and icons
-		http://maxcdn.bootstrapcdn.com/font-awesome/latest/css/font-awesome.min.css     -->
+		http://maxcdn.bootstrapcdn.com/font-awesome/latest/css/font-awesome.min.css-->
 		<link href="../../../css/font-awesome/css/font-awesome.min.css" rel="stylesheet">
 		<link href='http://fonts.googleapis.com/css?family=Roboto:400,700,300|Material+Icons' rel='stylesheet' type='text/css'>
 	</head>
-	<body>
+	<body style="overflow-y: hidden;">
 		<div class="wrapper">
 			<?php include "sidebar.php"; ?>
 			<div class="main-panel">

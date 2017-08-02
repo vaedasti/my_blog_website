@@ -16,7 +16,7 @@
 <script src="../assets/js/jquery-ui.min.js" type="text/javascript"></script>
 <script src="../assets/js/bootstrap.min.js" type="text/javascript"></script>
 <script src="../assets/js/material.min.js" type="text/javascript"></script>
-<!--<script src="../assets/js/perfect-scrollbar.jquery.min.js" type="text/javascript"></script>-->
+<script src="../assets/js/perfect-scrollbar.jquery.min.js" type="text/javascript"></script>
 
 <!--  Plugin for Date Time Picker and Full Calendar Plugin-->
 <!-- <script src="../assets/js/moment.min.js"></script> -->

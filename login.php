@@ -225,7 +225,7 @@
       } // Kayıt ise
       elseif (strip_tags($_POST['giris']) == 'true') { // Giriş mi?
         // Eğer kullanıcı adı veya parola boş değil ise
-        $bilgi = array('kAd' => strip_tags(trim($_POST['kAd'])), 'parola' => strip_tags(trim($_POST['parola'])));
+        $bilgi = array('kAd' => strip_tags(trim($_POST['kAd'])), 'parola' => md5(strip_tags(trim($_POST['parola']))));
         //print_r($bilgi);die();
         if (!empty($bilgi['kAd']) AND !empty($bilgi['parola'])) {
           // Kullanıcı adı ve parola veritabanında var mı?

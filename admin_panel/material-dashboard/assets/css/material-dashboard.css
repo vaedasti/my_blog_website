@@ -8923,7 +8923,7 @@ fieldset[disabled] .form-group.is-focused .togglebutton label {
   color: #777;
 }
 .bootstrap-tagsinput .tag {
-  cursor: pointer;
+  cursor: default;;/*pointer;*/
   margin: 5px 3px 5px 0;
   position: relative;
   padding: 3px 8px;
@@ -8960,15 +8960,15 @@ fieldset[disabled] .form-group.is-focused .togglebutton label {
   background-color: #e91e63;
   color: #FFFFFF;
 }
-.bootstrap-tagsinput .tag:hover {
+/*.bootstrap-tagsinput .tag:hover {
   padding-right: 18px;
 }
 .bootstrap-tagsinput .tag:hover [data-role="remove"] {
   opacity: 1;
   padding-right: 6px;
-}
+}*/
 .bootstrap-tagsinput .tag [data-role="remove"] {
-  cursor: pointer;
+  /*cursor: pointer;*/
   position: absolute;
   top: 3px;
   right: 0;
