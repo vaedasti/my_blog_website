@@ -3,10 +3,10 @@
   $db; // global; veritabanı değişkeni
   $dbHost='172.17.0.1'; // database.php; veritabanı adresi
   $dbPort='8080'; // database.php; veritabanı portu
-  $dbName='blog'; // database.php; veritabanı adı
-  $dbUser='root'; // database.php; veritabanı kullanıcı adı
-  $dbPass='1234'; // database.php; veritabanı kullanıcı şifresi
-  $yPanel = "/my_blog_website/admin_panel/material-dashboard/main"; // Yönetim panelinin URL'si
+  $dbName='blog_backup'; // database.php; veritabanı adı
+  $dbUser='blog';//'root'; // database.php; veritabanı kullanıcı adı
+  $dbPass='JUsEn0iiKA1uC8h5';//'1234'; // database.php; veritabanı kullanıcı şifresi
+  $yPanel = "/admin_panel/material-dashboard/main/index.php"; // Yönetim panelinin URL'si
   $limitAdet=4; // content.php; gonderi limiti adeti
   $limit='0,'.$limitAdet; // content.php; gonderi limiti
   $sorgu; // content.php; SQL sorgusunun bulunduğu değişken

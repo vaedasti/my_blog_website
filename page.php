@@ -4,8 +4,7 @@
 ?>
 <?php
   //if "email" variable is filled out, send email
-  if ($_SERVER["REQUEST_METHOD"] == "POST" AND isset($_REQUEST['cEmail']))  {
-
+  if ($_SERVER["REQUEST_METHOD"] == "POST" AND isset($_POST['cEmail']))  {
     //Email information
     $recipient = "vaedasti@gmail.com";
     $name = strip_tags(trim($_POST["cName"]));
@@ -16,7 +15,6 @@
 
     //send email
     print_r(mail($recipient, "subject", "message"));//"$subject", $message, "From:" . $email);
-    die();
   }
 ?>
 <!-- Content

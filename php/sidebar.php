@@ -58,14 +58,15 @@
     ?>
     </div>
   </div>
-  <!--<div class="widget widget_popular">
-    <h3>Popular Post.</h3>
+  <div class="widget widget_popular">
+    <h3>Popüler Gönderiler.</h3>
     <ul class="link-list">
-      <li><a href="#">Sint cillum consectetur voluptate.</a></li>
-      <li><a href="#">Lorem ipsum Ullamco commodo.</a></li>
-      <li><a href="#">Fugiat minim eiusmod do.</a></li>
+      <?php $populer_posts = sorgu_calistir("SELECT COUNT(y.gonderi) AS adet, g.id AS id, g.baslik AS baslik FROM gonderiler AS g INNER JOIN yorumlar AS y ON y.gonderi=g.id WHERE y.onay=1 GROUP BY y.gonderi ORDER BY adet DESC LIMIT 0,5",2); ?>
+      <?php foreach ($populer_posts as $post) { ?>
+        <li><a href="<?php print $post['id']; ?>"><?php print $post['baslik']; ?></a></li>
+      <?php } ?>
     </ul>
-  </div>-->
+  </div>
 </div> <!-- end sidebar -->
 </div> <!-- end row -->
 </div> <!-- end content-wrap -->

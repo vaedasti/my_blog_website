@@ -9,11 +9,11 @@ ATA-BAUM Intern Project
 + site_basligi, site_bilgisi gibi veritabanından alınan bilgileri cookie olarak tanımla.
 + ~~Single.php dosyasında 'Önceki Gönderi', 'Sonraki Gönderi' olayını hallet.~~
 + ~~Giriş yapmış kullanıcı yorum yapabilsin. Eğer giriş yapmamışsa `Zaten kayıtlı mısınız? Giriş yapın. Henüz kayıt olmadınız mı? Kayıt olun.` gözüksün.~~
-+ Üst menü ve alt "Navigate" bölümünü veritabanından çeksin.
++ ~~Üst menü ve alt "Navigate" bölümünü veritabanından çeksin.~~
 + ~~Yönetim Panelini erişilebilir yap.~~
 + ~~Yönetim Panelinin Front-End kısmını tamamla.~~
 + ~~Yönetim Panelinin Back-End kısmını tamamla.~~
-+ Yapmış olduğun websitesini en az iki saat test et.
++ ~~Yapmış olduğun websitesini en az iki saat test et.~~
 + Staj bitiminden en geç iki gün önce(08/09/17) bitirmiş ol ve bitirdiğini ilan et.
 + Websitesi üzerinde şunları geliştir, ekle, çıkar vb. cümleler söylerlerse bunları olabilitesine göre yap.
 + 08/11/17 tarihinde staj defterini imzalat.

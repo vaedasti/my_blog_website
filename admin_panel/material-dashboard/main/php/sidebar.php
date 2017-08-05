@@ -13,10 +13,10 @@
   </div>
   <div class="sidebar-wrapper">
     <ul class="nav">
-      <li <?php if ($_SERVER['PHP_SELF'] == "/my_blog_website/admin_panel/material-dashboard/main/index.php") print "class='active'"; ?>>
+      <li <?php if ($_SERVER['PHP_SELF'] == "/admin_panel/material-dashboard/main/index.php") print "class='active'"; ?>>
         <a href="index.php"><i class="material-icons">dashboard</i><p>Yönetim Paneli</p></a>
       </li>
-      <li <?php if ($_SERVER['PHP_SELF'] == "/my_blog_website/admin_panel/material-dashboard/main/users.php") print "class='active'"; ?>>
+      <li <?php if ($_SERVER['PHP_SELF'] == "/admin_panel/material-dashboard/main/users.php") print "class='active'"; ?>>
         <a href="users.php"><i class="material-icons">account_box</i><p>Kullanıcılar</p></a>
       </li>
       <li>
@@ -31,13 +31,13 @@
           </ul>
         </div>
       </li>
-      <li <?php if ($_SERVER['PHP_SELF'] == "/my_blog_website/admin_panel/material-dashboard/main/comments.php") print "class='active'"; ?>>
+      <li <?php if ($_SERVER['PHP_SELF'] == "/admin_panel/material-dashboard/main/comments.php") print "class='active'"; ?>>
         <a href="comments.php"><i class="material-icons">comment</i><p>Yorumlar</p></a>
       </li>
-      <li <?php if ($_SERVER['PHP_SELF'] == "/my_blog_website/admin_panel/material-dashboard/main/category.php") print "class='active'"; ?>>
+      <li <?php if ($_SERVER['PHP_SELF'] == "/admin_panel/material-dashboard/main/category.php") print "class='active'"; ?>>
         <a href="category.php"><i class="material-icons">comment</i><p>Kategoriler</p></a>
       </li>
-      <li <?php if ($_SERVER['PHP_SELF'] == "/my_blog_website/admin_panel/material-dashboard/main/website.php") print "class='active'"; ?>>
+      <li <?php if ($_SERVER['PHP_SELF'] == "/admin_panel/material-dashboard/main/website.php") print "class='active'"; ?>>
         <a href="website.php"><i class="material-icons">comment</i><p>Website Bilgileri</p></a>
       </li>
     </ul>

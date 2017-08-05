@@ -1,6 +1,6 @@
 <?php
-	if ($_SERVER['PHP_SELF'] == "/my_blog_website/admin_panel/material-dashboard/main/php/head.php") {
-		include "../../../../php/database.php";
+	if ($_SERVER['PHP_SELF'] == "/admin_panel/material-dashboard/main/php/head.php") {
+		require_once "../../../../php/database.php";
 		if (isset($_POST['yayinla'])) {
 			sorgu_calistir("UPDATE gonderiler SET gosterim=1 WHERE id=".$_POST['yayinla'], 4);
 		} else if (isset($_POST['yayinKaldir'])) {
