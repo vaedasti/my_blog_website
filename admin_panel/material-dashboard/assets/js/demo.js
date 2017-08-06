@@ -890,7 +890,7 @@ demo = {
             }
         },
 
-        showSwal2: function(baslik, mesaj, tip, confirmButtonText, cancelButtonText, confirmTitle, confirmText, yayinlaID, yayinKaldirID, yorumSilID, yorumOnaylaID, yorumOnayKaldirID, kullaniciSilID, kullaniciYoneticiID){
+        showSwal2: function(baslik, mesaj, tip, confirmButtonText, cancelButtonText, confirmTitle, confirmText, yayinlaID, yayinSilID, yayinKaldirID, yorumSilID, yorumOnaylaID, yorumOnayKaldirID, kullaniciSilID, kullaniciYoneticiID){
           swal({
                   title: baslik,
                   text: mesaj,
@@ -908,9 +908,15 @@ demo = {
                     console.log(data);//"yayinla="+yayinlaID);
                   });
                   //});
+                }else if(typeof(yayinSilID) != "undefined" && yayinSilID !== null) {
+                  $.post("php/head.php", { yayinSil:yayinSilID } ,function(data){
+                    console.log("yayinSil="+yayinSilID);
+                    console.log(data);
+                  });
                 }else if(typeof(yayinKaldirID) != "undefined" && yayinKaldirID !== null) {
                   $.post("php/head.php", { yayinKaldir:yayinKaldirID } ,function(data){
                     console.log("yayinKaldir="+yayinKaldirID);
+                    console.log(data);
                   });
                 }else if(typeof(yorumSilID) != "undefined" && yorumSilID !== null) {
                   $.post("php/head.php", { yorumSil:yorumSilID } ,function(data){

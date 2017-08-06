@@ -20,10 +20,7 @@
         <a href="users.php"><i class="material-icons">account_box</i><p>Kullanıcılar</p></a>
       </li>
       <li>
-        <a data-toggle="collapse" href="#posts" class="collapsed" aria-expanded="false">
-          <i class="material-icons">library_books</i>
-          <p>Gönderiler<b class="caret"></b></p>
-        </a>
+        <a data-toggle="collapse" href="#posts" class="collapsed" aria-expanded="false"><i class="material-icons">library_books</i><p>Gönderiler<b class="caret"></b></p></a>
         <div class="collapse" id="posts" aria-expanded="false" style="height: auto;">
           <ul class="nav">
             <li><a href="posts.php">Gönderiler</a></li>
@@ -35,10 +32,10 @@
         <a href="comments.php"><i class="material-icons">comment</i><p>Yorumlar</p></a>
       </li>
       <li <?php if ($_SERVER['PHP_SELF'] == "/admin_panel/material-dashboard/main/category.php") print "class='active'"; ?>>
-        <a href="category.php"><i class="material-icons">comment</i><p>Kategoriler</p></a>
+        <a href="category.php"><i class="material-icons">view_headline</i><p>Kategoriler</p></a>
       </li>
       <li <?php if ($_SERVER['PHP_SELF'] == "/admin_panel/material-dashboard/main/website.php") print "class='active'"; ?>>
-        <a href="website.php"><i class="material-icons">comment</i><p>Website Bilgileri</p></a>
+        <a href="website.php"><i class="material-icons">info</i><p>Website Bilgileri</p></a>
       </li>
     </ul>
   </div>

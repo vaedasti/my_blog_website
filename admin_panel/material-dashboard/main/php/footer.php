@@ -72,11 +72,11 @@
   }
 </script>
 <?php
-  if ($_SERVER['PHP_SELF'] == "/my_blog_website/admin_panel/material-dashboard/main/posts.php")
+  if ($_SERVER['PHP_SELF'] == "/admin_panel/material-dashboard/main/posts.php")
     print "<script>clickMenuItem('#posts', 0)</script>";
-  elseif ($_SERVER['PHP_SELF'] == "/my_blog_website/admin_panel/material-dashboard/main/postAdd.php")
+  elseif ($_SERVER['PHP_SELF'] == "/admin_panel/material-dashboard/main/postAdd.php")
     print "<script>clickMenuItem('#posts', 1)</script>";
-  elseif ($_SERVER['PHP_SELF'] == "/my_blog_website/admin_panel/material-dashboard/main/postAdd.php")
+  elseif ($_SERVER['PHP_SELF'] == "/admin_panel/material-dashboard/main/postAdd.php")
     print "<script>clickMenuItem('#gonderiler', 1)</script>";
 ?>
 </html>

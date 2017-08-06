@@ -77,8 +77,12 @@
 												<div class="ripple-container"></div>
 											</button>
 										</a>
-										<button type="button" name="yayinla" class="btn btn-success" onclick="demo.showSwal2('Emin Misiniz!', 'Bu gönderiyi yayınlamak istediğinize emin misiniz?', 'warning', 'Evet', 'Hayır', 'Tamam!', 'Gönderi başarılı bir şekilde yayınlandı!', '<?php print $gonderi['id']; ?>', null, null, null, null, null, null)">
+										<button type="button" name="yayinla" class="btn btn-success" onclick="demo.showSwal2('Emin Misiniz!', 'Bu gönderiyi yayınlamak istediğinize emin misiniz?', 'warning', 'Evet', 'Hayır', 'Tamam!', 'Gönderi başarılı bir şekilde yayınlandı!', '<?php print $gonderi['id']; ?>', null, null, null, null, null, null, null)">
 											<i class="material-icons">chat</i> Yayınla
+											<div class="ripple-container"></div>
+										</button>
+										<button type="button" name="yayinSil" class="btn btn-danger" onclick="demo.showSwal2('Emin Misiniz!', 'Bu gönderiyi silmek istediğinize emin misiniz?', 'warning', 'Evet', 'Hayır', 'Tamam!', 'Gönderi başarılı bir şekilde silindi!', null, '<?php print $gonderi['id']; ?>', null, null, null, null, null, null, null)">
+											<i class="material-icons">delete</i> Sil
 											<div class="ripple-container"></div>
 										</button>
 									</form>
@@ -117,7 +121,9 @@
 								<div class="col-md-12" align="center">
 									<form action="postAdd.php" class="form-horizontal" method="get">
 										<button type="submit" name="duzenle" value="<?php print $gonderi['id']; ?>" class="btn btn-primary"><i class="material-icons">edit</i> Düzenle<div class="ripple-container"></div></button>
-										<button type="button" name="yayındanKaldir" class="btn btn-danger" onclick="demo.showSwal2('Emin Misiniz!', 'Bu gönderiyi yayından kaldırmak istediğinize emin misiniz?', 'warning', 'Evet', 'Hayır', 'Tamam!', 'Gönderi başarılı bir şekilde yayından kaldırıldı!', null, '<?php print $gonderi['id']; ?>', null, null, null, null, null)"><i class="material-icons">chat_bubble</i> Yayından Kaldır<div class="ripple-container"></div></button>
+										<button type="button" name="yayındanKaldir" class="btn btn-rose" onclick="demo.showSwal2('Emin Misiniz!', 'Bu gönderiyi yayından kaldırmak istediğinize emin misiniz?', 'warning', 'Evet', 'Hayır', 'Tamam!', 'Gönderi başarılı bir şekilde yayından kaldırıldı!', null, null, '<?php print $gonderi['id']; ?>', null, null, null, null, null)"><i class="material-icons">chat_bubble</i> Yayından Kaldır<div class="ripple-container"></div></button>
+
+										<button type="button" name="yayinSil" class="btn btn-danger" onclick="demo.showSwal2('Emin Misiniz!', 'Bu gönderiyi silmek istediğinize emin misiniz?', 'warning', 'Evet', 'Hayır', 'Tamam!', 'Gönderi başarılı bir şekilde silindi!', null, '<?php print $gonderi['id']; ?>', null, null, null, null, null, null, null)"><i class="material-icons">delete</i> Sil<div class="ripple-container"></div></button>
 										<a href="../../../single.php?gonderiId=<?php print $gonderi['id']; ?>" target="_blank">
 											<button type="button" class="btn"><i class="material-icons">open_in_new</i> Sayfada Aç<div class="ripple-container"></div></button>
 										</a>

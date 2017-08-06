@@ -39,7 +39,7 @@
                             <div class="ripple-container"></div>
                           </button>
                         </a>
-                        <button type="button" rel="tooltip" class="btn btn-danger btn-icon remove" data-original-title="Yayından Kaldır" title="" onclick="demo.showSwal2('Emin Misiniz!', 'Bu gönderiyi yayından kaldırmak istediğinize emin misiniz?', 'warning', 'Evet', 'Hayır', 'Tamam!', 'Gönderi başarılı bir şekilde yayından kaldırıldı!', null, '<?php print $gonderi['id']; ?>', null, null, null, null, null)">
+                        <button type="button" rel="tooltip" class="btn btn-danger btn-icon remove" data-original-title="Yayından Kaldır" title="" onclick="demo.showSwal2('Emin Misiniz!', 'Bu gönderiyi yayından kaldırmak istediğinize emin misiniz?', 'warning', 'Evet', 'Hayır', 'Tamam!', 'Gönderi başarılı bir şekilde yayından kaldırıldı!', null, null, '<?php print $gonderi['id']; ?>', null, null, null, null, null)">
                           <i class="material-icons">chat_bubble</i>
                           <div class="ripple-container"></div>
                         </button>

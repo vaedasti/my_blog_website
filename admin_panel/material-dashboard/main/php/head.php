@@ -1,30 +1,32 @@
 <?php
 	if ($_SERVER['PHP_SELF'] == "/admin_panel/material-dashboard/main/php/head.php") {
-		require_once "../../../../php/database.php";
-		if (isset($_POST['yayinla'])) {
-			sorgu_calistir("UPDATE gonderiler SET gosterim=1 WHERE id=".$_POST['yayinla'], 4);
-		} else if (isset($_POST['yayinKaldir'])) {
-			sorgu_calistir("UPDATE gonderiler SET gosterim=0 WHERE id=".$_POST['yayinKaldir'], 4);
-		} else if (isset($_POST['yorumSil'])) {
-			sorgu_calistir("DELETE FROM yorumlar WHERE id=".$_POST['yorumSil'], 4);
-		} else if (isset($_POST['yorumOnayla'])) {
-			sorgu_calistir("UPDATE yorumlar SET onay=1 WHERE id=".$_POST['yorumOnayla'], 4);
-		} else if (isset($_POST['yorumOnayKaldir'])) {
-			sorgu_calistir("UPDATE yorumlar SET onay=0 WHERE id=".$_POST['yorumOnayKaldir'], 4);
-		} else if (isset($_POST['kullaniciSil'])) {
-			sorgu_calistir("DELETE FROM kullanicilar WHERE id=".$_POST['kullaniciSil'], 4);
-		} else if (isset($_POST['kullaniciYonetici'])) {
-			sorgu_calistir("UPDATE kullanicilar SET tip=1 WHERE id=".$_POST['kullaniciYonetici'], 4);
-		} else if (isset($_POST['kategori'])) {
-			sorgu_calistir("INSERT INTO kategoriler(ad) VALUES(?)", 3, array($_POST['kategori']));
-			print sorgu_calistir("SELECT id FROM kategoriler WHERE ad='".$_POST['kategori']."'",1)['id'];
+		if ($_SERVER["REQUEST_METHOD"] == "POST") {
+			require_once "../../../../php/database.php";
+			if (isset($_POST['yayinla'])) {
+				sorgu_calistir("UPDATE gonderiler SET gosterim=1 WHERE id=".$_POST['yayinla'], 4);
+			} else if (isset($_POST['yayinKaldir'])) {
+				sorgu_calistir("UPDATE gonderiler SET gosterim=0 WHERE id=".$_POST['yayinKaldir'], 4);
+			} else if (isset($_POST['yayinSil'])) {
+				sorgu_calistir("DELETE FROM gonderiler WHERE id=".$_POST['yayinSil'], 4);
+			} else if (isset($_POST['yorumSil'])) {
+				sorgu_calistir("DELETE FROM yorumlar WHERE id=".$_POST['yorumSil'], 4);
+			} else if (isset($_POST['yorumOnayla'])) {
+				sorgu_calistir("UPDATE yorumlar SET onay=1 WHERE id=".$_POST['yorumOnayla'], 4);
+			} else if (isset($_POST['yorumOnayKaldir'])) {
+				sorgu_calistir("UPDATE yorumlar SET onay=0 WHERE id=".$_POST['yorumOnayKaldir'], 4);
+			} else if (isset($_POST['kullaniciSil'])) {
+				sorgu_calistir("DELETE FROM kullanicilar WHERE id=".$_POST['kullaniciSil'], 4);
+			} else if (isset($_POST['kullaniciYonetici'])) {
+				sorgu_calistir("UPDATE kullanicilar SET tip=1 WHERE id=".$_POST['kullaniciYonetici'], 4);
+			} else if (isset($_POST['kategori'])) {
+				sorgu_calistir("INSERT INTO kategoriler(ad) VALUES(?)", 3, array($_POST['kategori']));
+				print sorgu_calistir("SELECT id FROM kategoriler WHERE ad='".$_POST['kategori']."'",1)['id'];
+			}
 		}
 		die();
 	}
 	require_once "../../../php/database.php";
-	if (!isset($_SESSION['kAd']) OR $_SESSION['tip'] != 1)
-		yonlendir("../../../login.php");
-	if ($_SERVER['PHP_SELF'] == "/my_blog_website/admin_panel/material-dashboard/main/postAdd.php") {
+	if ($_SERVER['PHP_SELF'] == "/admin_panel/material-dashboard/main/postAdd.php") {
 		if ($_SERVER["REQUEST_METHOD"] == "POST") {
 			if (isset($_POST['baslik'])) {
 				$bilgi = array(':baslik' => htmlspecialchars(trim($_POST['baslik'])),
@@ -45,6 +47,8 @@
 			}
 		}
 	}
+	if (!isset($_SESSION['kAd']) OR $_SESSION['tip'] != 1)
+		yonlendir("../../../login.php");
 ?>
 <html lang="en" class="perfect-scrollbar-off">
 	<head>

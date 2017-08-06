@@ -3,7 +3,7 @@
 	include "php/menu.php";
 ?>
 <?php
-	$kullanicilar = sorgu_calistir("SELECT id, kAd, email, ad, soyad, tel, dTarih, kTarih, tip FROM kullanicilar", 2);
+	$kullanicilar = sorgu_calistir("SELECT id, kAd, email, ad, soyad, kTarih, tip FROM kullanicilar", 2);
 ?>
 <div class="content">
 	<div class="container-fluid">
@@ -51,8 +51,6 @@
 													<th class="disabled-sorting" tabindex="2" aria-controls="datatables" rowspan="1" colspan="1" style="width: 150px;">E-Mail</th>
 													<th class="disabled-sorting" tabindex="3" aria-controls="datatables" rowspan="1" colspan="1" style="width: 150px;">Ad</th>
 													<th class="disabled-sorting" tabindex="4" aria-controls="datatables" rowspan="1" colspan="1" style="width: 150px;">Soyad</th>
-													<th class="disabled-sorting" tabindex="5" aria-controls="datatables" rowspan="1" colspan="1" style="width: 150px;">Telefon</th>
-													<th class="disabled-sorting" tabindex="6" aria-controls="datatables" rowspan="1" colspan="1" style="width: 150px;">Doğum Tarihi</th>
 													<th class="disabled-sorting" tabindex="7" aria-controls="datatables" rowspan="1" colspan="1" style="width: 150px;">Kayıt Tarihi</th>
 													<th class="disabled-sorting text-right" tabindex="-1" aria-controls="datatables" rowspan="1" colspan="1" style="width: 200px;">İşlem</th>
 												</tr>
@@ -75,8 +73,6 @@
 													<td><?php print $kullanici['email']; ?></td>
 													<td><?php print $kullanici['ad']; ?></td>
 													<td><?php print $kullanici['soyad']; ?></td>
-													<td><?php print $kullanici['tel']; ?></td>
-													<td><?php print substr($kullanici['dTarih'], 0,10); ?></td>
 													<td><?php print substr($kullanici['kTarih'],0,10); ?></td>
 													<td class="td-actions text-right">
 														<!--<div class="togglebutton">
@@ -89,11 +85,11 @@
 															<div class="ripple-container"></div>
 														</button>-->
 														<?php if ($kullanici['tip']=="0") { ?>
-														<button type="button" rel="tooltip" class="btn btn-success btn-icon edit" data-original-title="Yönetici Yap" title="" onclick="demo.showSwal2('Emin Misiniz!', 'Bu kullanıcıyı yönetici yapmak istediğinize emin misiniz?', 'warning', 'Evet', 'Hayır', 'Tamam!', 'Kullanıcı başarılı bir şekilde yönetici yapıldı!', null, null, null, null, null, null, '<?php print $kullanici['id']; ?>')">
+														<button type="button" rel="tooltip" class="btn btn-success btn-icon edit" data-original-title="Yönetici Yap" title="" onclick="demo.showSwal2('Emin Misiniz!', 'Bu kullanıcıyı yönetici yapmak istediğinize emin misiniz?', 'warning', 'Evet', 'Hayır', 'Tamam!', 'Kullanıcı başarılı bir şekilde yönetici yapıldı!', null, null, null, null, null, null, null, '<?php print $kullanici['id']; ?>')">
 															<i class="material-icons">person</i>
 															<div class="ripple-container"></div>
 														</button>
-														<button type="button" rel="tooltip" class="btn btn-danger btn-icon remove" data-original-title="Sil" title="" onclick="demo.showSwal2('Emin Misiniz!', 'Bu kullanıcıyı silmek istediğinize emin misiniz?', 'warning', 'Evet', 'Hayır', 'Silindi!', 'Kullanıcı başarılı bir şekilde silindi!!', null, null, null, null, null, '<?php print $kullanici['id']; ?>', null)">
+														<button type="button" rel="tooltip" class="btn btn-danger btn-icon remove" data-original-title="Sil" title="" onclick="demo.showSwal2('Emin Misiniz!', 'Bu kullanıcıyı silmek istediğinize emin misiniz?', 'warning', 'Evet', 'Hayır', 'Silindi!', 'Kullanıcı başarılı bir şekilde silindi!!', null, null, null, null, null, null, '<?php print $kullanici['id']; ?>', null)">
 															<i class="material-icons">close</i>
 															<div class="ripple-container"></div>
 														</button>
