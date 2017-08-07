@@ -966,29 +966,33 @@ demo = {
             cancelButtonText: 'İptal',
             buttonsStyling: false
             }).then(function(result) {
-              $.post("php/head.php", { kategori:$('#input-field').val() } ,function(data){
-                console.log("You Entered: " + $('#input-field').val());
-                console.log(data);
-                //var a = $(".dropdown-menu .inner")[0];
-                //var b = a.children[a.childElementCount-1];
-                //var c = parseInt(b.attributes[0].value)+1;
-                if (comboBox) {
-                  var option = document.createElement("option");
-                  option.setAttribute("value", data);
-                  option.innerHTML = $('#input-field').val();
-                  $(".selectpicker")[0].append(option);
+              if ($('#input-field').val() == "") {
+                alert("Boş kategori ekleyemezsiniz");
+              } else {
+                $.post("php/head.php", { kategori:$('#input-field').val() } ,function(data){
+                  console.log("You Entered: " + $('#input-field').val());
+                  console.log(data);
+                  //var a = $(".dropdown-menu .inner")[0];
+                  //var b = a.children[a.childElementCount-1];
+                  //var c = parseInt(b.attributes[0].value)+1;
+                  if (comboBox) {
+                    var option = document.createElement("option");
+                    option.setAttribute("value", data);
+                    option.innerHTML = $('#input-field').val();
+                    $(".selectpicker")[0].append(option);
 
-                  var li = document.createElement("li");
-                  li.setAttribute("data-original-index", data);
-                  li.setAttribute("class", "selected");
-                  li.innerHTML = "<a tabindex='0' data-tokens='null' role='option' aria-disabled='false' aria-selected='false'><span class='text'>"+$('#input-field').val()+"</span><span class='material-icons check-mark'> done </span></a>";
-                  $(".dropdown-menu .inner")[0].append(li);
-                } else {
-                  setTimeout(function(){
-                    location.reload();
-                  }, 300);
-                }
-              });
+                    var li = document.createElement("li");
+                    li.setAttribute("data-original-index", data);
+                    li.setAttribute("class", "selected");
+                    li.innerHTML = "<a tabindex='0' data-tokens='null' role='option' aria-disabled='false' aria-selected='false'><span class='text'>"+$('#input-field').val()+"</span><span class='material-icons check-mark'> done </span></a>";
+                    $(".dropdown-menu .inner")[0].append(li);
+                  } else {
+                    setTimeout(function(){
+                      location.reload();
+                    }, 300);
+                  }
+                });
+              }
             }).catch(swal.noop)
         },
 
@@ -1045,6 +1049,53 @@ demo = {
                 }, 300);
               });
             }).catch(swal.noop)
+        },
+
+        menu: function(id="", adi="", adresi=""){
+          if (id != "" && adi != "" && adresi != "") {
+            $.post("menu.php", { menuId:id, menuAdi:adi, menuAdresi:adresi } ,function(data){
+              console.log("You Entered: " + adi + " / " + adresi);
+              //console.log(data);
+              setTimeout(function(){
+                location.reload();
+              }, 300);
+            });
+          } else if(id != "") {
+            $.post("menu.php", { menuId:id} ,function(data){
+              console.log("You Entered: " + adi);
+              //console.log(data);
+              setTimeout(function(){
+                location.reload();
+              }, 100);
+            });
+          } else {
+            swal({
+              title: 'Menu Ekle',
+              html: '<div class="form-group">' +
+              '<input id="input-field-adi" type="text" class="form-control" placeholder="Menu adı" />' +
+              '<input id="input-field-adresi" type="text" class="form-control" placeholder="Menu adresi" />' +
+              '</div>',
+              showCancelButton: true,
+              confirmButtonClass: 'btn btn-success',
+              cancelButtonClass: 'btn btn-danger',
+              confirmButtonText: 'Tamam',
+              cancelButtonText: 'İptal',
+              buttonsStyling: false
+              }).then(function(result) {
+                if ($('#input-field-adi').val()=="" || $('#input-field-adresi').val()=="") {
+                  alert("Boş menu ekleyemezsiniz.");
+                } else {
+                  $.post("menu.php", { menuAdi:$('#input-field-adi').val(), menuAdresi:$('#input-field-adresi').val() } ,function(data){
+                    console.log("You Entered: " + $('#input-field-adi').val() + " / " + $('#input-field-adresi').val());
+                    //console.log(data);
+
+                    setTimeout(function(){
+                      location.reload();
+                    }, 300);
+                  });
+                }
+              }).catch(swal.noop)
+          }
         },
 
     initVectorMap: function(){

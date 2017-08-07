@@ -46,20 +46,9 @@
         <div class="two columns">
           <h3 class="social">Navigate</h3>
           <ul class="navigate group">
-            <?php
-              if(!empty($website_bilgileri['menu_isim_1']) AND !empty($website_bilgileri['menu_adres_1']))
-                print "<li><a href='".$website_bilgileri['menu_adres_1']."'>".$website_bilgileri['menu_isim_1']."</a></li>";
-              if(!empty($website_bilgileri['menu_isim_2']) AND !empty($website_bilgileri['menu_adres_2']))
-                print "<li><a href='".$website_bilgileri['menu_adres_2']."'>".$website_bilgileri['menu_isim_2']."</a></li>";
-              if(!empty($website_bilgileri['menu_isim_3']) AND !empty($website_bilgileri['menu_adres_3']))
-                print "<li><a href='".$website_bilgileri['menu_adres_3']."'>".$website_bilgileri['menu_isim_3']."</a></li>";
-              if(!empty($website_bilgileri['menu_isim_4']) AND !empty($website_bilgileri['menu_adres_4']))
-                print "<li><a href='".$website_bilgileri['menu_adres_4']."'>".$website_bilgileri['menu_isim_4']."</a></li>";
-              if(!empty($website_bilgileri['menu_isim_5']) AND !empty($website_bilgileri['menu_adres_5']))
-                print "<li><a href='".$website_bilgileri['menu_adres_5']."'>".$website_bilgileri['menu_isim_5']."</a></li>";
-              if(!empty($website_bilgileri['menu_isim_6']) AND !empty($website_bilgileri['menu_adres_6']))
-                print "<li><a href='".$website_bilgileri['menu_adres_6']."'>".$website_bilgileri['menu_isim_6']."</a></li>";
-            ?>
+            <?php $menuler = sorgu_calistir("SELECT * FROM menu ORDER BY id",2); foreach ($menuler as $menu) { ?>
+              <li><a href='<?php print $menu['adresi']; ?>'><?php print $menu['adi']; ?></a></li>
+            <?php } ?>
           </ul>
         </div>
         <p class="copyright">&copy; Copyright 2014 Keep It Simple. &nbsp; Design by <a title="Styleshout" href="http://www.styleshout.com/">Styleshout</a>.</p>

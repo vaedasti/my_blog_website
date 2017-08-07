@@ -6,18 +6,6 @@
 	if ($_SERVER['REQUEST_METHOD'] == "POST") {
 		$bilgiler = array($_POST['baslik'],
 											$_POST['slogan'],
-											$_POST['menu_isim_1'],
-											$_POST['menu_isim_2'],
-											$_POST['menu_isim_3'],
-											$_POST['menu_isim_4'],
-											$_POST['menu_isim_5'],
-											$_POST['menu_isim_6'],
-											$_POST['menu_adres_1'],
-											$_POST['menu_adres_2'],
-											$_POST['menu_adres_3'],
-											$_POST['menu_adres_4'],
-											$_POST['menu_adres_5'],
-											$_POST['menu_adres_6'],
 											$_POST['bilgi'],
 											$_POST['fb'],
 											$_POST['tw'],
@@ -27,7 +15,7 @@
 											$_POST['flickr'],
 											$_POST['skype'],
 											$_POST['hakkimda']);
-		sorgu_calistir("UPDATE website SET site_basligi=?, site_slogani=?, menu_isim_1=?, menu_isim_2=?, menu_isim_3=?, menu_isim_4=?, menu_isim_5=?, menu_isim_6=?, menu_adres_1=?, menu_adres_2=?, menu_adres_3=?, menu_adres_4=?, menu_adres_5=?, menu_adres_6=?, site_bilgisi=?, site_fb=?, site_tw=?, site_gp=?, site_git=?, site_inst=?, site_flickr=?, site_skype=?, hakkimda=? WHERE id=1",3,$bilgiler);
+		sorgu_calistir("UPDATE website SET site_basligi=?, site_slogani=?, site_bilgisi=?, site_fb=?, site_tw=?, site_gp=?, site_git=?, site_inst=?, site_flickr=?, site_skype=?, hakkimda=? WHERE id=1",3,$bilgiler);
 	}
 	$bilgiler = sorgu_calistir("SELECT * FROM website", 1);
 ?>
@@ -62,32 +50,6 @@
 											<span class="material-input"></span>
 										</div>
 									</div>
-								</div>
-								<div class="row">
-									<label class="col-sm-2 label-on-left">Menüler İsimleri</label>
-									<?php for ($i=1; $i <= 6; $i++) { ?>
-										<div class="col-sm-1">
-											<div class="form-group label-floating is-empty">
-												<label class="control-label"></label>
-												<input type="text" class="form-control" name="<?php print "menu_isim_$i"; ?>" style="cursor: auto;" value="<?php print $bilgiler['menu_isim_'.$i] ?>">
-												<span class="help-block">Menü <?php print $i; ?>. alan ismi.</span>
-												<span class="material-input"></span>
-											</div>
-										</div>
-									<?php } ?>
-								</div>
-								<div class="row">
-									<label class="col-sm-2 label-on-left">Menüler Adresleri</label>
-									<?php for ($i=1; $i <= 6; $i++) { ?>
-										<div class="col-sm-1">
-											<div class="form-group label-floating is-empty">
-												<label class="control-label"></label>
-												<input type="text" class="form-control" name="<?php print "menu_adres_$i"; ?>" style="cursor: auto;" value="<?php print $bilgiler['menu_adres_'.$i] ?>">
-												<span class="help-block">Menü <?php print $i; ?>. alan adresi.</span>
-												<span class="material-input"></span>
-											</div>
-										</div>
-									<?php } ?>
 								</div>
 								<div class="row">
 									<label class="col-sm-2 label-on-left">Site Bilgisi</label>

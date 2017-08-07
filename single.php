@@ -197,7 +197,7 @@
               </div>-->
               <div class="message group">
                 <label  for="cMessage">Yorumunuz <span class="required">*</span></label>
-                <textarea name="cMessage" id="cMessage" rows="10" cols="50" ></textarea>
+                <textarea name="cMessage" id="cMessage" rows="10" cols="50" required></textarea>
               </div>
               <button type="submit" class="submit">Gönder</button>
             </fieldset>

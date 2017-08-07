@@ -32,7 +32,10 @@
         <a href="comments.php"><i class="material-icons">comment</i><p>Yorumlar</p></a>
       </li>
       <li <?php if ($_SERVER['PHP_SELF'] == "/admin_panel/material-dashboard/main/category.php") print "class='active'"; ?>>
-        <a href="category.php"><i class="material-icons">view_headline</i><p>Kategoriler</p></a>
+        <a href="category.php"><i class="material-icons">list</i><p>Kategoriler</p></a>
+      </li>
+      <li <?php if ($_SERVER['PHP_SELF'] == "/admin_panel/material-dashboard/main/menu.php") print "class='active'"; ?>>
+        <a href="menu.php"><i class="material-icons">view_headline</i><p>Menüler</p></a>
       </li>
       <li <?php if ($_SERVER['PHP_SELF'] == "/admin_panel/material-dashboard/main/website.php") print "class='active'"; ?>>
         <a href="website.php"><i class="material-icons">info</i><p>Website Bilgileri</p></a>
