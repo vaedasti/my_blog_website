@@ -49,11 +49,11 @@
         <div class="entry-content">
           <p>
             <?php
-              if (strlen(htmlspecialchars($gonderi['icerik'])) >= $karakterLimiti) { // Eğer yazı $karakterLimiti karakterden fazlaysa "Devamını Gör" linki çıksın.
-                print substr($gonderi['icerik'], 0, $karakterLimiti)."...";
+              if (strlen(strip_tags($gonderi['icerik'])) >= $karakterLimiti) { // Eğer yazı $karakterLimiti karakterden fazlaysa "Devamını Gör" linki çıksın.
+                print substr(strip_tags($gonderi['icerik']), 0, $karakterLimiti)."...";
                 print '<a href="single.php?gonderiId='.$gonderi['id'].'" title="'.$gonderi['baslik'].'"> Devamını Gör</a>';
               }
-              else print $gonderi['icerik'];
+              else print strip_tags($gonderi['icerik']);
             ?>
           </p>
         </div>
