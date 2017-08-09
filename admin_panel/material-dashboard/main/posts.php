@@ -54,7 +54,13 @@
 								<p class="category"><?php print $gonderi['kAd']." ".$gonderi['kSoyad']; ?> - <?php print $gonderi['kategori']; ?> - <?php print $gonderi['tarih']; ?></p>
 							</div>
 							<div class="card-content">
-								<?php print strip_tags($gonderi['icerik']); ?>
+								<?php
+									$icerik = strip_tags($gonderi['icerik']);
+									if (strlen($icerik)>500) {
+										$icerik = substr($icerik, 0, 500)."...";
+									}
+									print $icerik;
+									?>
 								<br>
 								<div class="bootstrap-tagsinput">
 									<?php
@@ -103,7 +109,13 @@
 								<p class="category"><?php print $gonderi['kAd']." ".$gonderi['kSoyad']; ?> - <?php print $gonderi['kategori']; ?> - <?php print $gonderi['tarih']; ?></p>
 							</div>
 							<div class="card-content">
-								<?php print strip_tags($gonderi['icerik']); ?>
+								<?php
+									$icerik = strip_tags($gonderi['icerik']);
+									if (strlen($icerik)>500) {
+										$icerik = substr($icerik, 0, 500)."...";
+									}
+									print $icerik;
+								?>
 								<br>
 								<div class="bootstrap-tagsinput">
 									<?php

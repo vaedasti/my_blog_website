@@ -28,7 +28,7 @@
                   ?>
                   <tr>
                     <td><?php print $gonderi['baslik']; ?></td>
-                    <td><?php print substr(htmlspecialchars($gonderi['icerik']), 0,20)."..."; ?></td>
+                    <td><?php print substr(strip_tags($gonderi['icerik']), 0,20)."..."; ?></td>
                     <td><?php print substr($gonderi['tarih'], 0,10); ?></td>
                     <td><?php print $gonderi['kAd']." ".$gonderi['kSoyad']; ?></td>
                     <td class="text-primary td-actions text-right">

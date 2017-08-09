@@ -1,15 +1,15 @@
 <?php
   require_once "php/database.php";
   // Eğer GET yok ise anasayfaya yönlendir
-  if (empty(htmlspecialchars($_GET['gonderiId']))) echo "<script>window.location.replace('index.php');</script>";
+  if (empty($_GET['gonderiId']))
+    yonlendir("index.php");//echo "<script>window.location.replace('index.php');</script>";
   include_once "php/header.php";
-  $sorgu = "SELECT g.id, g.baslik, g.icerik, g.zaman, g.etiketler,k.ad AS kategori, k.id AS kategoriId, kl.ad AS yazar FROM gonderiler AS g INNER JOIN kategoriler AS k ON g.kategori=k.id INNER JOIN kullanicilar AS kl ON g.yazar=kl.id WHERE g.gosterim=1 AND g.id=".htmlspecialchars($_GET['gonderiId']);
-  $gonderi = sorgu_calistir($sorgu, 1);
-?>
-<?php
-  if (isset($_SESSION['id']) AND isset($_POST['cMessage'])) {
+  if (isset($_SESSION['id']) AND isset($_POST['cMessage']))
     sorgu_calistir("INSERT INTO yorumlar(kullanici, icerik, gonderi) VALUES(?,?,?)", 3, array($_SESSION['id'], htmlspecialchars($_POST['cMessage']), $_GET['gonderiId']));
-  }
+  if ($_GET['gonderiId'] > 0) {
+    $sorgu = "SELECT g.id, g.baslik, g.icerik, g.zaman, g.etiketler,k.ad AS kategori, k.id AS kategoriId, kl.ad AS yazar FROM gonderiler AS g INNER JOIN kategoriler AS k ON g.kategori=k.id INNER JOIN kullanicilar AS kl ON g.yazar=kl.id WHERE g.gosterim=1 AND g.id=".strip_tags($_GET['gonderiId']);
+    $gonderi = sorgu_calistir($sorgu, 1);
+  } else yonlendir("index.php");
 ?>
 <!-- Content
 ================================================== -->
@@ -75,7 +75,7 @@
       ================================================== -->
       <div id="comments">
         <?php
-          $adet = sorgu_calistir("SELECT COUNT(y.id) AS adet FROM yorumlar as y INNER JOIN gonderiler AS g ON y.gonderi=g.id WHERE g.id=".htmlspecialchars($_GET['gonderiId'])." AND y.onay=1", 1);
+          $adet = sorgu_calistir("SELECT COUNT(y.id) AS adet FROM yorumlar as y INNER JOIN gonderiler AS g ON y.gonderi=g.id WHERE g.id=".strip_tags($_GET['gonderiId'])." AND y.onay=1", 1);
           if ($adet['adet'] > 0) {
             print "<h3>".$adet['adet']." Yorum</h3>"; $adet = null;
             $yorumlar = sorgu_calistir("SELECT k.ad AS ad, k.soyad AS soyad, y.tarih AS zaman, y.icerik AS yorum FROM yorumlar as y INNER JOIN gonderiler AS g ON y.gonderi=g.id INNER JOIN kullanicilar AS k ON k.id=y.kullanici WHERE g.id=".htmlspecialchars($_GET['gonderiId'])." AND y.onay=1 ORDER BY y.tarih DESC", 2);
@@ -96,83 +96,11 @@
                 </div>
               </div>
               <div class="comment-text">
-                <?php print htmlspecialchars($yorum['yorum']); ?>
+                <?php print strip_tags($yorum['yorum']); ?>
                 <!--<p>Adhuc quaerendum est ne, vis ut harum tantas noluisse, id suas iisque mei. Nec te inani ponderum vulputate, facilisi expetenda has et. Iudico dictas scriptorem an vim, ei alia mentitum est, ne has voluptua praesent.</p>-->
               </div>
             </div>
           </li>
-          <!--<li class="thread-alt depth-1">
-            <div class="avatar">
-              <img width="50" height="50" class="avatar" src="images/user-03.png" alt="">
-            </div>
-            <div class="comment-content">
-              <div class="comment-info">
-                <cite>John Doe</cite>
-                <div class="comment-meta">
-                  <time class="comment-time" datetime="2014-07-12T24:05">Jul 12, 2014 @ 24:05</time>
-                  <span class="sep">/</span><a class="reply" href="#">Reply</a>
-                </div>
-              </div>
-              <div class="comment-text">
-                <p>Sumo euismod dissentiunt ne sit, ad eos iudico qualisque adversarium, tota falli et mei. Esse euismod urbanitas ut sed, et duo scaevola pericula splendide. Primis veritus contentiones nec ad, nec et tantas semper delicatissimi.</p>
-              </div>
-            </div>
-            <ul class="children">
-              <li class="depth-2">
-                <div class="avatar">
-                  <img width="50" height="50" class="avatar" src="images/user-03.png" alt="">
-                </div>
-                <div class="comment-content">
-                  <div class="comment-info">
-                    <cite>Kakashi Hatake</cite>
-                    <div class="comment-meta">
-                      <time class="comment-time" datetime="2014-07-12T25:05">Jul 12, 2014 @ 25:05</time>
-                      <span class="sep">/</span><a class="reply" href="#">Reply</a>
-                    </div>
-                  </div>
-                  <div class="comment-text">
-                    <p>Duis sed odio sit amet nibh vulputate cursus a sit amet mauris. Morbi accumsan ipsum velit. Duis sed odio sit amet nibh vulputate cursus a sit amet mauris</p>
-                  </div>
-                </div>
-                <ul class="children">
-                  <li class="depth-3">
-                    <div class="avatar">
-                      <img width="50" height="50" class="avatar" src="images/user-03.png" alt="">
-                    </div>
-                    <div class="comment-content">
-                      <div class="comment-info">
-                        <cite>John Doe</cite>
-                        <div class="comment-meta">
-                          <time class="comment-time" datetime="2014-07-12T25:15">July 12, 2014 @ 25:15</time>
-                          <span class="sep">/</span><a class="reply" href="#">Reply</a>
-                        </div>
-                      </div>
-                      <div class="comment-text">
-                        <p>Investigationes demonstraverunt lectores legere me lius quod ii legunt saepius. Claritas est etiam processus dynamicus, qui sequitur mutationem consuetudium lectorum.</p>
-                      </div>
-                    </div>
-                  </li>
-                </ul>
-              </li>
-            </ul>
-          </li>
-          <li class="depth-1">
-            <div class="avatar">
-              <img width="50" height="50" class="avatar" src="images/user-02.png" alt="">
-            </div>
-            <div class="comment-content">
-              <div class="comment-info">
-                <cite>Hinata Hyuga</cite>
-                <div class="comment-meta">
-                  <time class="comment-time" datetime="2014-07-12T25:15">July 12, 2014 @ 25:15</time>
-                  <span class="sep">/</span><a class="reply" href="#">Reply</a>
-                </div>
-              </div>
-              <div class="comment-text">
-                <p>Typi non habent claritatem insitam; est usus legentis in iis qui facit eorum claritatem.</p>
-              </div>
-            </div>
-          </li>-->
         </ol> <!-- Commentlist End -->
         <?php }} ?>
         <!-- respond -->
@@ -182,7 +110,6 @@
           <!-- form -->
           <form name="contactForm" id="contactForm" method="post" action="#">
             <fieldset>
-              <input type="hidden" name="gonderiId" value="<?php print $_GET['gonderiId']; ?>" />
               <!--<div class="group">
                 <label for="cName">Name <span class="required">*</span></label>
                 <input name="cName" type="hidden" id="cName" size="35" value="" disabled />

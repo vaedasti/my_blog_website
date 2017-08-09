@@ -191,7 +191,7 @@
       else echo '<script>git("Hoşgeldiniz '.$_SESSION['ad'].'", "/my_blog_website");</script>';
     }
     if ($_SERVER["REQUEST_METHOD"] == "POST") { // POST yapıldı ise
-      if (htmlspecialchars($_POST['kayit']) == 'true') { // Kayıt mı?
+      if (isset($_POST['kayit']) AND $_POST['kayit'] == "true") { // Kayıt mı?
         // Değerleri bir diziye at // Ulaşması daha kolay olur
         $bilgi = array(
           'kAd' => strip_tags(trim($_POST['kAd'])),

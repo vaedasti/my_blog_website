@@ -123,16 +123,16 @@
   function inst_resim($adet=8){
     global $instUser;
     $resimler = array();
-    $json = file_get_contents('https://www.instagram.com/'.$instUser.'/media/');
     //$instagram_feed_data = json_decode($json, true);
-    $post = json_decode($json, true)['items'];//$instagram_feed_data['items'];
+    $post = json_decode(file_get_contents('https://www.instagram.com/'.$instUser.'/media/'), true)['items'];//$instagram_feed_data['items'];
     if (isset($post)) {
       for ($i=0; $i < $adet; $i++) {
         //$link = $post[$i]['link'];
         //$img_url = $post[$i]['images']['low_resolution']['url'];
         //$caption = isset($post[$i]['caption']) ? $post[$i]['caption']['text'] : '';
         //print "<li><a href=".$link."><img alt='thumbnail' src=".$img_url."></a></li>";
-        $resimler['resim'.$i] = array('link' => $post[$i]['link'], 'resim' => $post[$i]['images']['low_resolution']['url']);
+        //$resimler['resim'.$i] = array('link' => $post[$i]['link'], 'resim' => $post[$i]['images']['low_resolution']['url']);
+        array_push($resimler, array('link' => $post[$i]['link'], 'resim' => $post[$i]['images']['low_resolution']['url']));
       }
     }
     return $resimler;

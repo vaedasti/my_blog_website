@@ -80,3 +80,4 @@
     print "<script>clickMenuItem('#gonderiler', 1)</script>";
 ?>
 </html>
+<?php $db=null; ?>
