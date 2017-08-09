@@ -36,7 +36,7 @@
 								<div class="col-sm-6 col-lg-3 col-xs-4">
 									<!--<div class="col-md-12">-->
 										<div class="col-md-8 col-lg-8 col-xs-8">
-											<select class="selectpicker dropdown-toggle" name="kategori" aria-expanded="false" data-style="btn btn-primary" role="button" title="Kategori Seç">
+											<select class="selectpicker dropdown-toggle" name="kategori" aria-expanded="false" data-style="btn btn-primary" role="button" title="Kategori Seç" required>
 												<?php
 													foreach (sorgu_calistir("SELECT * FROM kategoriler",2) as $kategori) {
 														if (isset($gonderi)) {
