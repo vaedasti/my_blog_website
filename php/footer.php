@@ -36,7 +36,7 @@
           </ul>
         </div>
         <div class="two columns">
-          <h3 class="social">Navigate</h3>
+          <h3 class="social">Site haritası</h3>
           <ul class="navigate group">
             <?php $menuler = sorgu_calistir("SELECT * FROM menu ORDER BY id",2); foreach ($menuler as $menu) { ?>
               <li><a href='<?php print $menu['adresi']; ?>'><?php print $menu['adi']; ?></a></li>
