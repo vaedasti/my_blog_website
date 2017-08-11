@@ -147,11 +147,11 @@
       <div class="form">
         <form class="register-form" action="#" method="post">
           <input type="hidden" name="kayit" value="true" required/>
-          <input type="text" placeholder="kullanıcı adı" name="kAd" required/>
-          <input type="text" placeholder="isim" name="isim" required/>
-          <input type="text" placeholder="soyisim" name="sIsim"/>
-          <input type="password" placeholder="parola" name="parola" required/>
-          <input type="email" placeholder="email adresi" name="email" required/>
+          <input type="text" placeholder="kullanıcı adı" name="kAd" maxlength="25" required/>
+          <input type="text" placeholder="isim" name="isim" maxlength="60" required/>
+          <input type="text" placeholder="soyisim" max="60" name="sIsim"/>
+          <input type="password" placeholder="parola" name="parola" maxlength="125" required/>
+          <input type="email" placeholder="email adresi" name="email" maxlength="125" required/>
           <!-- <input type="date" placeholder="doğum tarihi" name="dTarih"/> -->
           <!-- <input type="number" placeholder="telefon" name="tel"/> -->
           <button>kaydol</button>
@@ -159,8 +159,8 @@
         </form>
         <form class="login-form" action="#" method="post">
           <input type="hidden" name="giris" value="true"/>
-          <input type="text" placeholder="kullanıcı adı" name="kAd" required autofocus="true"/>
-          <input type="password" placeholder="parola" name="parola" required/>
+          <input type="text" placeholder="kullanıcı adı" name="kAd" maxlength="25" required autofocus="true"/>
+          <input type="password" placeholder="parola" name="parola" maxlength="125" required/>
           <button>giris yap</button>
           <p class="message">Üye değil misin? <a href="#">Kayıt Ol</a></p>
         </form>
