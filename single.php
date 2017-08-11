@@ -44,7 +44,6 @@
           <?php
             foreach (explode(", " ,$gonderi['etiketler']) as $etiket)
               print '<a href="index.php?etiket='.$etiket.'">'.$etiket.'</a>, ';
-            $gonderi=null;
           ?>
           <!-- <a href="#">orci</a>, <a href="#">lectus</a>, <a href="#">varius</a>, <a href="#">turpis</a> -->
         </p>
@@ -57,7 +56,6 @@
               $gonderi = $gonderi->fetch();
               print '<li class="prev"><a rel="prev" href="?gonderiId='.$gonderi['id'].'"><strong>Önceki Gönderi</strong>'.$gonderi['baslik'].'</a></li>';
             }
-            //else print '<li class="prev"><strong>Hata</strong>Önceki Gönderi Bulunamadı.</li>';
             // Sonraki gönderi
             $gonderi = $db -> query("SELECT id, baslik FROM gonderiler WHERE gosterim=1 AND id=".(htmlspecialchars($_GET['gonderiId'])+1), PDO::FETCH_ASSOC);
             //print_r($gonderi);
@@ -65,10 +63,7 @@
               $gonderi = $gonderi->fetch();
               print '<li class="next"><a rel="next" href="?gonderiId='.$gonderi['id'].'"><strong>Sonraki Gönderi</strong>'.$gonderi['baslik'].'</a></li>';
             }
-            //else print '<li class="next"><strong>Hata</strong>Önceki Gönderi Bulunamadı.</li>';
           ?>
-          <!--<li class="prev"><a rel="prev" href="#"><strong>Önceki Gönderi</strong>Başlık</a></li>-->
-          <!--<li class="next"><a rel="next" href="#"><strong>Sonraki Gönderi</strong>Başlık</a></li>-->
         </ul>
       </article>
       <!-- Comments
