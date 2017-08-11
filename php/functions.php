@@ -124,7 +124,7 @@
     global $instUser;
     $resimler = array();
     //$instagram_feed_data = json_decode($json, true);
-    $post = json_decode(file_get_contents('https://www.instagram.com/'.$instUser.'/media/'), true)['items'];//$instagram_feed_data['items'];
+    $post = json_decode(file_get_contents('http://www.instagram.com/'.$instUser.'/media/'), true)['items'];//$instagram_feed_data['items'];
     if (isset($post)) {
       for ($i=0; $i < $adet; $i++) {
         //$link = $post[$i]['link'];
