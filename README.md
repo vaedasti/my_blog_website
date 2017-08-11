@@ -14,8 +14,8 @@ ATA-BAUM Intern Project
 + ~~Yönetim Panelinin Front-End kısmını tamamla.~~
 + ~~Yönetim Panelinin Back-End kısmını tamamla.~~
 + ~~Yapmış olduğun websitesini en az iki saat test et.~~
-+ Staj bitiminden en geç iki gün önce(08/09/17) bitirmiş ol ve bitirdiğini ilan et.
-+ Websitesi üzerinde şunları geliştir, ekle, çıkar vb. cümleler söylerlerse bunları olabilitesine göre yap.
++ ~~Staj bitiminden en geç iki gün önce(08/09/17) bitirmiş ol ve bitirdiğini ilan et.~~
++ ~~Websitesi üzerinde şunları geliştir, ekle, çıkar vb. cümleler söylerlerse bunları olabilitesine göre yap.~~
 + 08/11/17 tarihinde staj defterini imzalat.
 + Staj bitiminden sonraki hafta(08/14/17) Tortum Meslek Yüksek Okulu'na staj defterini teslim et.
 + Bir aksilik çıkmaz ise iki hafta sonra(08/28/17) aynı haftaya Mardin'e otobüs bileti al.
