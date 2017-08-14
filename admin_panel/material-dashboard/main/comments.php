@@ -21,7 +21,11 @@
 				<div class="tab-content">
 					<div class="tab-pane active" id="onaylanmamis">
 						<?php
-							$yorumlar = sorgu_calistir("SELECT y.id AS id, k.ad AS ad, k.soyad AS soyad, y.icerik AS icerik, y.tarih AS tarih, y.onay AS onay, g.baslik AS gonderi FROM yorumlar AS y INNER JOIN kullanicilar AS k ON y.kullanici=k.id INNER JOIN gonderiler AS g ON y.gonderi=g.id WHERE onay=0", 2);
+							$yorumlar = sorgu_calistir("SELECT y.id AS id, k.ad AS ad, k.soyad AS soyad, y.icerik AS icerik, y.tarih AS tarih, y.onay AS onay, g.baslik AS gonderi
+																					FROM yorumlar AS y
+																					INNER JOIN kullanicilar AS k ON y.kullanici=k.id
+																					INNER JOIN gonderiler AS g ON y.gonderi=g.id
+																					WHERE onay=0", 2);
 						?>
 						<div class="card">
 		          <div class="card-header card-header-icon" data-background-color="purple">
@@ -86,7 +90,11 @@
 					</div>
 					<div class="tab-pane" id="onaylanmis">
 						<?php
-							$yorumlar = sorgu_calistir("SELECT y.id AS id, k.ad AS ad, k.soyad AS soyad, y.icerik AS icerik, y.tarih AS tarih, y.onay AS onay, g.baslik AS gonderi, g.id AS gId FROM yorumlar AS y INNER JOIN kullanicilar AS k ON y.kullanici=k.id INNER JOIN gonderiler AS g ON y.gonderi=g.id WHERE onay=1", 2);
+							$yorumlar = sorgu_calistir("SELECT y.id AS id, k.ad AS ad, k.soyad AS soyad, y.icerik AS icerik, y.tarih AS tarih, y.onay AS onay, g.baslik AS gonderi, g.id AS gId
+																					FROM yorumlar AS y
+																					INNER JOIN kullanicilar AS k ON y.kullanici=k.id
+																					INNER JOIN gonderiler AS g ON y.gonderi=g.id
+																					WHERE onay=1", 2);
 						?>
 						<div class="card">
 		          <div class="card-header card-header-icon" data-background-color="purple">

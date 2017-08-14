@@ -6,29 +6,56 @@
       <?php
         // Form GET limitle var mı?
         if (!empty($_GET['limitle']))
-          $limit = htmlspecialchars($_GET['limitle']).','.$limitAdet;
+          $limit = strip_tags($_GET['limitle']).','.$limitAdet;
         if (!empty($_GET['ara'])) { // ara
           $ara = htmlspecialchars($_GET['ara']);
           print "<h4>Arama sonuçları;</h4><hr />";
-          $sorgu = "SELECT g.id, g.baslik, g.icerik, g.zaman, k.ad AS kategori, k.id AS kategoriId, kl.ad AS yazar FROM gonderiler AS g INNER JOIN kategoriler AS k ON g.kategori=k.id INNER JOIN kullanicilar AS kl ON g.yazar=kl.id WHERE g.gosterim=1 AND (g.etiketler LIKE '%$ara%' OR k.ad LIKE '%$ara%' OR g.icerik LIKE '%$ara%' OR g.baslik LIKE '%$ara%') ORDER BY zaman DESC";
+          $sorgu = "SELECT g.id, g.baslik, g.icerik, g.zaman, k.ad AS kategori, k.id AS kategoriId, kl.ad AS yazar
+                    FROM gonderiler AS g
+                    INNER JOIN kategoriler AS k ON g.kategori=k.id
+                    INNER JOIN kullanicilar AS kl ON g.yazar=kl.id
+                    WHERE g.gosterim=1 AND
+                    (g.etiketler LIKE '%$ara%' OR k.ad LIKE '%$ara%' OR g.icerik LIKE '%$ara%' OR g.baslik LIKE '%$ara%' OR kl.ad LIKE '%$ara%')
+                    ORDER BY zaman DESC";
         }
         elseif (!empty($_GET['kategoriId'])) { // kategori
           $kategori = htmlspecialchars($_GET['kategoriId']);
           print "<h4>".sorgu_calistir("SELECT ad FROM kategoriler WHERE id=$kategori", 1)['ad']." kategorisine ait gönderiler listeleniyor; </h4><hr />";
-          $sorgu = "SELECT g.id, g.baslik, g.icerik, g.zaman, k.ad AS kategori, k.id AS kategoriId, kl.ad AS yazar FROM gonderiler AS g INNER JOIN kategoriler AS k ON g.kategori=k.id INNER JOIN kullanicilar AS kl ON g.yazar=kl.id WHERE g.gosterim=1 AND k.id=$kategori ORDER BY zaman DESC";
+          $sorgu = "SELECT g.id, g.baslik, g.icerik, g.zaman, k.ad AS kategori, k.id AS kategoriId, kl.ad AS yazar
+                    FROM gonderiler AS g
+                    INNER JOIN kategoriler AS k ON g.kategori=k.id
+                    INNER JOIN kullanicilar AS kl ON g.yazar=kl.id
+                    WHERE g.gosterim=1 AND k.id=$kategori
+                    ORDER BY zaman DESC";
         }
         elseif (!empty($_GET['etiket'])) { // etiket
           $etiket = htmlspecialchars($_GET['etiket']);
           print "<h4>".mb_convert_case($etiket, MB_CASE_TITLE)." etiketine sahip gönderiler listeleniyor;</h4><hr />";
-          $sorgu = "SELECT g.id, g.baslik, g.icerik, g.zaman, k.ad AS kategori, k.id AS kategoriId, kl.ad AS yazar FROM gonderiler AS g INNER JOIN kategoriler AS k ON g.kategori=k.id INNER JOIN kullanicilar AS kl ON g.yazar=kl.id WHERE g.gosterim=1 AND g.etiketler LIKE '%$etiket%' ORDER BY zaman DESC";
+          $sorgu = "SELECT g.id, g.baslik, g.icerik, g.zaman, k.ad AS kategori, k.id AS kategoriId, kl.ad AS yazar
+                    FROM gonderiler AS g
+                    INNER JOIN kategoriler AS k ON g.kategori=k.id
+                    INNER JOIN kullanicilar AS kl ON g.yazar=kl.id
+                    WHERE g.gosterim=1 AND g.etiketler LIKE '%$etiket%'
+                    ORDER BY zaman DESC";
         }
         elseif (!empty($_GET['zaman'])) { // zaman
           $zaman = htmlspecialchars($_GET['zaman']);
           print "<h4>".tarih($zaman)['ay']." ".tarih($zaman)['yil']." tarihinde yapılan gönderiler listeleniyor;</h4><hr />";
-          $sorgu = "SELECT g.id, g.baslik, g.icerik, g.zaman, k.ad AS kategori, k.id AS kategoriId, kl.ad AS yazar FROM gonderiler AS g INNER JOIN kategoriler AS k ON g.kategori=k.id INNER JOIN kullanicilar AS kl ON g.yazar=kl.id WHERE g.gosterim=1 AND g.zaman LIKE '%".substr($zaman, 0, 7)."%' ORDER BY zaman DESC";
+          $sorgu = "SELECT g.id, g.baslik, g.icerik, g.zaman, k.ad AS kategori, k.id AS kategoriId, kl.ad AS yazar
+                    FROM gonderiler AS g
+                    INNER JOIN kategoriler AS k ON g.kategori=k.id
+                    INNER JOIN kullanicilar AS kl ON g.yazar=kl.id
+                    WHERE g.gosterim=1 AND g.zaman LIKE '%".substr($zaman, 0, 7)."%'
+                    ORDER BY zaman DESC";
         }
         else
-          $sorgu = "SELECT g.id, g.baslik, g.icerik, g.zaman, k.ad AS kategori, k.id AS kategoriId, kl.ad AS yazar FROM gonderiler AS g INNER JOIN kategoriler AS k ON g.kategori=k.id INNER JOIN kullanicilar AS kl ON g.yazar=kl.id WHERE g.gosterim=1 ORDER BY zaman DESC LIMIT $limit";
+          $sorgu = "SELECT g.id, g.baslik, g.icerik, g.zaman, k.ad AS kategori, k.id AS kategoriId, kl.ad AS yazar
+                    FROM gonderiler AS g
+                    INNER JOIN kategoriler AS k ON g.kategori=k.id
+                    INNER JOIN kullanicilar AS kl ON g.yazar=kl.id
+                    WHERE g.gosterim=1
+                    ORDER BY zaman DESC
+                    LIMIT $limit";
         foreach (sorgu_calistir($sorgu, 2) as $gonderi) {
       ?>
       <article class="entry">

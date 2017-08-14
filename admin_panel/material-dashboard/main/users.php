@@ -3,7 +3,8 @@
 	include "php/menu.php";
 ?>
 <?php
-	$kullanicilar = sorgu_calistir("SELECT id, kAd, email, ad, soyad, kTarih, tip FROM kullanicilar", 2);
+	$kullanicilar = sorgu_calistir("SELECT id, kAd, email, ad, soyad, kTarih, tip
+																	FROM kullanicilar", 2);
 ?>
 <div class="content">
 	<div class="container-fluid">

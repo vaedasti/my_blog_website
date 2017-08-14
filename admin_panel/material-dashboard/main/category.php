@@ -5,15 +5,20 @@
 <?php
 	if ($_SERVER["REQUEST_METHOD"] == "POST") {
 		if (isset($_POST['kategoriSil'])) {
-			sorgu_calistir("DELETE FROM kategoriler WHERE id=?",3,array($_POST['kategoriSil']));
+			sorgu_calistir("DELETE FROM kategoriler
+											WHERE id=?",3,array($_POST['kategoriSil']));
 		}
 		elseif (isset($_POST['kategoriDuzenle']) AND isset($_POST['icerik'])) {
-			sorgu_calistir("UPDATE kategoriler SET ad=? WHERE id=?",3,array($_POST['icerik'], $_POST['kategoriDuzenle']));
+			sorgu_calistir("UPDATE kategoriler
+											SET ad=?
+											WHERE id=?",3,array($_POST['icerik'], $_POST['kategoriDuzenle']));
 		}
 	}
 ?>
 <?php
-	$kategoriler = sorgu_calistir("SELECT id, ad FROM kategoriler ORDER BY id", 2);
+	$kategoriler = sorgu_calistir("SELECT id, ad
+																FROM kategoriler
+																ORDER BY id", 2);
 ?>
 <div class="content">
 	<div class="container-fluid">

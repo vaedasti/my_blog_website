@@ -15,7 +15,9 @@
 											$_POST['flickr'],
 											$_POST['skype'],
 											$_POST['hakkimda']);
-		sorgu_calistir("UPDATE website SET site_basligi=?, site_slogani=?, site_bilgisi=?, site_fb=?, site_tw=?, site_gp=?, site_git=?, site_inst=?, site_flickr=?, site_skype=?, hakkimda=? WHERE id=1",3,$bilgiler);
+		sorgu_calistir("UPDATE website
+										SET site_basligi=?, site_slogani=?, site_bilgisi=?, site_fb=?, site_tw=?, site_gp=?, site_git=?, site_inst=?, site_flickr=?, site_skype=?, hakkimda=?
+										WHERE id=1",3,$bilgiler);
 	}
 	$bilgiler = sorgu_calistir("SELECT * FROM website", 1);
 ?>

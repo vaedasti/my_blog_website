@@ -7,7 +7,12 @@
   if (isset($_SESSION['id']) AND isset($_POST['cMessage']))
     sorgu_calistir("INSERT INTO yorumlar(kullanici, icerik, gonderi) VALUES(?,?,?)", 3, array($_SESSION['id'], htmlspecialchars($_POST['cMessage']), $_GET['gonderiId']));
   if ($_GET['gonderiId'] > 0) {
-    $sorgu = "SELECT g.id, g.baslik, g.icerik, g.zaman, g.etiketler,k.ad AS kategori, k.id AS kategoriId, kl.ad AS yazar FROM gonderiler AS g INNER JOIN kategoriler AS k ON g.kategori=k.id INNER JOIN kullanicilar AS kl ON g.yazar=kl.id WHERE g.gosterim=1 AND g.id=".strip_tags($_GET['gonderiId']);
+    $sorgu = "SELECT g.id, g.baslik, g.icerik, g.zaman, g.etiketler,k.ad AS kategori, k.id AS kategoriId, kl.ad AS yazar
+              FROM gonderiler AS g
+              INNER JOIN kategoriler AS k ON g.kategori=k.id
+              INNER JOIN kullanicilar AS kl ON g.yazar=kl.id
+              WHERE g.gosterim=1
+              AND g.id=".strip_tags($_GET['gonderiId']);
     $gonderi = sorgu_calistir($sorgu, 1);
   } else yonlendir("index.php");
 ?>
@@ -29,12 +34,6 @@
             </ul>
           </div>
         </header>
-        <!--
-        <div class="entry-content-media">
-          <div class="post-thumb">
-            <img src="images/m-farmerboy.jpg">
-          </div>
-        </div>-->
         <div class="entry-content">
           <!-- <p class="lead">Lorem ipsum Nisi enim est proident est magna occaecat dolore proident eu</p> -->
           <?php print $gonderi['icerik']; ?>
@@ -45,19 +44,24 @@
             foreach (explode(", " ,$gonderi['etiketler']) as $etiket)
               print '<a href="index.php?etiket='.$etiket.'">'.$etiket.'</a>, ';
           ?>
-          <!-- <a href="#">orci</a>, <a href="#">lectus</a>, <a href="#">varius</a>, <a href="#">turpis</a> -->
         </p>
         <ul class="post-nav group">
           <?php
             // Önceki gönderi
-            $gonderi = $db -> query("SELECT id, baslik FROM gonderiler WHERE gosterim=1 AND id=".(htmlspecialchars($_GET['gonderiId'])-1), PDO::FETCH_ASSOC);
+            $gonderi = $db -> query("SELECT id, baslik
+                                      FROM gonderiler
+                                      WHERE gosterim=1
+                                      AND id=".(htmlspecialchars($_GET['gonderiId'])-1), PDO::FETCH_ASSOC);
             //print_r($gonderi);
             if ($gonderi->rowCount() == 1) {
               $gonderi = $gonderi->fetch();
               print '<li class="prev"><a rel="prev" href="?gonderiId='.$gonderi['id'].'"><strong>Önceki Gönderi</strong>'.$gonderi['baslik'].'</a></li>';
             }
             // Sonraki gönderi
-            $gonderi = $db -> query("SELECT id, baslik FROM gonderiler WHERE gosterim=1 AND id=".(htmlspecialchars($_GET['gonderiId'])+1), PDO::FETCH_ASSOC);
+            $gonderi = $db -> query("SELECT id, baslik
+                                      FROM gonderiler
+                                      WHERE gosterim=1
+                                      AND id=".(htmlspecialchars($_GET['gonderiId'])+1), PDO::FETCH_ASSOC);
             //print_r($gonderi);
             if ($gonderi->rowCount() == 1) {
               $gonderi = $gonderi->fetch();
@@ -70,10 +74,20 @@
       ================================================== -->
       <div id="comments">
         <?php
-          $adet = sorgu_calistir("SELECT COUNT(y.id) AS adet FROM yorumlar as y INNER JOIN gonderiler AS g ON y.gonderi=g.id WHERE g.id=".strip_tags($_GET['gonderiId'])." AND y.onay=1", 1);
+          $adet = sorgu_calistir("SELECT COUNT(y.id) AS adet
+                                  FROM yorumlar as y
+                                  INNER JOIN gonderiler AS g ON y.gonderi=g.id
+                                  WHERE g.id=".strip_tags($_GET['gonderiId'])."
+                                  AND y.onay=1", 1);
           if ($adet['adet'] > 0) {
             print "<h3>".$adet['adet']." Yorum</h3>"; $adet = null;
-            $yorumlar = sorgu_calistir("SELECT k.ad AS ad, k.soyad AS soyad, y.tarih AS zaman, y.icerik AS yorum FROM yorumlar as y INNER JOIN gonderiler AS g ON y.gonderi=g.id INNER JOIN kullanicilar AS k ON k.id=y.kullanici WHERE g.id=".htmlspecialchars($_GET['gonderiId'])." AND y.onay=1 ORDER BY y.tarih DESC", 2);
+            $yorumlar = sorgu_calistir("SELECT k.ad AS ad, k.soyad AS soyad, y.tarih AS zaman, y.icerik AS yorum
+                                        FROM yorumlar as y
+                                        INNER JOIN gonderiler AS g ON y.gonderi=g.id
+                                        INNER JOIN kullanicilar AS k ON k.id=y.kullanici
+                                        WHERE g.id=".htmlspecialchars($_GET['gonderiId'])."
+                                        AND y.onay=1
+                                        ORDER BY y.tarih DESC", 2);
             foreach ($yorumlar as $yorum) {
         ?>
         <!-- commentlist -->
@@ -105,18 +119,6 @@
           <!-- form -->
           <form name="contactForm" id="contactForm" method="post" action="#">
             <fieldset>
-              <!--<div class="group">
-                <label for="cName">Name <span class="required">*</span></label>
-                <input name="cName" type="hidden" id="cName" size="35" value="" disabled />
-              </div>-->
-              <!--<div class="group">
-                <label for="cWebsite">Website</label>
-                <input name="cWebsite" type="text" id="cWebsite" size="35" value="" />
-              </div>-->
-              <!--<<div class="group">
-                <label for="cEmail">Email <span class="required">*</span></label>
-                <input name="cEmail" type="text" id="cEmail" size="35" value="" />
-              </div>-->
               <div class="message group">
                 <label  for="cMessage">Yorumunuz <span class="required">*</span></label>
                 <textarea name="cMessage" id="cMessage" rows="10" cols="50" required></textarea>

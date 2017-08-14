@@ -6,23 +6,21 @@
   $dbName='blog_backup'; // database.php; veritabanı adı
   $dbUser='blog';//'root'; // database.php; veritabanı kullanıcı adı
   $dbPass='JUsEn0iiKA1uC8h5';//'1234'; // database.php; veritabanı kullanıcı şifresi
-  $yPanel = "/admin_panel/material-dashboard/main/index.php"; // Yönetim panelinin URL'si
+  $yPanel="/admin_panel/material-dashboard/main/index.php"; // Yönetim panelinin URL'si
   $limitAdet=4; // content.php; gonderi limiti adeti
   $limit='0,'.$limitAdet; // content.php; gonderi limiti
   $sorgu; // content.php; SQL sorgusunun bulunduğu değişken
   $karakterLimiti=200; // content.php; gonderi içeriğinin kaç karakteri gözüksün
   $sidebarKategoriAdet=5; // sidebar.php; sidebardaki kategori listesinde kaç adet öğe gözüksün
-  $instUser = "natgeo";
+  $instUser="natgeo";
   // Parametre olarak verilen mesaj ve hataya görsellik katar ve geri gönderir.
   function hata_mesaji($mesaj, $hata){
     $style = "
-      .div {
-        width: 460px;
+      .div { width: 460px;
         padding: 8% 0 0;
         margin: auto;
       }
-      .div > div {
-        position: relative;
+      .div > div { position: relative;
         z-index: 1;
         background: #FFFFFF;
         max-width: 360px;

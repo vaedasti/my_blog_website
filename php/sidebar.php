@@ -43,7 +43,9 @@
     <div class="tagcloud group">
     <?php
       $dizi = array();
-      $etiketler = sorgu_calistir("SELECT etiketler FROM gonderiler WHERE gosterim=1;", 2);
+      $etiketler = sorgu_calistir("SELECT etiketler
+                                    FROM gonderiler
+                                    WHERE gosterim=1;", 2);
       foreach ($etiketler as $row) {
         foreach (explode(', ', $row['etiketler']) as $etiket) {
           if (!in_array($etiket, $dizi))
@@ -61,7 +63,13 @@
   <div class="widget widget_popular">
     <h3>Popüler Gönderiler</h3>
     <ul class="link-list">
-      <?php $populer_posts = sorgu_calistir("SELECT COUNT(y.gonderi) AS adet, g.id AS id, g.baslik AS baslik FROM gonderiler AS g INNER JOIN yorumlar AS y ON y.gonderi=g.id WHERE y.onay=1 GROUP BY y.gonderi ORDER BY adet DESC LIMIT 0,5",2); ?>
+      <?php $populer_posts = sorgu_calistir("SELECT COUNT(y.gonderi) AS adet, g.id AS id, g.baslik AS baslik
+                                              FROM gonderiler AS g
+                                              INNER JOIN yorumlar AS y ON y.gonderi=g.id
+                                              WHERE y.onay=1
+                                              GROUP BY y.gonderi
+                                              ORDER BY adet DESC
+                                              LIMIT 0,5",2); ?>
       <?php foreach ($populer_posts as $post) { ?>
         <li><a href="single.php?gonderiId=<?php print $post['id']; ?>"><?php print $post['baslik']; ?></a></li>
       <?php } ?>

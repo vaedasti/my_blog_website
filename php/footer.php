@@ -6,19 +6,19 @@
           <ul class="social-links">
             <?php
               if (!empty($website_bilgileri["site_fb"])) // Eğer Facebook bilgisi var ise
-                print "<li><a href='https://www.facebook.com/".$website_bilgileri['site_fb']."'><i class='fa fa-facebook'></i></a></li>";
+                print "<li><a target='_blank' href='https://www.facebook.com/".$website_bilgileri['site_fb']."'><i class='fa fa-facebook'></i></a></li>";
               if (!empty($website_bilgileri["site_tw"])) // Eğer Twitter bilgisi var ise
-                print "<li><a href='http://twittter.com/".$website_bilgileri['site_tw']."'><i class='fa fa-twitter'></i></a></li>";
+                print "<li><a target='_blank' href='http://twittter.com/".$website_bilgileri['site_tw']."'><i class='fa fa-twitter'></i></a></li>";
               if (!empty($website_bilgileri["site_gp"])) // Eğer Google Plus bilgisi var ise
-                print "<li><a href='https://plus.google.com/".$website_bilgileri['site_gp']."'><i class='fa fa-google-plus'></i></a></li>";
+                print "<li><a target='_blank' href='https://plus.google.com/".$website_bilgileri['site_gp']."'><i class='fa fa-google-plus'></i></a></li>";
               if (!empty($website_bilgileri["site_git"])) // Eğer GitHub bilgisi var ise
-                print "<li><a href='https://github.com/".$website_bilgileri['site_git']."'><i class='fa fa-github-square'></i></a></li>";
+                print "<li><a target='_blank' href='https://github.com/".$website_bilgileri['site_git']."'><i class='fa fa-github-square'></i></a></li>";
               if (!empty($website_bilgileri["site_inst"])) // Eğer instagram bilgisi var ise
-                print "<li><a href='https://www.instagram.com/".$website_bilgileri['site_inst']."'><i class='fa fa-instagram'></i></a></li>";
+                print "<li><a target='_blank' href='https://www.instagram.com/".$website_bilgileri['site_inst']."'><i class='fa fa-instagram'></i></a></li>";
               if (!empty($website_bilgileri["site_flickr"])) // Eğer Flickr bilgisi var ise
-                print "<li><a href='https://www.flickr.com/people/".$website_bilgileri['site_flickr']."'><i class='fa fa-flickr'></i></a></li>";
+                print "<li><a target='_blank' href='https://www.flickr.com/people/".$website_bilgileri['site_flickr']."'><i class='fa fa-flickr'></i></a></li>";
               if (!empty($website_bilgileri["site_skype"])) // Eğer Skype bilgisi var ise
-                print "<li><a href='".$website_bilgileri['site_skype']."'><i class='fa fa-skype'></i></a></li>";
+                print "<li><a target='_blank' href='".$website_bilgileri['site_skype']."'><i class='fa fa-skype'></i></a></li>";
             ?>
           </ul>
         </div>
@@ -30,8 +30,8 @@
           <h3>Fotoğraf Akışı</h3>
           <ul class="photostream group">
             <?php
-              foreach (inst_resim() as $resimler)
-                print "<li><a href=".$resimler['link']."><img alt='thumbnail' src=".$resimler['resim']."></a></li>";
+              //foreach (inst_resim() as $resimler)
+              //  print "<li><a href=".$resimler['link']."><img alt='thumbnail' src=".$resimler['resim']."></a></li>";
             ?>
           </ul>
         </div>

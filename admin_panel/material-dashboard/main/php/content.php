@@ -2,7 +2,13 @@
   <div class="container-fluid">
     <div class="row">
       <?php
-      	$gonderiler = sorgu_calistir("SELECT g.id AS id, g.baslik AS baslik, g.icerik AS icerik, g.zaman AS tarih, g.etiketler AS etiketler, kl.ad AS kAd, kl.soyad AS kSoyad, k.ad AS kategori, g.gosterim AS goster FROM gonderiler AS g INNER JOIN kategoriler AS k ON g.kategori=k.id INNER JOIN kullanicilar AS kl ON g.yazar=kl.id WHERE g.gosterim=1  ORDER BY tarih DESC LIMIT 0,5", 2);
+      	$gonderiler = sorgu_calistir("SELECT g.id AS id, g.baslik AS baslik, g.icerik AS icerik, g.zaman AS tarih, g.etiketler AS etiketler, kl.ad AS kAd, kl.soyad AS kSoyad, k.ad AS kategori, g.gosterim AS goster
+                                      FROM gonderiler AS g
+                                      INNER JOIN kategoriler AS k ON g.kategori=k.id
+                                      INNER JOIN kullanicilar AS kl ON g.yazar=kl.id
+                                      WHERE g.gosterim=1
+                                      ORDER BY tarih DESC
+                                      LIMIT 0,5", 2);
       ?>
       <div class="col-md-12">
         <div class="card">
@@ -55,8 +61,12 @@
       </div>
     </div>
     <?php
-      $yorumlar = sorgu_calistir("SELECT y.id AS id, k.ad AS ad, k.soyad AS soyad, y.icerik AS icerik, y.tarih AS tarih, y.onay AS onay, g.baslik AS gonderi FROM yorumlar AS y INNER JOIN kullanicilar AS k ON y.kullanici=k.id INNER JOIN gonderiler AS g ON y.gonderi=g.id WHERE onay=0", 2);
-      if(!empty($yorumlar)) {    
+      $yorumlar = sorgu_calistir("SELECT y.id AS id, k.ad AS ad, k.soyad AS soyad, y.icerik AS icerik, y.tarih AS tarih, y.onay AS onay, g.baslik AS gonderi
+                                  FROM yorumlar AS y
+                                  INNER JOIN kullanicilar AS k ON y.kullanici=k.id
+                                  INNER JOIN gonderiler AS g ON y.gonderi=g.id
+                                  WHERE onay=0", 2);
+      if(!empty($yorumlar)) {
     ?>
     <div class="row">
       <div class="col-lg-6 col-md-12">

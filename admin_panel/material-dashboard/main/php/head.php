@@ -36,11 +36,14 @@
 											);
 				if (isset($_POST['gonderi'])) {
 					$bilgi[':id'] = $_POST['gonderi'];
-					sorgu_calistir("UPDATE gonderiler SET baslik=:baslik, icerik=:icerik, etiketler=:etiket, kategori=:kategori WHERE id=:id", 3, $bilgi);
+					sorgu_calistir("UPDATE gonderiler
+													SET baslik=:baslik, icerik=:icerik, etiketler=:etiket, kategori=:kategori
+													WHERE id=:id", 3, $bilgi);
 				}
 				else {
 					$bilgi[':yazar'] = $_SESSION['id'];
-					sorgu_calistir("INSERT INTO gonderiler(baslik, icerik, etiketler, yazar, kategori) VALUES(:baslik,:icerik,:etiket,:yazar,:kategori)", 3, $bilgi);
+					sorgu_calistir("INSERT INTO gonderiler(baslik, icerik, etiketler, yazar, kategori)
+													VALUES(:baslik,:icerik,:etiket,:yazar,:kategori)", 3, $bilgi);
 				}
 				yonlendir("posts.php");
 				//$("")[].click()

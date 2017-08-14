@@ -93,6 +93,7 @@
       }
       .form .uyari {
         display: none;
+        color: #E91E63;
       }
       .form .register-form {
         display: none;
@@ -209,10 +210,6 @@
         if (!empty($sor)) // Bu kullanıcı adına sahip kullanıcı var ise uyarı ver ve kaydetme.
           echo "<script>document.getElementsByClassName('message')[0].childNodes[1].click();uyari('Bu Kullanıcı Adına veya E-Mail\'e sahip zaten bir kullanıcı var!');</script>";
         else { // Bu kullanıcı adına sahip kullanıcı yok ise
-          // Doğum tarihi kısmını boş bırakmış ise NULL değer ekle
-          //if (empty($bilgi['dTarih'])) $bilgi['dTarih'] = "NULL";
-          // Doğum tarihi kısmını boş bırakmamış ise değeri tırnaklar('') içerisinde ekle
-          //else $bilgi['dTarih'] = "'".$bilgi['dTarih']."'";
           // Kayıt eklemek için SQL sorgusunu çalıştır
           $kayit = sorgu_calistir("INSERT INTO kullanicilar(kAd, parola, email, ad, soyad) VALUES(?,?,?,?,?)", 3, array($bilgi['kAd'], $bilgi['parola'], $bilgi['email'], $bilgi['isim'], $bilgi['sIsim']));
           //if ($kayit->rowCount()) { // Kayıt gerçekleştiyse
