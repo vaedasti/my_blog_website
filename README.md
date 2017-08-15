@@ -16,7 +16,7 @@ ATA-BAUM Intern Project
 + ~~Yapmış olduğun websitesini en az iki saat test et.~~
 + ~~Staj bitiminden en geç iki gün önce(08/09/17) bitirmiş ol ve bitirdiğini ilan et.~~
 + ~~Websitesi üzerinde şunları geliştir, ekle, çıkar vb. cümleler söylerlerse bunları olabilitesine göre yap.~~
-+ 08/11/17 tarihinde staj defterini imzalat.
++ ~~08/11/17 tarihinde staj defterini imzalat.~~
 + Staj bitiminden sonraki hafta(08/14/17) Tortum Meslek Yüksek Okulu'na staj defterini teslim et.
 + Bir aksilik çıkmaz ise iki hafta sonra(08/28/17) aynı haftaya Mardin'e otobüs bileti al.
 
@@ -24,3 +24,67 @@ ATA-BAUM Intern Project
 + SQLinjection
 + xss
 + csrf
+
+# Veritabanı
+```sql
+CREATE TABLE `gonderiler` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `baslik` varchar(255) COLLATE utf8_turkish_ci NOT NULL,
+  `icerik` text COLLATE utf8_turkish_ci NOT NULL,
+  `zaman` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
+  `etiketler` text COLLATE utf8_turkish_ci,
+  `yazar` int(11) NOT NULL,
+  `kategori` int(11) NOT NULL,
+  `gosterim` tinyint(1) NOT NULL DEFAULT '1',
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_turkish_ci;
+CREATE TABLE `kategoriler` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `ad` varchar(255) COLLATE utf8_turkish_ci NOT NULL
+  PRIMARY KEY (`id`),
+  UNIQUE `ad` (`ad`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_turkish_ci;
+CREATE TABLE `kullanicilar` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `kAd` varchar(255) COLLATE utf8_turkish_ci NOT NULL,
+  `parola` varchar(255) COLLATE utf8_turkish_ci NOT NULL,
+  `email` varchar(255) COLLATE utf8_turkish_ci NOT NULL,
+  `ad` varchar(255) COLLATE utf8_turkish_ci NOT NULL,
+  `soyad` varchar(255) COLLATE utf8_turkish_ci DEFAULT NULL,
+  `kTarih` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
+  `tip` int(3) NOT NULL DEFAULT '0',
+  PRIMARY KEY (`id`),
+  UNIQUE `kAd` (`kAd`),
+  UNIQUE `email` (`email`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_turkish_ci;
+CREATE TABLE `menu` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `adi` varchar(255) COLLATE utf8_turkish_ci NOT NULL,
+  `adresi` varchar(255) COLLATE utf8_turkish_ci NOT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_turkish_ci;
+CREATE TABLE `website` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `site_basligi` varchar(255) COLLATE utf8_turkish_ci NOT NULL,
+  `site_slogani` varchar(255) COLLATE utf8_turkish_ci DEFAULT NULL,
+  `site_bilgisi` varchar(255) COLLATE utf8_turkish_ci NOT NULL,
+  `site_fb` varchar(255) COLLATE utf8_turkish_ci DEFAULT NULL,
+  `site_tw` varchar(255) COLLATE utf8_turkish_ci DEFAULT NULL,
+  `site_gp` varchar(255) COLLATE utf8_turkish_ci DEFAULT NULL,
+  `site_git` varchar(255) COLLATE utf8_turkish_ci DEFAULT NULL,
+  `site_inst` varchar(255) COLLATE utf8_turkish_ci DEFAULT NULL,
+  `site_flickr` varchar(255) COLLATE utf8_turkish_ci DEFAULT NULL,
+  `site_skype` varchar(255) COLLATE utf8_turkish_ci DEFAULT NULL,
+  `hakkimda` text COLLATE utf8_turkish_ci NOT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_turkish_ci;
+CREATE TABLE `yorumlar` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `kullanici` int(11) NOT NULL,
+  `icerik` text COLLATE utf8_turkish_ci NOT NULL,
+  `tarih` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
+  `gonderi` int(11) NOT NULL,
+  `onay` tinyint(4) NOT NULL DEFAULT '0',
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_turkish_ci;
+```
